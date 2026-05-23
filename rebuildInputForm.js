@@ -5,6 +5,16 @@ function rebuildInputForm () {
 
     try {
 
+        FORMSHEET.getRange("A1:G27")
+            .clearDataValidations()
+            .clearContent()
+            .merge()
+            .setBackground("white");
+
+        FORMSHEET.getRange("A1:G27")
+            .breakApart();
+
+
         let outerRange = FORMSHEET.getRange(OUTERRANGE.a1notation);
         outerRange.setBackground(OUTERRANGE.color);
 
@@ -76,6 +86,42 @@ function rebuildInputForm () {
 
 
         displayRange.setValue ("");
+
+        FORMSHEET.getRange(TITLEENTER.a1notation)
+                .setBorder(
+                    TITLEENTER.borders[0],
+                    TITLEENTER.borders[1],
+                    TITLEENTER.borders[2],
+                    TITLEENTER.borders[3],
+                    TITLEENTER.borders[4],
+                    TITLEENTER.borders[5],
+                    TITLEENTER.bordercolor, 
+                    TITLEENTER.borderstyle
+                )
+                .setBackground(TITLEENTER.background)
+                .setHorizontalAlignment(TITLEENTER.horizontal)
+                .setVerticalAlignment(TITLEENTER.vertical)
+                .setValue("Enter title here");
+
+
+        FORMSHEET.getRange(MENUOPTIONS.a1notation)
+            .setBackground(MENUOPTIONS.background)
+            .setHorizontalAlignment('center')
+            .setVerticalAlignment('middle');
+
+        let optionsRule = SpreadsheetApp.newDataValidation()
+            .requireValueInList(MENUOPTIONS.options)
+            .setAllowInvalid(false)
+            .build();
+
+        let optionsCell = FORMSHEET.getRange(MENUOPTIONS.a1notation);
+        optionsCell.clearDataValidations()
+            .clearContent();
+        
+        SpreadsheetApp.flush();
+
+        optionsCell.setDataValidation(optionsRule);
+        optionsCell.setValue(MENUOPTIONS.options[0]);
 
         return true;
 

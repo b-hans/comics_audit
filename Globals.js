@@ -3,9 +3,12 @@
 const FORMSHEET = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Forms");
 
 const MENUCELL = "C3";
-const DISPLAYCELL = "C6";
+const DISPLAYCELL = "C8";
+const OPTIONSCELL = "D6";
+const TITLESEARCHCELL = "C6";
 
 const MENUDEFAULT = "Select one";
+const TITLEDEFAULT = "Enter title here";
 
 const OUTERRANGE = {
     a1notation: "A1:G27",
@@ -38,7 +41,7 @@ const MENU = {
 }
 
 const DISPLAY = {
-    a1notation: "C6:E24",
+    a1notation: "C8:E24",
     background: "#f3f3f3",
     borders: [true, true, true, true, false, false],
     borderstyle: SpreadsheetApp.BorderStyle.DOUBLE,
@@ -47,5 +50,20 @@ const DISPLAY = {
     vertical: 'top'
 }
 
-// const MENUMERGE;
-// const DISPLAYMERGE;
+const TITLEENTER = {
+    a1notation: "C6",
+    background: "white",
+    borders: [true, true, true, true, false, false],
+    borderstyle: SpreadsheetApp.BorderStyle.SOLID,
+    bordercolor: "black",
+    horizontal: "center",
+    vertical: 'middle'
+}
+
+const MENUOPTIONS = {
+    a1notation: "D6",
+    background: "white",
+    horizontal: "center",
+    vertical: 'middle',
+    options: ['Options', 'Search title'],
+}

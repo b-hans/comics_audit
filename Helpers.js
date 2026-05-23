@@ -5,18 +5,45 @@ function menuOnEdit(e) {
 
     const displayRange = FORMSHEET.getRange(DISPLAYCELL);
     const menuRange = FORMSHEET.getRange(MENUCELL);
+    const optionsRange = FORMSHEET.getRange(OPTIONSCELL);
 
     try {
 
-        if (sheet.getName() != FORMSHEET.getName() ||
-            range.getA1Notation() != MENUCELL) {
+        if (sheet.getName() != FORMSHEET.getName() || (
+            range.getA1Notation() != MENUCELL) &&
+            range.getA1Notation() != OPTIONSCELL
+            ) {
             return true;
         }
 
-        const menuType = range.getValue();
-        menuRange.setValue(MENUDEFAULT);
+        let menuType = "";
 
-        displayRange.setValue ("test: " + menuType);
+        if (menuRange.getValue() != MENUDEFAULT) {
+            menuType = menuRange.getValue();
+        }
+        else {
+            menuType = optionsRange.getValue();
+        }
+        
+        menuRange.setValue(MENUDEFAULT);
+        optionsRange.setValue(MENUOPTIONS.options[0]);
+
+        switch (menuType) {
+            case "Create one":
+                return createOne();
+
+            case "Creat all":
+                return createAll();
+
+            case "Search title":
+                return searchTitle();
+                
+            default:
+                displayRange.setValue ("test: " + menuType);
+                break;
+        }
+
+        
 
         return true;
 
