@@ -19,9 +19,32 @@ const OUTERRANGE = {
 const INNERRANGE = {
     a1notation: "B2:F26",
     background: "#cfe2f3",
+    borders: [true, true, true, true, false, false],
     borderstyle: SpreadsheetApp.BorderStyle.SOLID_THICK,
     bordercolor: "#999999"
 
+}
+
+const MENU = {
+    a1notation: "C3:C4",
+    background: "white",
+    options: ['Select one', 'Create one', 'Create all'],
+    horizontal: 'center',
+    vertical: 'middle',
+    borders: [true, true, true, true, false, false],
+    borderstyle: SpreadsheetApp.BorderStyle.SOLID,
+    bordercolor: "black"
+
+}
+
+const DISPLAY = {
+    a1notation: "C6:E24",
+    background: "#f3f3f3",
+    borders: [true, true, true, true, false, false],
+    borderstyle: SpreadsheetApp.BorderStyle.DOUBLE,
+    bordercolor: "black",
+    horizontal: 'left',
+    vertical: 'top'
 }
 
 // const MENUMERGE;

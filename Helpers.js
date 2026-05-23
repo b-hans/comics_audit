@@ -8,8 +8,6 @@ function menuOnEdit(e) {
 
     try {
 
-        return true;
-
         if (sheet.getName() != FORMSHEET.getName() ||
             range.getA1Notation() != MENUCELL) {
             return true;
