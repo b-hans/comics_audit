@@ -10,7 +10,12 @@ const TITLESEARCHCELL = "C6";
 const MENUDEFAULT = "Select one";
 const TITLEDEFAULT = "Enter title here";
 
-const AUDITFOLDER = "10mMy5UP30JuTrcd_vSjV1Ems95lXnbif";
+const AUDITFOLDER = "1iBZzYLkgROW1nNatYuebA5n9bxJP938o";
+
+const usdFormatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
 
 
 const OUTERRANGE = {

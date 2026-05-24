@@ -48,7 +48,7 @@ function menuOnEdit(e) {
         return true;
 
     } catch (error) {
-        console.log ("Error: " + error);
+        displayRange.setValue ("Error: " + error);
         return false;
     }
     

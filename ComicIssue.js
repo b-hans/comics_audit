@@ -7,7 +7,7 @@ class ComicIssue {
         const display = FORMSHEET.getRange(DISPLAYCELL);
 
         try {
-            id = row.indexOf("id");
+            id = row[headers.indexOf('id')];
 
             if (id < 0) {
                 this.valid = false;
@@ -17,6 +17,8 @@ class ComicIssue {
             this.number = row[headers.indexOf("Number")];
             this.month = row[headers.indexOf("month")];
             this.year = row[headers.indexOf("year")];
+            this.online = row[headers.indexOf("Value Online")];
+            this.overstreet = row[headers.indexOf("Value Overstreet")];
 
             return;
         } catch (error) {

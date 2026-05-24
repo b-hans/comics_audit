@@ -22,6 +22,7 @@ function searchTitle () {
         if (searcher.valid) {
 
             return createTitleDocument(searcher);
+
             // display.setValue (// display.getValue() + "\n\n" + 
             //     "Title: " + searcher.title + "\n" +
             //     "publisher: " + searcher.publisher.name + "\n" +
