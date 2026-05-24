@@ -120,4 +120,5 @@ class ComicTitle {
             return;
         }
     }
+
 }

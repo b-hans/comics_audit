@@ -5,6 +5,8 @@ function searchTitle () {
 
     try {
 
+        display.setValue("Working....");
+
         if (!searchTitle || searchTitle == "Enter title here") {
             display.setValue ("You need to enter a title to search");
             return false;
@@ -18,16 +20,17 @@ function searchTitle () {
         });
 
         if (searcher.valid) {
-            display.setValue (// display.getValue() + "\n\n" + 
-                "Title: " + searcher.title + "\n" +
-                "publisher: " + searcher.publisher.name + "\n" +
-                "Volume: " + searcher.volume + "\n" +
-                "First#: " + searcher.num_first + "\n" +
-                "Last#: " + searcher.num_last + "\n\nBoo"
-            );
 
-            // for (let i=0; i<searcher.issues.length; i++) {
-            // }
+            return createTitleDocument(searcher);
+            // display.setValue (// display.getValue() + "\n\n" + 
+            //     "Title: " + searcher.title + "\n" +
+            //     "publisher: " + searcher.publisher.name + "\n" +
+            //     "Volume: " + searcher.volume + "\n" +
+            //     "First#: " + searcher.num_first + "\n" +
+            //     "Last#: " + searcher.num_last + "\n\n" +
+            //     createTitleDocument(searcher)
+            // );
+
         }
         else if (searcher.multiple) {
             display.setValue ("Multiple titles: " + searchTitle);
