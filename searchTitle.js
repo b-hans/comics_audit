@@ -12,9 +12,26 @@ function searchTitle () {
 
         FORMSHEET.getRange(TITLESEARCHCELL).setValue (TITLEDEFAULT);
 
-        let searcher = new ComicTitle(searchTitle);
+        let searcher = new ComicTitle({
+            title: searchTitle,
+            id: null
+        });
 
-        // display.setValue(display.getValue() + "\nSearcher: " + searcher.title);
+        if (searcher.valid) {
+            display.setValue (// display.getValue() + "\n\n" + 
+                "Title: " + searcher.title + "\n" +
+                "publisher: " + searcher.publisher.name + "\n" +
+                "Volume: " + searcher.volume + "\n" +
+                "First#: " + searcher.num_first + "\n" +
+                "Last#: " + searcher.num_last
+            );
+        }
+        else if (searcher.multiple) {
+            display.setValue ("Multiple titles: " + searchTitle);
+        }
+        else {
+            display.setValue ("Not found: " + searchTitle);
+        }
 
         return true;
     } catch (error) {
