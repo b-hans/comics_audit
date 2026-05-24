@@ -103,8 +103,14 @@ class ComicTitle {
             });
 
             let issueList = "";
+            this.issues = []
             for (let i=0; i<filteredIssues.length; i++) {
-                issueList += filteredIssues[i][numIndex] + ' ';
+                this.issues.push(new ComicIssue(
+                    {
+                        row: filteredIssues[i],
+                        headers: issueHeaders
+                    }
+                ));
             }
 
             return;

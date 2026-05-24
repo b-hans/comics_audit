@@ -23,8 +23,11 @@ function searchTitle () {
                 "publisher: " + searcher.publisher.name + "\n" +
                 "Volume: " + searcher.volume + "\n" +
                 "First#: " + searcher.num_first + "\n" +
-                "Last#: " + searcher.num_last
+                "Last#: " + searcher.num_last + "\n\nBoo"
             );
+
+            // for (let i=0; i<searcher.issues.length; i++) {
+            // }
         }
         else if (searcher.multiple) {
             display.setValue ("Multiple titles: " + searchTitle);
