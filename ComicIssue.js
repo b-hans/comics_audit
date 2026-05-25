@@ -20,6 +20,14 @@ class ComicIssue {
             this.online = row[headers.indexOf("Value Online")];
             this.overstreet = row[headers.indexOf("Value Overstreet")];
 
+            // this.grade = "F";
+
+
+            this.grade = GRADINGDATA.filter (
+                item => item[GRADINGHEADERS.indexOf('id')] === 
+                row[headers.indexOf("condition_id")]
+            )[0][GRADINGHEADERS.indexOf('Condition')];
+
             return;
         } catch (error) {
             display.setValue ("Error getting issues: " + error);

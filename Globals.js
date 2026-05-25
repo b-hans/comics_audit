@@ -17,6 +17,13 @@ const usdFormatter = new Intl.NumberFormat('en-US', {
   currency: 'USD',
 });
 
+const GRADINGDATA = SpreadsheetApp.getActiveSpreadsheet()
+    .getSheetByName('Grading ID')
+    .getDataRange()
+    .getValues();
+
+const GRADINGHEADERS = GRADINGDATA.shift();
+
 
 const OUTERRANGE = {
     a1notation: "A1:G27",

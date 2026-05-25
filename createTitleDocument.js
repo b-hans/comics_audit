@@ -12,8 +12,9 @@ function createTitleDocument (comicTitle) {
         let auditFile = null;
 
         if (files.hasNext()) {
-            let trashFile = files.next();
-            trashFile.setTrashed(true);
+            return true;
+            // let trashFile = files.next();
+            // trashFile.setTrashed(true);
         }
 
         auditDocument = DocumentApp.create(filename);
@@ -103,7 +104,7 @@ function createTitleDocument (comicTitle) {
                 .setBackgroundColor(rowColor)
                 .getChild(0)
                 .setAttributes(tableCellDefaultStyle);
-            issueRow.appendTableCell("NM")
+            issueRow.appendTableCell(myIssue.grade)
                 .setBackgroundColor(rowColor)
                 .getChild(0)
                 .setAttributes(tableCellDefaultStyle);
