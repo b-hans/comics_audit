@@ -32,7 +32,7 @@ function menuOnEdit(e) {
             case "Create one":
                 return createOne();
 
-            case "Creat all":
+            case "Create all":
                 return createAll();
 
             case "Search title":

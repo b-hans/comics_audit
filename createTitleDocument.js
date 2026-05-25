@@ -73,15 +73,48 @@ function createTitleDocument (comicTitle) {
             }
         }
 
+        let color1 = "#f3f3f3";
+        let color2 = "#cfe2f3";
+
         for (let i=0; i<comicTitle.issues.length; i++) {
+
             let myIssue = comicTitle.issues[i];
             let issueRow = issueTable.appendTableRow();
-            issueRow.appendTableCell(String.fromCharCode(9744));
-            issueRow.appendTableCell(parseInt(myIssue.number).toFixed(0));
-            issueRow.appendTableCell(myIssue.month);
-            issueRow.appendTableCell(parseInt(myIssue.year).toFixed(0));
-            issueRow.appendTableCell("NM");
-            issueRow.appendTableCell(usdFormatter.format(myIssue.online));
+
+            const rowColor = (i % 2 === 0) ? color1 : color2;
+
+            let col1 = issueRow.appendTableCell(" ")
+                .setBackgroundColor(rowColor)
+                .setAttributes(tableCellDefaultStyle);
+
+            // let myCheck = col1.appendListItem("yes");
+
+            // myCheck.setGlyphType(DocumentApp.GlyphType.CHECKBOX);
+
+            issueRow.appendTableCell(parseInt(myIssue.number).toFixed(0))
+                .setBackgroundColor(rowColor)
+                .getChild(0)
+                .setAttributes(tableCellDefaultStyle);
+            issueRow.appendTableCell(myIssue.month)
+                .setBackgroundColor(rowColor)
+                .getChild(0)
+                .setAttributes(tableCellDefaultStyle);
+            issueRow.appendTableCell(parseInt(myIssue.year).toFixed(0))
+                .setBackgroundColor(rowColor)
+                .getChild(0)
+                .setAttributes(tableCellDefaultStyle);
+            issueRow.appendTableCell("NM")
+                .setBackgroundColor(rowColor)
+                .getChild(0)
+                .setAttributes(tableCellDefaultStyle);
+            issueRow.appendTableCell(usdFormatter.format(myIssue.online))
+                .setBackgroundColor(rowColor)
+                .getChild(0)
+                .setAttributes(tableCellDefaultStyle);
+            issueRow.appendTableCell(" ")
+                .setBackgroundColor(rowColor)
+                .getChild(0)
+                .setAttributes(tableCellDefaultStyle);
         }
         
         display.setValue("Done!");

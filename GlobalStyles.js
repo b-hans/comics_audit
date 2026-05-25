@@ -11,3 +11,7 @@ tableHeaderStyle[DocumentApp.Attribute.BACKGROUND_COLOR] = "#d0e0e3";
 const tableHeaderParagraphStyle = {};
 tableHeaderParagraphStyle[DocumentApp.Attribute.HORIZONTAL_ALIGNMENT] 
     = DocumentApp.HorizontalAlignment.CENTER;
+
+const tableCellDefaultStyle = {};
+tableCellDefaultStyle[DocumentApp.Attribute.HORIZONTAL_ALIGNMENT]
+    = DocumentApp.HorizontalAlignment.CENTER;
