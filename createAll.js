@@ -5,24 +5,12 @@ function createAll () {
 
         display.setValue("Working....");
 
-        // get the document
-        const folder = DriveApp.getFolderById(AUDITFOLDER);
-        const files = folder.getFilesByName("Audit document");
+        const auditDocument = getAuditDocument();
+        const startRow = doChecks (auditDocument);
 
-        let auditDocument;
-
-        if (files.hasNext()) {
-            auditDocument = DocumentApp.openById(files.next().getId());
+        if (!startRow) {
+            return false;
         }
-        else {
-            auditDocument = DocumentApp.create("Audit document");
-            let ad_id = auditDocument.getId();
-
-            let auditFile = DriveApp.getFileById(ad_id);
-            auditFile.moveTo(folder);
-
-        }
-
 
         let titlesData = SpreadsheetApp.getActiveSpreadsheet()
             .getSheetByName("Title table")
@@ -32,9 +20,14 @@ function createAll () {
         let headers = titlesData.shift();
 
         const idIndex = headers.indexOf('id');
-        const start = titlesData.findIndex( row => row[idIndex] === STARTING_ID);
 
-        for (let i=start; i<start+20; i++) {
+        // find the active cell
+        const titleSheet = SpreadsheetApp.getActiveSpreadsheet()
+            .getSheetByName("Title table");
+
+        const start = startRow - 2;
+
+        for (let i=start; i<start+60; i++) {
             let myTitle = new ComicTitle({
                 id: titlesData[i][idIndex],
                 title: null,
@@ -47,6 +40,8 @@ function createAll () {
         }
 
         display.setValue ("Done!");
+
+        FORMSHEET.activate();
 
         return true;
 

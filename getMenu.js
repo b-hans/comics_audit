@@ -7,6 +7,7 @@ function getMenu(e) {
     SpreadsheetApp.getUi()
          .createMenu('Form rebuilds')
          .addItem('Rebuild input form', 'rebuildInputForm')
+         .addItem('Create all', 'createAll')
          .addToUi();
     
 }
