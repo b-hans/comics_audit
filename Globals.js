@@ -12,6 +12,8 @@ const TITLEDEFAULT = "Enter title here";
 
 const AUDITFOLDER = "1iBZzYLkgROW1nNatYuebA5n9bxJP938o";
 
+const STARTING_ID = 113;
+
 const usdFormatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',

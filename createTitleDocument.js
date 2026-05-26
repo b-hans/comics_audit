@@ -1,30 +1,35 @@
-function createTitleDocument (comicTitle) {
+function createTitleDocument (params) {
 
     const display = FORMSHEET.getRange(DISPLAYCELL);
 
     try {
-        const folder = DriveApp.getFolderById(AUDITFOLDER);
-        const filename = comicTitle.title + "_" + comicTitle.publisher.name + "_vol" + comicTitle.volume;
-        const files = folder.getFilesByName(filename);
 
-        let auditDocument = null;
-        let doc_id = null;
-        let auditFile = null;
+        const comicTitle = params.title;
+        const auditDocument = params.document;
 
-        if (files.hasNext()) {
-            return true;
-            // let trashFile = files.next();
-            // trashFile.setTrashed(true);
-        }
+        // const folder = DriveApp.getFolderById(AUDITFOLDER);
+        // const filename = comicTitle.title + "_" + comicTitle.publisher.name + "_vol" + comicTitle.volume;
+        // const files = folder.getFilesByName(filename);
 
-        auditDocument = DocumentApp.create(filename);
-        doc_id = auditDocument.getId();
+        // let auditDocument = null;
+        // let doc_id = null;
+        // let auditFile = null;
 
-        auditFile = DriveApp.getFileById(doc_id);
-        auditFile.moveTo(folder);
+        // if (files.hasNext()) {
+        //     return true;
+        //     // let trashFile = files.next();
+        //     // trashFile.setTrashed(true);
+        // }
+
+        // auditDocument = DocumentApp.create(filename);
+        // doc_id = auditDocument.getId();
+
+        // auditFile = DriveApp.getFileById(doc_id);
+        // auditFile.moveTo(folder);
 
         const docBody = auditDocument.getBody();
-        const docTitle = docBody.insertParagraph(0, 
+
+        const docTitle = docBody.appendParagraph( 
             comicTitle.title + " vol. " + comicTitle.volume + " (" + comicTitle.publisher.name + ")");
 
         docTitle.setHeading(DocumentApp.ParagraphHeading.TITLE);
@@ -117,8 +122,10 @@ function createTitleDocument (comicTitle) {
                 .getChild(0)
                 .setAttributes(tableCellDefaultStyle);
         }
+
+        docBody.appendPageBreak();
         
-        display.setValue("Done!");
+        // display.setValue("Done!");
 
         return true;
 
