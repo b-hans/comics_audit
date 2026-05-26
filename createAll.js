@@ -34,7 +34,7 @@ function createAll () {
         const idIndex = headers.indexOf('id');
         const start = titlesData.findIndex( row => row[idIndex] === STARTING_ID);
 
-        for (let i=start; i<start+5; i++) {
+        for (let i=start; i<titlesData.length; i++) {
             let myTitle = new ComicTitle({
                 id: titlesData[i][idIndex],
                 title: null,
