@@ -34,7 +34,7 @@ function createAll () {
         const idIndex = headers.indexOf('id');
         const start = titlesData.findIndex( row => row[idIndex] === STARTING_ID);
 
-        for (let i=start; i<titlesData.length; i++) {
+        for (let i=start; i<start+20; i++) {
             let myTitle = new ComicTitle({
                 id: titlesData[i][idIndex],
                 title: null,
@@ -46,7 +46,7 @@ function createAll () {
             });
         }
 
-        display.setValue ("zDone!");
+        display.setValue ("Done!");
 
         return true;
 
