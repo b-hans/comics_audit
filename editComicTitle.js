@@ -1,18 +1,26 @@
 function editComicTitle (params) {
     const ui = params.ui;
-    const title = params.title;
+    const inputTitle = params.title;
     const display = params.display;
 
     try {
 
-        const comicTitle = getComicTitle({
+        const myTitle = getComicTitle({
             ui: ui,
-            title: title
+            title: inputTitle
         });
 
-        if (!comicTitle.valid) {
+        if (!myTitle.valid) {
+            ui.alert("Not valid");
             return false;
         }
+
+        const title = myTitle.title;
+        const publisher = title.publisher.name;
+
+        ui.alert ("Found: " + title.title + " vol." + title.volume + 
+            " (" + publisher + ")"
+        );
 
         // if (buildEditForm()) {
         //     ui.alert("in build");

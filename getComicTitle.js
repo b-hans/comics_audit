@@ -6,23 +6,29 @@ function getComicTitle (params) {
     try {
     
         // search for the vol.
-        let vol = "";
-        let publisher_id = "";
-        let comicTitle = "";
+        let titleId = "";
 
-        let volIndex = title.indexOf("vol.");
+        let idIndex = title.indexOf(" [[");
 
-        if (volIndex != -1){
-            let vStart = volIndex + 4;
-            let vEnd = title.indexOf(' ', vStart);
+        if (idIndex != -1){
+            let vStart = idIndex + 3;
+            let vEnd = title.indexOf(']]', vStart);
 
-            vol = title.substring(vStart, vEnd);
+            titleId = title.substring(vStart, vEnd);
         }
 
-        ui.alert ("Volume: " + vol);
+        const myTitle = new ComicTitle({
+            id: titleId,
+            title: null
+        });
+
+        if (!myTitle.valid) {
+            return { valid: false }
+        }
 
         return {
             valid: true,
+            title: myTitle
         }
 
     } catch (error) {

@@ -58,6 +58,8 @@ function getTitles(params) {
                 returnValue += " (" + publisher + ")";
             }
 
+            returnValue += ": [[" + row[headers.indexOf('id')] + "]]";
+
             return returnValue;
 
         });

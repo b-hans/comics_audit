@@ -19,6 +19,7 @@ class ComicTitle {
         }
 
         let display = FORMSHEET.getRange(DISPLAYCELL);
+        let ui = SpreadsheetApp.getUi();
 
         const TITLEDATA = SpreadsheetApp
             .getActiveSpreadsheet()
@@ -54,7 +55,7 @@ class ComicTitle {
                 }
             }
             else if (id != -1) {
-                filteredResult = TITLEDATA.filter (item => item[idIndex] === id);
+                filteredResult = TITLEDATA.filter (item => item[idIndex] == id);
                 if (filteredResult.length < 1) {
                     this.valid = false;
                     return;
