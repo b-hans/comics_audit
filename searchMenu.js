@@ -7,8 +7,16 @@ function searchMenu(params) {
 
     range.setValue("Select one");
 
+    const searchValue = FORMSHEET.getRange(TS_SEARCH_TITLE_RANGE).getValue();
 
-    display.setValue("Test: " + menuType);
+    if (!searchValue) {
+        display.setValue ("The search field is empty");
+        return false;
+    }
 
-    return true;
+    return applySearch({
+        searchTerm: searchValue,
+        display: display
+    });
+
 }
