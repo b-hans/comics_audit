@@ -32,8 +32,8 @@ function menuOnEdit(e) {
             case "Create one":
                 return createOne();
 
-            case "Create all":
-                return createAll();
+            case "Title search form":
+                return rebuildTitleSearchForm();
 
             case "Search title":
                 return searchTitle();

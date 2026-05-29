@@ -1,0 +1,27 @@
+const TS_FULLRANGE = "A1:H29";
+const TS_DEFAULT_COL_WIDTH = 100;
+const TS_DEFAULT_COL_RANGE = 20;
+
+const TS_RANGE = "A1:F15";
+const TS_TITLE_RANGE = "B2:E3";
+
+const TS_CURRENT_TITLES_RANGE = "C5:E5";
+const TS_SEARCH_TITLE_RANGE = "C7:D7";
+
+const TS_DISPLAY_RANGE = "B12:E14";
+
+const TS_RANGE_BACKGROUND = "#d9d2e9";
+
+const TS_CURRENT_TITLES_LABEL = "B5";
+const TS_SEARCH_TITLES_LABEL = "B7";
+
+const TS_CURRENT_TITLES = "C5:E5";
+const TS_SEARCH_TITLES = "C7:D7";
+
+const TS_FUNCTIONS_LABEL = "B10";
+const TS_FUNCTIONS = "C10";
+
+// const TS_TITLE_STYLE = {};
+// TS_TITLE_STYLE[];
+
+

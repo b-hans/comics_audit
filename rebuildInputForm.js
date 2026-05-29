@@ -5,15 +5,8 @@ function rebuildInputForm () {
 
     try {
 
-        FORMSHEET.getRange("A1:G27")
-            .clearDataValidations()
-            .clearContent()
-            .merge()
-            .setBackground("white");
 
-        FORMSHEET.getRange("A1:G27")
-            .breakApart();
-
+        deleteFormsSheet();
 
         let outerRange = FORMSHEET.getRange(OUTERRANGE.a1notation);
         outerRange.setBackground(OUTERRANGE.color);
