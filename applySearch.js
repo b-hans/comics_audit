@@ -23,7 +23,7 @@ function applySearch (params) {
         SpreadsheetApp.flush();
         FORMSHEET.getRange(TS_CURRENT_TITLES)
             .setDataValidation(rule)
-            .setValue("Select a title");
+            .setValue(results.titles[0]);
 
         display.setValue("Check titles");
 

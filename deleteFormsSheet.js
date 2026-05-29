@@ -32,6 +32,11 @@ function deleteFormsSheet () {
     setUniformRowHeight();
     setAllColumnsWidth();
 
+    range = sheet.getRange(TS_FULLRANGE)
+        .setFontFamily("Arial")
+        .setFontColor("black")
+        .setFontSize(10);
+
     sheet.getRange("A1").activate();
 
 

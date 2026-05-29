@@ -66,7 +66,9 @@ function getTitles(params) {
             return { valid: false}
         }
 
-        titleMap.unshift("Select a title");
+        if (titleMap.length > 1) {
+            titleMap.unshift("Select a title");
+        }
 
         return {
             titles: titleMap,

@@ -7,16 +7,40 @@ function searchMenu(params) {
 
     range.setValue("Select one");
 
-    const searchValue = FORMSHEET.getRange(TS_SEARCH_TITLE_RANGE).getValue();
+    if (menuType == "Search") {
 
-    if (!searchValue) {
-        display.setValue ("The search field is empty");
+        const searchValue = FORMSHEET.getRange(TS_SEARCH_TITLE_RANGE).getValue();
+
+        if (!searchValue) {
+            display.setValue ("The search field is empty");
+            return false;
+        }
+
+        return applySearch({
+            searchTerm: searchValue,
+            display: display
+        });
+
+    } 
+    else if (menuType == "Edit selected") {
+        const editTitle = FORMSHEET.getRange(TS_CURRENT_TITLES).getValue();
+
+        if (!editTitle || editTitle == "Select a title") {
+            display.setValue ("No title has been selected");
+            return false;
+        }
+
+        display.setValue ("Working...");
+
+        return editComicTitle({
+            display: display,
+            title: editTitle,
+            ui: ui
+        });
+    }
+    else {
+        display.setValue ("Function error");
         return false;
     }
-
-    return applySearch({
-        searchTerm: searchValue,
-        display: display
-    });
 
 }
