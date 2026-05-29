@@ -21,16 +21,33 @@ function searchTitle () {
 
         if (searcher.valid) {
 
-            return createTitleDocument(searcher);
+            const folder = DriveApp.getFolderById(AUDITFOLDER);
+            const filename = searcher.title + "_" + 
+                searcher.publisher.name + "_vol" + searcher.volume;
+            const files = folder.getFilesByName(filename);
 
-            // display.setValue (// display.getValue() + "\n\n" + 
-            //     "Title: " + searcher.title + "\n" +
-            //     "publisher: " + searcher.publisher.name + "\n" +
-            //     "Volume: " + searcher.volume + "\n" +
-            //     "First#: " + searcher.num_first + "\n" +
-            //     "Last#: " + searcher.num_last + "\n\n" +
-            //     createTitleDocument(searcher)
-            // );
+            let auditDocument = null;
+            let doc_id = null;
+            let auditFile = null;
+
+            if (files.hasNext()) {
+                return true;
+                // let trashFile = files.next();
+                // trashFile.setTrashed(true);
+            }
+
+            auditDocument = DocumentApp.create(filename);
+            doc_id = auditDocument.getId();
+
+            auditFile = DriveApp.getFileById(doc_id);
+            auditFile.moveTo(folder);
+
+            display.setValue ("check document");
+            
+            return createTitleDocument({
+                title: searcher,
+                document: auditDocument
+            });
 
         }
         else if (searcher.multiple) {

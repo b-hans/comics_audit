@@ -48,7 +48,7 @@ const INNERRANGE = {
 const MENU = {
     a1notation: "C3:C4",
     background: "white",
-    options: ['Select one', 'Title search form', 'Title add form', 'Audit form', 'Create one'],
+    options: ['Select one', 'Instructions'],
     horizontal: 'center',
     vertical: 'middle',
     borders: [true, true, true, true, false, false],

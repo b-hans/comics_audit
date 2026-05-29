@@ -116,6 +116,10 @@ function rebuildInputForm () {
         optionsCell.setDataValidation(optionsRule);
         optionsCell.setValue(MENUOPTIONS.options[0]);
 
+        let firstCell = FORMSHEET.getRange("A1")
+                .setFontColor('#f3f3f3')
+                .setValue("audit");
+
         return true;
 
     } catch (error) {

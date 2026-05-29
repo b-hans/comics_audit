@@ -12,6 +12,10 @@ function rebuildTitleSearchForm() {
             .setBorder(true, true, true, true, false, false, 
                 "black", SpreadsheetApp.BorderStyle.DOUBLE);
 
+        range = sheet.getRange("A1")
+                .setFontColor(TS_RANGE_BACKGROUND)
+                .setValue("titlesearch");
+
         range = sheet.getRange(TS_TITLE_RANGE)
                 .merge()
                 .setBackground("white")

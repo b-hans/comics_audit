@@ -7,12 +7,23 @@ function menuOnEdit(e) {
     const menuRange = FORMSHEET.getRange(MENUCELL);
     const optionsRange = FORMSHEET.getRange(OPTIONSCELL);
 
+    const ui = SpreadsheetApp.getUi();
+
+    const formType = FORMSHEET.getRange("A1").getValue();
+
     try {
 
-        if (sheet.getName() != FORMSHEET.getName() || (
-            range.getA1Notation() != MENUCELL) &&
-            range.getA1Notation() != OPTIONSCELL
-            ) {
+        if (sheet.getName() != FORMSHEET.getName()) {
+            return true;
+        }
+
+        // This is title search functions
+        if (range.getA1Notation() == "C10" && formType == "titlesearch") {
+            return searchMenu({
+                range: range
+            });
+        }
+        else if (formType != "audit") {
             return true;
         }
 
@@ -29,21 +40,22 @@ function menuOnEdit(e) {
         optionsRange.setValue(MENUOPTIONS.options[0]);
 
         switch (menuType) {
-            case "Create one":
-                return createOne();
-
-            case "Title search form":
-                return rebuildTitleSearchForm();
 
             case "Search title":
-                return searchTitle();
+                return searchTitle(e);
                 
-            default:
-                displayRange.setValue ("test: " + menuType);
+            case "Instructions":
+                displayRange.setValue (
+                    "Instructions\n\n" +
+                    "Go to Title table and activate the row to start\n" +
+                    "Then select \"Create all\" from \n" +
+                    "the form rebuilds custom menu"
+                );
                 break;
-        }
 
-        
+            default:
+                displayRange.setValue("");
+        }
 
         return true;
 
