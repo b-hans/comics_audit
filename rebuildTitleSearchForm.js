@@ -41,7 +41,7 @@ function rebuildTitleSearchForm() {
                     .setFontSize(10)
                     .setValue("Search Title: ");
 
-        range = sheet.getRange(TS_CURRENT_TITLES)
+        let titlesRange = sheet.getRange(TS_CURRENT_TITLES)
                     .setBackground("#ffffff")
                     .merge()
                     .setFontColor("black")
@@ -101,15 +101,6 @@ function rebuildTitleSearchForm() {
         range = sheet.getRange(TS_FUNCTIONS)
                 .setDataValidation(functionsRule)
                 .setValue("Select one");
-
-
-        // let tfc = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Copy of Forms");
-        // let td = tfc.getRange("B12");
-        // let trow = tfc.getRange("B10").getRow();
-
-        // td.setValue (
-        //     ""
-        // );
 
         return true;
     }
