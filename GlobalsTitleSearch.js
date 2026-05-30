@@ -1,4 +1,4 @@
-const TS_FULLRANGE = "A1:H29";
+const TS_FULLRANGE = "A1:I29";
 const TS_DEFAULT_COL_WIDTH = 100;
 const TS_DEFAULT_COL_RANGE = 20;
 

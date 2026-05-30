@@ -18,17 +18,21 @@ function editComicTitle (params) {
         const title = myTitle.title;
         const publisher = title.publisher.name;
 
-        ui.alert ("Found: " + title.title + " vol." + title.volume + 
-            " (" + publisher + ")"
-        );
+        // ui.alert ("Found: " + title.title + " vol." + title.volume + 
+        //     " (" + publisher + ")"
+        // );
 
-        // if (buildEditForm()) {
-        //     ui.alert("in build");
-        // }
-        // else {
-        //     ui.alert ("Problem");
-        //     return false;
-        // }
+        let testSheet = SpreadsheetApp.getActiveSpreadsheet()
+            .getSheetByName("Copy of Forms");
+        
+
+        if (!buildEditForm()) {
+            ui.alert("Problem");
+            return false;
+        }
+
+        FORMSHEET.getRange(TE_titleInput.a1notation)
+            .setValue(title.title);
 
         return true;
     } catch (error) {
