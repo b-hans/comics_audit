@@ -33,6 +33,24 @@ function buildEditForm() {
         .setVerticalAlignment(TE_fontStyles.vertical)
         .merge();
 
+    FORMSHEET.getRange(TE_publisherLabel.a1notation)
+        .setBackground(TE_fontStyles.background)
+        .setFontColor(TE_fontStyles.color)
+        .setFontSize(TE_publisherLabel.fontSize)
+        .setFontFamily(TE_fontStyles.fontFamily)
+        .setHorizontalAlignment(TE_publisherLabel.horizontal)
+        .setVerticalAlignment(TE_fontStyles.vertical)
+        .setValue(TE_publisherLabel.value);
+
+    FORMSHEET.getRange(TE_publisherInput.a1notation)
+        .setBackground(TE_fontStyles.background)
+        .setFontColor(TE_fontStyles.color)
+        .setFontSize(TE_publisherInput.fontSize)
+        .setFontFamily(TE_fontStyles.fontFamily)
+        .setHorizontalAlignment(TE_publisherInput.horizontal)
+        .setVerticalAlignment(TE_fontStyles.vertical)
+        .merge();
+
     return true;
 
 }

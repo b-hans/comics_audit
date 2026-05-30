@@ -33,6 +33,8 @@ function editComicTitle (params) {
 
         FORMSHEET.getRange(TE_titleInput.a1notation)
             .setValue(title.title);
+        FORMSHEET.getRange(TE_publisherInput.a1notation)
+            .setValue(publisher);
 
         return true;
     } catch (error) {

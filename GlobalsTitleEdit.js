@@ -31,4 +31,17 @@ const TE_titleInput = {
     fontSize: 14,
 }
 
+const TE_publisherLabel = {
+    a1notation: "B4",
+    horizontal: "right",
+    value: "Publisher: ",
+    fontSize: 14,
+}
+
+const TE_publisherInput = {
+    a1notation: "C4:E4",
+    horizontal: "center",
+    fontSize: 14
+}
+
 
