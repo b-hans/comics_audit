@@ -1,6 +1,8 @@
 function buildEditForm() {
     deleteFormsSheet();
 
+    const ui = SpreadsheetApp.getUi();
+
     let range = FORMSHEET.getRange(TE_OUTERRANGE.a1notation)
         .setBackground(TE_OUTERRANGE.background)
         .setFontColor(TE_OUTERRANGE.color);
@@ -15,41 +17,51 @@ function buildEditForm() {
         FORMSHEET.setColumnWidth(i+1, TE_OUTERRANGE.colwidths[i]);
     }
 
-    FORMSHEET.getRange(TE_titleLabel.a1notation)
-        .setBackground(TE_fontStyles.background)
-        .setFontColor(TE_fontStyles.color)
-        .setFontSize(TE_titleLabel.fontSize)
-        .setFontFamily(TE_fontStyles.fontFamily)
-        .setHorizontalAlignment(TE_titleLabel.horizontal)
-        .setVerticalAlignment(TE_fontStyles.vertical)
-        .setValue(TE_titleLabel.value);
+    for (let i=0; i<TE_innerRanges.length; i++) {
+        let myItem = TE_innerRanges[i];
+        let myRange = FORMSHEET.getRange(myItem.a1notation);
 
-    FORMSHEET.getRange(TE_titleInput.a1notation)
-        .setBackground(TE_fontStyles.background)
-        .setFontColor(TE_fontStyles.color)
-        .setFontSize(TE_titleInput.fontSize)
-        .setFontFamily(TE_fontStyles.fontFamily)
-        .setHorizontalAlignment(TE_titleInput.horizontal)
-        .setVerticalAlignment(TE_fontStyles.vertical)
-        .merge();
+        if (myItem.merge) {
+            myRange.merge();
+        }
 
-    FORMSHEET.getRange(TE_publisherLabel.a1notation)
-        .setBackground(TE_fontStyles.background)
-        .setFontColor(TE_fontStyles.color)
-        .setFontSize(TE_publisherLabel.fontSize)
-        .setFontFamily(TE_fontStyles.fontFamily)
-        .setHorizontalAlignment(TE_publisherLabel.horizontal)
-        .setVerticalAlignment(TE_fontStyles.vertical)
-        .setValue(TE_publisherLabel.value);
+        myRange.setBackground(myItem.background)
+            .setFontColor(myItem.fontColor)
+            .setFontSize(myItem.fontSize)
+            .setFontFamily(myItem.fontFamily)
+            .setHorizontalAlignment(myItem.horizontal)
+            .setVerticalAlignment(myItem.vertical);
 
-    FORMSHEET.getRange(TE_publisherInput.a1notation)
-        .setBackground(TE_fontStyles.background)
-        .setFontColor(TE_fontStyles.color)
-        .setFontSize(TE_publisherInput.fontSize)
-        .setFontFamily(TE_fontStyles.fontFamily)
-        .setHorizontalAlignment(TE_publisherInput.horizontal)
-        .setVerticalAlignment(TE_fontStyles.vertical)
-        .merge();
+        if (myItem.value) {
+            myRange.setValue(myItem.value);
+        }
+
+        if (myItem.border) {
+            let bor = myItem.border;
+            myRange.setBorder(
+                bor[0],
+                bor[1],
+                bor[2],
+                bor[3],
+                bor[4],
+                bor[5],
+                bor[6],
+                bor[7],
+            );
+        }
+    }
+
+    const publisherData = getPublisherData();
+
+    const publisherRule = SpreadsheetApp.newDataValidation()
+        .requireValueInList(publisherData.dropdown, true)
+        .setAllowInvalid(false)
+        .build();
+
+    SpreadsheetApp.flush();
+
+    FORMSHEET.getRange(TE_PUBLISHER_DROPDOWN_RANGE)
+        .setDataValidation(publisherRule);
 
     return true;
 
