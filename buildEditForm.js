@@ -49,6 +49,17 @@ function buildEditForm() {
                 bor[7],
             );
         }
+
+        if (myItem.options) {
+            let newRule = SpreadsheetApp.newDataValidation()
+                .requireValueInList(myItem.options, true)
+                .setAllowInvalid(false)
+                .build();
+            
+            SpreadsheetApp.flush();
+            myRange.setDataValidation(newRule);
+            myRange.setValue(myItem.options[0]);
+        }
     }
 
     const publisherData = getPublisherData();

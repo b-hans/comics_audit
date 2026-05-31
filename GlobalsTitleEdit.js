@@ -7,6 +7,7 @@ const TE_VOL_RANGE = "C6";
 const TE_FIRST_RANGE = "C8";
 const TE_LAST_RANGE = "C10";
 const TE_issue_start_row = 15;
+const TE_ID_RANGE = "F12";
 
 const TE_OUTERRANGE = {
     a1notation: "A1:I17",
@@ -227,6 +228,43 @@ const TE_innerRanges = [
         a1notation: "H14",
         value: "Overstreet",
     },
+     {
+        background: TE_fontStyles.background,
+        fontFamily: "EB Garamond",
+        fontColor: TE_fontStyles.fontColor,
+        vertical: TE_fontStyles.vertical,
+        a1notation: "E6:F6",
+        horizontal: "Center",
+        fontSize: 12,
+        value: null,
+        merge: true,
+        options: ["Functions", "Cancel"]
+    },
+    {
+        background: TE_fontStyles.background,
+        fontFamily: TE_fontStyles.fontFamily,
+        fontColor: TE_fontStyles.fontColor,
+        vertical: TE_fontStyles.vertical,
+        a1notation: "E12",
+        horizontal: "Center",
+        fontSize: 12,
+        value: "ID",
+        merge: false
+    },
+    {
+        background: TE_fontStyles.background,
+        fontFamily: TE_fontStyles.fontFamily,
+        fontColor: TE_fontStyles.fontColor,
+        vertical: TE_fontStyles.vertical,
+        a1notation: "F12",
+        horizontal: "Center",
+        fontSize: 12,
+        value: null,
+        merge: false
+    },
+
+
+
 
 ];
 

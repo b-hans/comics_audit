@@ -37,6 +37,8 @@ function editComicTitle (params) {
             .setValue(title.num_first);
         FORMSHEET.getRange(TE_LAST_RANGE)
             .setValue(title.num_last);
+        FORMSHEET.getRange(TE_ID_RANGE)
+            .setValue(title.id);
 
         let issues = title.issues;
 
