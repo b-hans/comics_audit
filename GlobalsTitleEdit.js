@@ -238,7 +238,7 @@ const TE_innerRanges = [
         fontSize: 12,
         value: null,
         merge: true,
-        options: ["Functions", "Cancel"]
+        options: ["Functions", "Edit title", "Add issue", "Cancel"]
     },
     {
         background: TE_fontStyles.background,
@@ -262,9 +262,20 @@ const TE_innerRanges = [
         value: null,
         merge: false
     },
-
-
-
+    {
+        background: "#d9d2e9",
+        fontFamily: TE_fontStyles.fontFamily,
+        fontColor: TE_fontStyles.fontColor,
+        vertical: TE_fontStyles.vertical,
+        a1notation: "G2:H3",
+        horizontal: "Left",
+        fontSize: 12,
+        value: null,
+        merge: true,
+        border: [true, true, true, true, false, false, "#a61c00",
+            SpreadsheetApp.BorderStyle.SOLID_MEDIUM
+        ],
+    },
 
 ];
 
