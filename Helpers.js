@@ -7,8 +7,6 @@ function menuOnEdit(e) {
     const menuRange = FORMSHEET.getRange(MENUCELL);
     const optionsRange = FORMSHEET.getRange(OPTIONSCELL);
 
-    const ui = SpreadsheetApp.getUi();
-
     const formType = FORMSHEET.getRange("A1").getValue();
 
     try {

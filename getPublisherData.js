@@ -1,7 +1,5 @@
 function getPublisherData () {
 
-    const ui = SpreadsheetApp.getUi();
-
     try {
 
         const publisherData = SpreadsheetApp.getActiveSpreadsheet()

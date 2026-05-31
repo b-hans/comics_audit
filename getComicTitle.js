@@ -1,6 +1,5 @@
 function getComicTitle (params) {
 
-    const ui = params.ui;
     const title = params.title;
 
     try {

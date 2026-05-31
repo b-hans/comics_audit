@@ -14,6 +14,7 @@ class ComicIssue {
                 return;
             }
 
+            this.id = row[headers.indexOf('id')];
             this.number = row[headers.indexOf("Number")];
             this.month = row[headers.indexOf("month")];
             this.year = row[headers.indexOf("year")];

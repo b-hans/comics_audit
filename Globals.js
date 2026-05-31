@@ -2,6 +2,8 @@
 
 const FORMSHEET = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Forms");
 
+const ui = SpreadsheetApp.getUi();
+
 const MENUCELL = "C3";
 const DISPLAYCELL = "C8";
 const OPTIONSCELL = "D6";

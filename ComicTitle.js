@@ -19,7 +19,6 @@ class ComicTitle {
         }
 
         let display = FORMSHEET.getRange(DISPLAYCELL);
-        let ui = SpreadsheetApp.getUi();
 
         const TITLEDATA = SpreadsheetApp
             .getActiveSpreadsheet()

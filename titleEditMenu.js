@@ -1,6 +1,5 @@
 function titleEditMenu (params) {
 
-    const ui = SpreadsheetApp.getUi();
     const menuA1 = "E6";
     const defaultMenu = "Functions";
 

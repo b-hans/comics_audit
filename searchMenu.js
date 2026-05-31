@@ -1,5 +1,4 @@
 function searchMenu(params) {
-    const ui = SpreadsheetApp.getUi();
 
     const range = params.range;
     const menuType = range.getValue();

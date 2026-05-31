@@ -1,8 +1,6 @@
 function buildEditForm() {
     deleteFormsSheet();
 
-    const ui = SpreadsheetApp.getUi();
-
     let range = FORMSHEET.getRange(TE_OUTERRANGE.a1notation)
         .setBackground(TE_OUTERRANGE.background)
         .setFontColor(TE_OUTERRANGE.color);
