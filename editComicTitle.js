@@ -38,6 +38,39 @@ function editComicTitle (params) {
         FORMSHEET.getRange(TE_LAST_RANGE)
             .setValue(title.num_last);
 
+        let issues = title.issues;
+
+        if (issues.length <= 0) {
+            ui.alert ("No issues");
+        }
+        else {
+
+            let startRow = TE_issue_start_row;
+
+            for (let i=0; i<issues.length; i++) {
+                let myIssue = issues[i];
+
+                let rowData = [
+                    "", 
+                    myIssue.number, 
+                    myIssue.month,
+                    myIssue.year,
+                    myIssue.grade,
+                    "",
+                    myIssue.online,
+                    myIssue.overstreet
+                ];
+                FORMSHEET.getRange(startRow, 1, 1, rowData.length).setValues([rowData])
+                    .setFontColor("black")
+                    .setFontSize(10)
+                    .setHorizontalAlignment("left");
+
+                FORMSHEET.insertRowAfter(startRow++)
+
+            }
+
+        }
+
 
         return true;
     } catch (error) {

@@ -6,6 +6,7 @@ const TE_TITLE_RANGE = "C2";
 const TE_VOL_RANGE = "C6";
 const TE_FIRST_RANGE = "C8";
 const TE_LAST_RANGE = "C10";
+const TE_issue_start_row = 15;
 
 const TE_OUTERRANGE = {
     a1notation: "A1:I17",

@@ -21,7 +21,3 @@ const TS_SEARCH_TITLES = "C7:D7";
 const TS_FUNCTIONS_LABEL = "B10";
 const TS_FUNCTIONS = "C10";
 
-// const TS_TITLE_STYLE = {};
-// TS_TITLE_STYLE[];
-
-
