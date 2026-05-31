@@ -7,6 +7,17 @@ function titleEditMenu (params) {
 
         const range = params.range;
         const menuValue = range.getValue();
+        const rangeColumn = range.getColumn();
+        const rangeRow = range.getRow();
+
+        if (rangeColumn == 1 && menuValue && menuValue != "Options") {
+            if (menuValue == "Edit") {
+                return editIssue(rangeRow);
+            }
+            else if (menuValue == "Delete") {
+                return deleteIssue(rangeRow);
+            }
+        }
         
         if (range.getA1Notation() != menuA1 ||
             menuValue == "Functions") {
