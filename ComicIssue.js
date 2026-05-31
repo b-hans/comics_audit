@@ -19,6 +19,7 @@ class ComicIssue {
             this.year = row[headers.indexOf("year")];
             this.online = row[headers.indexOf("Value Online")];
             this.overstreet = row[headers.indexOf("Value Overstreet")];
+            this.location = row[headers.indexOf("Box Number")];
 
             // this.grade = "F";
 

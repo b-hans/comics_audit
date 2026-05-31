@@ -54,12 +54,10 @@ function editComicTitle (params) {
                 row.month,
                 row.year,
                 row.grade,
-                "",
-                row.online,
-                row.overstreet
+                row.location,
+                usdFormatter.format(row.online),
+                usdFormatter.format(row.overstreet)
             ]);
-
-            console.log (mappedArray);
 
             let startRow = TE_issue_start_row;
             let numRows = mappedArray.length;
@@ -73,6 +71,23 @@ function editComicTitle (params) {
                     .setFontColor("black")
                     .setFontSize(10)
                     .setHorizontalAlignment("left");
+
+                let colAlignments = [
+                    "center",
+                    "center",
+                    "left",
+                    "left",
+                    "left",
+                    "left",
+                    "right",
+                    "right"
+                ];
+
+                for (let i=0; i<colAlignments.length; i++) {
+                    FORMSHEET.getRange(startRow, i+1, numRows, 1)
+                        .setHorizontalAlignment(colAlignments[i]);
+                }
+
 
             } catch (error) {
                 ui.alert ("Error: " + error);
