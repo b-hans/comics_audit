@@ -66,6 +66,11 @@ function rebuildTitleSearchForm() {
 
             SpreadsheetApp.flush();
             titlesRange.setDataValidation(newRule);
+
+            let cacheSelected = cache.get("current_edit");
+            if (cacheSelected) {
+                titlesRange.setValue(cacheSelected);
+            }
         }
 
         range = sheet.getRange(TS_SEARCH_TITLES)

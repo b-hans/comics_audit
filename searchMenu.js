@@ -4,6 +4,7 @@ function searchMenu(params) {
     const range = params.range;
     const menuType = range.getValue();
     const display = FORMSHEET.getRange(TS_DISPLAY_RANGE);
+    const cache = CacheService.getScriptCache();
 
     range.setValue("Select one");
 
@@ -29,6 +30,8 @@ function searchMenu(params) {
             display.setValue ("No title has been selected");
             return false;
         }
+
+        cache.put("current_edit", editTitle, 3600);
 
         display.setValue ("Working...");
 
