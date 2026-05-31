@@ -23,6 +23,9 @@ function menuOnEdit(e) {
                 range: range
             });
         }
+        else if (formType == "titleedit") {
+            return titleEditMenu ({ range: range});
+        }
         else if (formType != "audit") {
             return true;
         }

@@ -1,6 +1,7 @@
 function applySearch (params) {
     const display = params.display;
     const searchTerm = params.searchTerm;
+    const cache = CacheService.getScriptCache();
 
     try {
 
@@ -14,6 +15,9 @@ function applySearch (params) {
             display.setValue ("Not found: " + searchTerm);
             return false;
         }
+
+        // put results in cache for current search results
+        cache.put('current_search', JSON.stringify(results.titles), 3600);
 
         let rule = SpreadsheetApp.newDataValidation()
             .requireValueInList(results.titles, true)

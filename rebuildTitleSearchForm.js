@@ -2,6 +2,8 @@ function rebuildTitleSearchForm() {
 
     try {
 
+        const cache = CacheService.getScriptCache();
+
         deleteFormsSheet();
 
         const sheet = FORMSHEET;
@@ -54,6 +56,17 @@ function rebuildTitleSearchForm() {
                     .setBorder(true, true, true, true, false, false,
                         "black", SpreadsheetApp.BorderStyle.SOLID
                     );
+
+        let cacheSearch = cache.get("current_search");
+        if (cacheSearch) {
+            let newRule = SpreadsheetApp.newDataValidation()
+                .requireValueInList(JSON.parse(cacheSearch), true)
+                .setAllowInvalid(false)
+                .build();
+
+            SpreadsheetApp.flush();
+            titlesRange.setDataValidation(newRule);
+        }
 
         range = sheet.getRange(TS_SEARCH_TITLES)
                     .setBackground("#ffffff")
