@@ -47,29 +47,37 @@ function editComicTitle (params) {
         }
         else {
 
+            // map the array
+            let mappedArray = issues.map (row => [
+                "",
+                row.number,
+                row.month,
+                row.year,
+                row.grade,
+                "",
+                row.online,
+                row.overstreet
+            ]);
+
+            console.log (mappedArray);
+
             let startRow = TE_issue_start_row;
+            let numRows = mappedArray.length;
+            let numCols = mappedArray[0].length;
 
-            for (let i=0; i<issues.length; i++) {
-                let myIssue = issues[i];
+            FORMSHEET.insertRowsAfter(startRow, numRows);
 
-                let rowData = [
-                    "", 
-                    myIssue.number, 
-                    myIssue.month,
-                    myIssue.year,
-                    myIssue.grade,
-                    "",
-                    myIssue.online,
-                    myIssue.overstreet
-                ];
-                FORMSHEET.getRange(startRow, 1, 1, rowData.length).setValues([rowData])
+            try {
+                FORMSHEET.getRange(startRow, 1, numRows, numCols)
+                    .setValues(mappedArray)
                     .setFontColor("black")
                     .setFontSize(10)
                     .setHorizontalAlignment("left");
 
-                FORMSHEET.insertRowAfter(startRow++)
-
+            } catch (error) {
+                ui.alert ("Error: " + error);
             }
+
 
         }
 
