@@ -37,7 +37,6 @@ function searchMenu(params) {
         return editComicTitle({
             display: display,
             title: editTitle,
-            ui: ui
         });
     }
     else {

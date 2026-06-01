@@ -31,27 +31,77 @@ function insertIssue () {
         const conditions = getConditions();
 
         let myCondition = newIssueData[3];
-        let condition_id = null;
 
+        let conditionRow = conditions.data.find ( row => 
+            row[conditions.headers.indexOf('Condition')] == myCondition);
+
+        let condition_id = conditionRow[conditions.headers.indexOf('id')];
+        const comicsIssuesSheet = SpreadsheetApp.getActiveSpreadsheet()
+            .getSheetByName("MyComics");
         
+        const comicsHeaders = comicsIssuesSheet
+            .getRange(1, 1, 1, comicsIssuesSheet.getLastColumn())
+            .getValues()[0];
+
+        let issueRow = [];
+
         const issue = {
             id:             newId.id,
             title_id:       title_id,
             publisher_id:   publisher_id,
-            number:         newIssueData[0],
+            Number:         newIssueData[0],
             month:          newIssueData[1],
             year:           newIssueData[2],
             condition:      newIssueData[3],
             location:       newIssueData[4],
             online:         newIssueData[5],
-            overstreet:     newIssueData[6]
+            overstreet:     newIssueData[6],
+            condition_id:   condition_id,
+            Notes:          ""
         }
 
-        console.log (issue);
+        for (let i=0; i<comicsHeaders.length; i++) {
+            let head = comicsHeaders[i];
 
-        display.setValue ("Check console\nDone!");
+            switch (head) {
 
+                case "Box Number":
+                    issueRow.push(issue.location);
+                    break;
 
+                case "Value Online":
+                    issueRow.push(issue.online);
+                    break;
+
+                case "Value Overstreet":
+                    issueRow.push(issue.overstreet);
+                    break;
+
+                default:
+                    issueRow.push(issue[head]);
+                    break;
+            }
+
+        }
+
+        // edit Comic title params display and like row edit
+
+        comicsIssuesSheet.appendRow(issueRow);
+
+        // construct the searcher for title
+        let searcher = myTitle.title;
+        if (myTitle.volume) {
+            searcher += " vol." + myTitle.volume;
+        }
+        searcher += " (" + myTitle.publisher.name + "): [[" + myTitle.id + "]]";
+
+        editComicTitle({
+            title:      searcher,
+            display:    display
+        });
+
+        display.setValue ("Done!");
+        
     } catch (error) {
         ui.alert("Error: " + error);
         return false;

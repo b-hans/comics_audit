@@ -84,13 +84,13 @@ function titleEditMenu (params) {
                 return addIssue();
 
             default:
-                ui.alert ("menu: " + menuValue);
+                display.setValue ("menu: " + menuValue);
         }
         
 
         return true;
     } catch (error) {
-        ui.alert ("Problem: " + error);
+        display.setValue ("Problem: " + error);
         return false;
     }
 }
