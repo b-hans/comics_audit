@@ -3,6 +3,7 @@ function titleEditMenu (params) {
     const menuA1 = "E6";
     const defaultMenu = "Functions";
     const display = getDisplay("TE");
+    const cache = CacheService.getScriptCache();
 
     try {
 
@@ -21,6 +22,15 @@ function titleEditMenu (params) {
             else if (menuValue == "Yes, insert") {
                 return insertIssue();
             }
+            else if (menuValue == "Yes, delete it") {
+                clearSelect("TE");
+                display.setValue ("Delete id: " + cache.get("delete_issue_id"));
+                return true;
+            }
+            else {
+                cache.remove("delete_issue_id");
+            }
+
             return true;
         }
         else if (rangeColumn == 1 && menuValue && menuValue != "Options") {
