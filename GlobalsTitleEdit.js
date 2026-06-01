@@ -9,6 +9,7 @@ const TE_LAST_RANGE = "C10";
 const TE_issue_start_row = 15;
 const TE_ID_RANGE = "F12";
 const TE_DISPLAY = "G2";
+const TE_CONFIRMATION = "H4";
 
 const TE_OUTERRANGE = {
     a1notation: "A1:I17",
@@ -263,19 +264,22 @@ const TE_innerRanges = [
         value: null,
         merge: false
     },
+    // display area
     {
         background: "#d9d2e9",
         fontFamily: TE_fontStyles.fontFamily,
         fontColor: TE_fontStyles.fontColor,
         vertical: TE_fontStyles.vertical,
         a1notation: "G2:H3",
-        horizontal: "Left",
+        horizontal: "left",
+        vertical: "top",
         fontSize: 12,
         value: null,
         merge: true,
         border: [true, true, true, true, false, false, "#a61c00",
             SpreadsheetApp.BorderStyle.SOLID_MEDIUM
         ],
+        wrap: "wrap"
     },
 
 ];

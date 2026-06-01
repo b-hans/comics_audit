@@ -1,6 +1,7 @@
 function insertIssue () {
 
     FORMSHEET.getRange(TE_issue_start_row, 1, 1, 1).setValue("Options");
+    clearSelect("TE");
 
     try {
 
@@ -31,8 +32,6 @@ function insertIssue () {
 
         let myCondition = newIssueData[3];
         let condition_id = null;
-
-        // let conditionRow = 
 
         
         const issue = {

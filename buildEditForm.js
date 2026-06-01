@@ -58,6 +58,10 @@ function buildEditForm() {
             myRange.setDataValidation(newRule);
             myRange.setValue(myItem.options[0]);
         }
+
+        if (myItem.wrap && myItem.wrap == "wrap") {
+            myRange.setWrap(true);
+        }
     }
 
     const publisherData = getPublisherData();

@@ -2,6 +2,7 @@ function titleEditMenu (params) {
 
     const menuA1 = "E6";
     const defaultMenu = "Functions";
+    const display = getDisplay("TE");
 
     try {
 
@@ -10,7 +11,19 @@ function titleEditMenu (params) {
         const rangeColumn = range.getColumn();
         const rangeRow = range.getRow();
 
-        if (rangeColumn == 1 && menuValue && menuValue != "Options") {
+        if (range.getA1Notation() == TE_CONFIRMATION && menuValue != "Select") {
+            if (menuValue == "No") {
+                clearSelect("TE");
+            }
+            else if (menuValue == "Cancel insert issue") {
+                cancelNewIssue();
+            }
+            else if (menuValue == "Yes, insert") {
+                return insertIssue();
+            }
+            return true;
+        }
+        else if (rangeColumn == 1 && menuValue && menuValue != "Options") {
             if (menuValue == "Edit") {
                 return editIssue(rangeRow);
             }
@@ -18,41 +31,33 @@ function titleEditMenu (params) {
                 return deleteIssue(rangeRow);
             }
             else if (menuValue == "Insert it") {
-                
-                let response = ui.alert(
-                    'Confirmation Required',
-                    'You are about to add this issue, do you wish to continue?',
-                    ui.ButtonSet.YES_NO
-                );
 
-                if (response == ui.Button.YES) {
-                    return insertIssue();
+                let params = {
+                    display:    display,
+                    options:    FORMSHEET.getRange(TE_issue_start_row, 1, 1, 1),
+                    text:       "Options"
+                }
+
+                if (newIssueValid(params)) {
+                    return insertConfirmation({
+                        text:           "Confirmation required\n\nAdd this issue?",
+                        display:        display,
+                        optionsRange:   FORMSHEET.getRange(TE_issue_start_row, 1, 1, 1),
+                        options:        ['Select', "Yes, insert", "No"]
+                    });                
                 }
                 else {
-                    FORMSHEET.getRange(TE_issue_start_row, 1, 1, 1).setValue("Options");
+                    return true;
                 }
-
-                return true;
             }
             else if (menuValue == "Cancel insert") {
 
-                let response = ui.alert(
-                    'Confirmation Required',
-                    'Do you wish to cance the issue insert?',
-                    ui.ButtonSet.YES_NO
-                );
-
-                if (response == ui.Button.YES) {
-                    FORMSHEET.deleteRow(TE_issue_start_row);
-                    return true;                    
-                }
-
-                FORMSHEET.getRange(TE_issue_start_row, 1, 1, 1)
-                    .setValue("Options");
-
-                ui.alert ("Continue insert");
-
-                return true;
+                return insertConfirmation({
+                    text:           "Confirmation required\n\nDo you wish to cancel?",
+                    display:        display,
+                    optionsRange:   FORMSHEET.getRange(TE_issue_start_row, 1, 1, 1),
+                    options:        ['Select', "Cancel insert issue", "No"]
+                });
 
             }
             else {

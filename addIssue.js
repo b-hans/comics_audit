@@ -1,5 +1,8 @@
 function addIssue () {
 
+    const display = getDisplay("TE");
+    display.setValue("Working....");
+
     try {
         const sheet = FORMSHEET;
         const conditions = getConditions();
@@ -24,11 +27,13 @@ function addIssue () {
             .setDataValidation(issueRule)
             .setValue(newOptions[0]);
 
+        display.setValue("");
+
         return true;
 
 
     } catch (error) {
-        ui.alert ("Error: " + error);
+        display.setValue ("Error: " + error);
         return false;
     }
 
