@@ -35,8 +35,6 @@ function newIssueValid (params) {
             errors += "Condition, ";
         }
 
-        console.log (newIssue);
-
         if (!valid) {
             display.setValue (errors.slice(0, -2));
             return false;

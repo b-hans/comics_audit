@@ -10,6 +10,7 @@ const TE_issue_start_row = 15;
 const TE_ID_RANGE = "F12";
 const TE_DISPLAY = "G2";
 const TE_CONFIRMATION = "H4";
+const TE_ISSUE_ID_COLUMN = 8;
 
 const TE_OUTERRANGE = {
     a1notation: "A1:I17",

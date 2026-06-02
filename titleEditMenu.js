@@ -8,6 +8,7 @@ function titleEditMenu (params) {
     try {
 
         const range = params.range;
+        const rowIndex = range.getRow();
         const menuValue = range.getValue();
         const rangeColumn = range.getColumn();
         const rangeRow = range.getRow();
@@ -50,7 +51,20 @@ function titleEditMenu (params) {
         }
         else if (rangeColumn == 1 && menuValue && menuValue != "Options") {
             if (menuValue == "Edit") {
-                return editIssue(rangeRow);
+
+                if (issueValid ({
+                    cache: cache,
+                    display: display, 
+                    data: rangeRow,
+                    optionsRow: rowIndex,
+                    optionsColumn: 1,
+                    optionsText: "Options"
+                })) {
+                    return editIssue(rangeRow);
+                }
+                else {
+                    return false;
+                }
             }
             else if (menuValue == "Delete") {
                 return deleteIssueConfirmation(rangeRow);

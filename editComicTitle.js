@@ -59,8 +59,6 @@ function editComicTitle (params) {
                 row.id
             ]);
 
-            console.log (mappedArray);
-
             let startRow = TE_issue_start_row;
             let numRows = mappedArray.length;
             let numCols = mappedArray[0].length;
