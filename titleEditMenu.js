@@ -24,8 +24,23 @@ function titleEditMenu (params) {
             }
             else if (menuValue == "Yes, delete it") {
                 clearSelect("TE");
-                display.setValue ("Delete id: " + cache.get("delete_issue_id"));
-                return true;
+                display.setValue("Working....");
+                if(deleteIssue({
+                    display: display,
+                    id: cache.get("delete_issue_id")
+                })) {
+                    cache.remove("delete_issue_id");
+                    if (redrawCurrentEdit({ display: display })) {
+                        display.setValue ("Issue deleted!");
+                    }
+                    else {
+                        display.setValue ("Problem deleting\n" + display.getValue());
+                    }
+                }
+                else {
+                    cache.remove("delete_issue_id");
+                    display.setValue ("Problem deleting issue");
+                }
             }
             else {
                 cache.remove("delete_issue_id");
@@ -38,7 +53,7 @@ function titleEditMenu (params) {
                 return editIssue(rangeRow);
             }
             else if (menuValue == "Delete") {
-                return deleteIssue(rangeRow);
+                return deleteIssueConfirmation(rangeRow);
             }
             else if (menuValue == "Insert it") {
 

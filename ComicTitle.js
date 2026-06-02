@@ -75,6 +75,12 @@ class ComicTitle {
             this.num_last = myTitle[HEADERS.indexOf('Title last#')];
 
             this.publisher = new ComicPublisher({id: this.publisher_id});
+            let edit_dropdown = this.title;
+            if (this.volume) {
+                edit_dropdown += ", vol." + this.volume;
+            }
+            edit_dropdown += " (" + this.publisher.name + "): [[" + this.id + "]]";
+            this.edit_dropdown = edit_dropdown;
 
             // filter for the issues
 

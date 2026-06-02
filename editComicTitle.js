@@ -9,7 +9,7 @@ function editComicTitle (params) {
         });
 
         if (!myTitle.valid) {
-            ui.alert("Not valid");
+            display.setValue ("Not valid");
             return false;
         }
 
@@ -21,7 +21,7 @@ function editComicTitle (params) {
             .getSheetByName("Copy of Forms");        
 
         if (!buildEditForm()) {
-            ui.alert("Problem");
+            display.setValue("Problem");
             return false;
         }
 
@@ -41,7 +41,8 @@ function editComicTitle (params) {
         let issues = title.issues;
 
         if (issues.length <= 0) {
-            ui.alert ("No issues");
+            display.setValue ("No issues");
+            return true;
         }
         else {
 
@@ -123,16 +124,15 @@ function editComicTitle (params) {
                 FORMSHEET.getRange(startRow, 9, numRows, 1)
                     .setFontColor('#f3f3f3');
 
+                return true;
 
             } catch (error) {
-                ui.alert ("Error: " + error);
+                display.setValue ("Error: " + error);
+                return false;
             }
-
 
         }
 
-
-        return true;
     } catch (error) {
         display.setValue ("Error getting title edit: " + error);
         return false;

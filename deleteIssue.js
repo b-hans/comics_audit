@@ -1,34 +1,32 @@
-function deleteIssue (rangeRow) {
+function deleteIssue (params) {
 
-    const display = getDisplay("TE");
-    const cache = CacheService.getScriptCache();
+    const display = params.display;
+    const id = params.id;
 
     try {
 
-        const idCol = 9;
-        const optionsCol = 1;
+        const titleSheet = SpreadsheetApp.getActiveSpreadsheet()
+            .getSheetByName("MyComics");
 
-        let issueRange = FORMSHEET.getRange(rangeRow, 1, 1, 9).getValues()[0];
+        const data = titleSheet.getDataRange().getValues();
+        const headers = data.shift();
 
-        const issue_id = issueRange[8];
-        cache.put("delete_issue_id", issue_id, 3600);
+        //find the row
+        const rowIndex = data.findIndex(
+            row => row[headers.indexOf('id')] == id
+        );
 
-        FORMSHEET.getRange(rangeRow, optionsCol, 1, 1).setValue ("Options");
-        
-        let params = {
-            text:       "Confirmation required\nDelete issue?",
-            type:       "Te",
-            display:    display,
-            options:    ["Select", "Yes, delete it", "No"],
-            optionsRange:   FORMSHEET.getRange(rangeRow, 1, 1, 1),
+        if (rowIndex >= 0) {
+            titleSheet.deleteRow(rowIndex + 2);
+            return true;
+        }
+        else {
+            display.setValue ("Did not find that issue");
+            return false;
         }
 
-        return insertConfirmation (params);
-
     } catch (error) {
-        display.setValue ("Error: " + error);
+        display.setValue ("Error deleting issue: " + error);
         return false;
     }
-
-
 }

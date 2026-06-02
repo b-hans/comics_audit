@@ -88,15 +88,8 @@ function insertIssue () {
 
         comicsIssuesSheet.appendRow(issueRow);
 
-        // construct the searcher for title
-        let searcher = myTitle.title;
-        if (myTitle.volume) {
-            searcher += " vol." + myTitle.volume;
-        }
-        searcher += " (" + myTitle.publisher.name + "): [[" + myTitle.id + "]]";
-
         editComicTitle({
-            title:      searcher,
+            title:      myTitle.edit_dropdown,
             display:    display
         });
 
