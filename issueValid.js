@@ -21,12 +21,18 @@ function issueValid (params) {
         const data = sheet.getRange(optionsRow, 1, 1, TE_ISSUE_ID_COLUMN+1)
             .getValues()[0];
 
-        console.log (data);
+        const issue = new ComicIssue({
+            row:        null,
+            headers:    null,
+            id:         data[TE_ISSUE_ID_COLUMN]
+        });
 
         sheet.getRange(optionsRow, optionsColumn, 1, 1)
             .setValue(optionsText);
 
-        display.setValue ("in validation row no.: " + optionsRow + " : " + data[TE_ISSUE_ID_COLUMN]);
+        console.log (issue);
+
+        display.setValue ("Validation, check console");
 
         return false
     } catch (error) {

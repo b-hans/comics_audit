@@ -1,20 +1,37 @@
 class ComicIssue {
     constructor (params) {
         this.valid = true;
-        let id = -1;
-        const row = params.row
-        const headers = params.headers
+        let id = params.id;
+        let row = params.row;
+        let headers = params.headers;
         const display = FORMSHEET.getRange(DISPLAYCELL);
 
         try {
-            id = row[headers.indexOf('id')];
+
+            // by issue id
+            if (id != -1) {
+                const issueData = SpreadsheetApp.getActiveSpreadsheet()
+                    .getSheetByName("MyComics")
+                    .getDataRange()
+                    .getValues();
+                headers = issueData.shift();
+
+                let rowIndex = issueData.findIndex(row => row[headers.indexOf('id')] == id);
+
+                row = issueData[rowIndex]
+
+            }
+            // by row input
+            else {
+                id = row[headers.indexOf('id')];
+            }
 
             if (id < 0) {
                 this.valid = false;
                 return;
             }
 
-            this.id = row[headers.indexOf('id')];
+            this.id = id;
             this.number = row[headers.indexOf("Number")];
             this.month = row[headers.indexOf("month")];
             this.year = row[headers.indexOf("year")];

@@ -113,8 +113,9 @@ class ComicTitle {
             for (let i=0; i<filteredIssues.length; i++) {
                 this.issues.push(new ComicIssue(
                     {
-                        row: filteredIssues[i],
-                        headers: issueHeaders
+                        row:        filteredIssues[i],
+                        headers:    issueHeaders,
+                        id:         -1
                     }
                 ));
             }

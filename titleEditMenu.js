@@ -52,10 +52,11 @@ function titleEditMenu (params) {
         else if (rangeColumn == 1 && menuValue && menuValue != "Options") {
             if (menuValue == "Edit") {
 
+                display.setValue ("Working....");
+
                 if (issueValid ({
                     cache: cache,
                     display: display, 
-                    data: rangeRow,
                     optionsRow: rowIndex,
                     optionsColumn: 1,
                     optionsText: "Options"
