@@ -61,7 +61,13 @@ function titleEditMenu (params) {
                     optionsColumn: 1,
                     optionsText: "Options"
                 })) {
-                    return editIssue(rangeRow);
+                    return editIssue({
+                        cache: cache,
+                        display: display,
+                        row: rowIndex,
+                        optionsColumn: 1,
+                        optionsText: "Options",
+                    });
                 }
                 else {
                     return false;

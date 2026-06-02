@@ -1,18 +1,60 @@
-function editIssue(rangeRow) {
+function editIssue(params) {
+
+    const display = params.display;
+    const cache = params.cache;
+    const rowIndex = params.row;
 
     try {
 
-        const idCol = 9;
-        const optionsCol = 1;
+        const headers = [
+            'Options', 
+            "number",
+            "month",
+            "year",
+            "condition",
+            "location",
+            "online",
+            "overstreet",
+            "issue_id"
+        ];
 
-        let issueRange = FORMSHEET.getRange(rangeRow, 1, 1, 9).getValues();
+        const issueRange = FORMSHEET.getRange(rowIndex, 1, 1, headers.length).getValues()[0];
+        const issue_id = issueRange[headers.indexOf('issue_id')];
 
-        FORMSHEET.getRange(rangeRow, optionsCol, 1, 1).setValue ("Options");
-        
-        ui.alert ("Edit issue: " + issueRange[0][8]);
+        const issueSheet = SpreadsheetApp.getActiveSpreadsheet()
+            .getSheetByName("MyComics");
+
+        const issueData = issueSheet.getDataRange().getValues();
+
+        const issueHeaders = issueSheet.getRange(1, 1, 1, issueSheet.getLastColumn())
+            .getValues()[0];
+
+        const sheetRow = issueData.findIndex(row => row[issueHeaders.indexOf('id')] == issue_id);
+
+        let sheetRowData = issueData[sheetRow];
+
+        let newRowData = [
+            issue_id,
+            sheetRowData[1],
+            sheetRowData[2],
+            issueRange[headers.indexOf('number')],
+            issueRange[headers.indexOf('month')],
+            issueRange[headers.indexOf('year')],
+            getConditionId({display: display, grade: issueRange[headers.indexOf('condition')]}),
+            '',
+            issueRange[headers.indexOf('location')],
+            issueRange[headers.indexOf('online')],
+            issueRange[headers.indexOf('overstreet')]
+        ];
+          
+        issueSheet.getRange(sheetRow+1, 1, 1, newRowData.length)
+            .setValues([newRowData]);
+
+        display.setValue ("Edit complete");
+        return true;
 
     } catch (error) {
-        ui.alert ("Error: " + error);
+        display.setValue ("Error: " + error);
         return false;
     }
 }
