@@ -25,6 +25,9 @@ function editComicTitle (params) {
             return false;
         }
 
+        // rebuild functions menu
+        rebuildFunctionsDropdown('edit');
+
         FORMSHEET.getRange(TE_TITLE_RANGE)
             .setValue(title.title);
         FORMSHEET.getRange(TE_PUBLISHER_DROPDOWN_RANGE)

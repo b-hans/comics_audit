@@ -15,11 +15,13 @@ function titleEditMenu (params) {
 
         // confirmation menu range
         if (range.getA1Notation() == TE_CONFIRMATION && menuValue != "Select") {
+            let current_row = TE_issue_start_row;
+            if (cache.get('current_row')) {
+                current_row = cache.get('current_row');
+            }
+
             if (menuValue == "No") {
                 clearSelect("TE");
-                if (cache.get('current_row')) {
-                    FORMSHEET.getRange(cache.get('current_row'), 1).activate();
-                }
             }
             else if (menuValue == "Yes, edit it") {
                 clearSelect("TE");
@@ -38,12 +40,11 @@ function titleEditMenu (params) {
                         .activate();
                 };
             }
-
             else if (menuValue == "Cancel insert issue") {
                 cancelNewIssue();
             }
             else if (menuValue == "Yes, insert") {
-                return insertIssue();
+                insertIssue();
             }
             else if (menuValue == "Yes, delete it") {
                 clearSelect("TE");
@@ -68,6 +69,8 @@ function titleEditMenu (params) {
             else {
                 cache.remove("delete_issue_id");
             }
+
+            FORMSHEET.getRange(current_row, 1).activate();
 
             return true;
         }
@@ -150,8 +153,11 @@ function titleEditMenu (params) {
             case "Cancel":
                 return rebuildTitleSearchForm();
 
-            case "Edit title":
+            case "Submit edit title":
                 return editTitle();
+
+            case "Submit new title":
+                return submitNewTitle({display: display, cache: cache});
 
             case "Add issue":
                 return addIssue();

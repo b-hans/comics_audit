@@ -6,6 +6,8 @@ function addTitleForm () {
 
     try {
 
+        rebuildFunctionsDropdown('new');
+
         display.setValue ("New title form");
         return true;
 
