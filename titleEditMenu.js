@@ -17,6 +17,24 @@ function titleEditMenu (params) {
             if (menuValue == "No") {
                 clearSelect("TE");
             }
+            else if (menuValue == "Yes, edit it") {
+                clearSelect("TE");
+                display.setValue ("Working");
+                let editRow = cache.get('edit_issue_row');
+                if (editIssue({
+                    cache:          cache,
+                    display:        display,
+                    row:            editRow,
+                    optionsColumn:  1,
+                    optionsText:    "Options",
+                })) {
+                    display.setValue("Edit done!");
+                    cache.remove("edit_issue_id");
+                    FORMSHEET.getRange(editRow, 1)
+                        .activate();
+                };
+            }
+
             else if (menuValue == "Cancel insert issue") {
                 cancelNewIssue();
             }
@@ -61,16 +79,17 @@ function titleEditMenu (params) {
                     optionsColumn: 1,
                     optionsText: "Options"
                 })) {
-                    return editIssue({
-                        cache: cache,
-                        display: display,
-                        row: rowIndex,
-                        optionsColumn: 1,
-                        optionsText: "Options",
+
+                    cache.put ("edit_issue_row", rowIndex, 3600);
+
+                    let confirmationText = "Confirmation required\nDo the edits?"
+
+                    return insertConfirmation ({
+                        display:        display,
+                        optionsRange:   FORMSHEET.getRange(rowIndex, 1),
+                        text:           confirmationText,
+                        options:        ["Options", "Yes, edit it", "No"]
                     });
-                }
-                else {
-                    return false;
                 }
             }
             else if (menuValue == "Delete") {
@@ -107,6 +126,7 @@ function titleEditMenu (params) {
 
             }
             else {
+                display.setValue(menuValue);
                 return true;
             }
         }
