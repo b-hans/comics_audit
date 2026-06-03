@@ -39,6 +39,9 @@ function searchMenu(params) {
             title: editTitle,
         });
     }
+    else if (menuType == "Add title") {
+        return addTitleForm();
+    }
     else {
         display.setValue ("Function error");
         return false;

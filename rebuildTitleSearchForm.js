@@ -114,7 +114,7 @@ function rebuildTitleSearchForm() {
                 .setVerticalAlignment("top");
 
         let functionsRule = SpreadsheetApp.newDataValidation()
-            .requireValueInList(["Select one", "Search", "Edit selected"])
+            .requireValueInList(["Select one", "Search", "Edit selected", "Add title"])
             .setAllowInvalid(false)
             .build();
 

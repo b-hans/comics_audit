@@ -13,9 +13,13 @@ function titleEditMenu (params) {
         const rangeColumn = range.getColumn();
         const rangeRow = range.getRow();
 
+        // confirmation menu range
         if (range.getA1Notation() == TE_CONFIRMATION && menuValue != "Select") {
             if (menuValue == "No") {
                 clearSelect("TE");
+                if (cache.get('current_row')) {
+                    FORMSHEET.getRange(cache.get('current_row'), 1).activate();
+                }
             }
             else if (menuValue == "Yes, edit it") {
                 clearSelect("TE");
@@ -67,7 +71,9 @@ function titleEditMenu (params) {
 
             return true;
         }
+        // issue option menu range
         else if (rangeColumn == 1 && menuValue && menuValue != "Options") {
+            cache.put("current_row", rangeRow, 3600);
             if (menuValue == "Edit") {
 
                 display.setValue ("Working....");
@@ -138,6 +144,7 @@ function titleEditMenu (params) {
 
         range.setValue(defaultMenu);
 
+        // function menu range
         switch (menuValue) {
 
             case "Cancel":
