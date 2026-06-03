@@ -7,6 +7,7 @@ function submitNewTitle (params) {
 
         const title = {};
         const sheet = FORMSHEET;
+        let publisher;
 
         display.setValue ("Working...");
 
@@ -15,13 +16,35 @@ function submitNewTitle (params) {
         title.volume = sheet.getRange(TE_VOL_RANGE).getValue();
         title.first = sheet.getRange(TE_FIRST_RANGE).getValue();
         title.last = sheet.getRange(TE_LAST_RANGE).getValue();
-        title.publisher = sheet.getRange(TE_PUBLISHER_DROPDOWN_RANGE).getValue();
 
-        console.log (title);
+        if (publisher = sheet.getRange(TE_PUBLISHER_DROPDOWN_RANGE).getValue()) {
 
-        display.setValue('check console');
+            let idStartIndex = publisher.indexOf( " (" );
+            if (idStartIndex != -1) {
 
-        return true;
+                let pStart = idStartIndex + 2;
+                let pEnd = publisher.indexOf(")");
+
+                title.publisher_id = publisher.substring(pStart, pEnd);
+                
+            }
+            else {
+                title.publisher_id = null;
+            }
+
+        }
+        else {
+            title.publisher_id = null;
+        }
+
+        if (isValidTitle ({display: display, title: title})) {
+            display.setValue ("It is valid");
+            return true;
+        }
+        else {
+            return false;
+        }
+
     } catch (error) {
         display.setValue("Error submitting new title: " + error);
         return false;
