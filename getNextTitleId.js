@@ -1,4 +1,4 @@
-function getNextIssueId (params) {
+function getNextTitleId (params) {
 
     const display = params.display;
 
@@ -7,7 +7,7 @@ function getNextIssueId (params) {
         const idColumn = 1;
     
         const issueSheet = SpreadsheetApp.getActiveSpreadsheet()
-            .getSheetByName("MyComics");
+            .getSheetByName("Title table");
 
         const numRows = issueSheet.getLastRow() - startRow + 1;
 

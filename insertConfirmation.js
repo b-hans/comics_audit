@@ -1,8 +1,21 @@
 function insertConfirmation (params) {
+
+    /**
+     * Params
+     * 
+     * display
+     * optionsRange could be null
+     * text
+     * options
+     * 
+     */
+
     const display = params.display;
     const optionsRange = params.optionsRange;
 
-    optionsRange.setValue ("Options");
+    if (optionsRange) {
+        optionsRange.setValue ("Options");
+    }
 
     display.setValue(params.text);
 
@@ -10,6 +23,8 @@ function insertConfirmation (params) {
         type: "TE",
         options: params.options
     });
+
+    FORMSHEET.getRange(TE_CONFIRMATION).activate();
 
     return true;
 }

@@ -14,8 +14,6 @@ function existsTitle (params) {
             .getValues();
         const headers = titleData.shift();
 
-        console.log (headers);
-
         for (let i=0; i<titleData.length; i++) {
             let item = titleData[i];
 

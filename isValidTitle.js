@@ -13,6 +13,7 @@ function isValidTitle(params) {
         }
 
         if (!title.publisher_id) {
+            isValid = false;
             errors += "Publisher is required\n";
         }
 

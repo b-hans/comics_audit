@@ -44,7 +44,7 @@ function editComicTitle (params) {
         let issues = title.issues;
 
         if (issues.length <= 0) {
-            display.setValue ("No issues");
+            // display.setValue ("No issues");
             return true;
         }
         else {

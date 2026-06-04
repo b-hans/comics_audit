@@ -23,6 +23,11 @@ function titleEditMenu (params) {
             if (menuValue == "No") {
                 clearSelect("TE");
             }
+            else if (menuValue == "Yes, enter the title") {
+                clearSelect("TE");
+                display.setValue ("Working....");
+                return enterTitle({display: display, cache: cache});
+            }
             else if (menuValue == "Yes, edit it") {
                 clearSelect("TE");
                 display.setValue ("Working");
@@ -151,6 +156,7 @@ function titleEditMenu (params) {
         switch (menuValue) {
 
             case "Cancel":
+                cache.remove('current_issue');
                 return rebuildTitleSearchForm();
 
             case "Submit edit title":

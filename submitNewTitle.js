@@ -37,9 +37,15 @@ function submitNewTitle (params) {
             title.publisher_id = null;
         }
 
-        if (isValidTitle ({display: display, title: title})) {
-            display.setValue ("It is valid");
-            return true;
+        if (isValidTitle ({display: display, title: title})) {            
+            // put title in cache
+            cache.put("current_title", JSON.stringify(title), 3600);
+            return insertConfirmation({
+                display:        display,
+                optionsRange:   null,
+                text:           "Confirmation required\nEnter this title?",
+                options:        ["Select one", "Yes, enter the title", "No"]
+            });
         }
         else {
             return false;

@@ -16,7 +16,7 @@ function insertIssue () {
             title: null
         });
 
-        const newId = getNextIssueId();
+        const newId = getNextIssueId({display: display});
 
         if (!newId.valid) {
             ui.alert("Problem getting a new issue id");
