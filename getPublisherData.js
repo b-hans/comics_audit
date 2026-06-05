@@ -14,10 +14,10 @@ function getPublisherData () {
         );
 
         return {
-            data: publisherData,
-            headers: publisherHeaders,
-            dropdown: dropdown,
-            valid: true
+            data:       publisherData,
+            headers:    publisherHeaders,
+            dropdown:   dropdown,
+            valid:      true
         }
     } catch (error) {
         ui.alert ("Error: " + error);

@@ -7,6 +7,19 @@ function isValidTitle(params) {
         let isValid = true;
         let errors = "";
 
+        let validType;
+
+        if (!title.id || title.id < 1) {
+            validType = "new";
+        }
+        else {
+            validType = "edit";
+        }
+
+        display.setValue ("type: " + validType);
+        return false;
+
+
         if (!title.title) {
             isValid = false;
             errors += "Title is required\n";

@@ -164,7 +164,8 @@ function titleEditMenu (params) {
                 return rebuildTitleSearchForm();
 
             case "Submit edit title":
-                return editTitle();
+                // editTitle
+                return submitEditTitle({display: display, cache: cache});
 
             case "Submit new title":
                 return submitNewTitle({display: display, cache: cache});
