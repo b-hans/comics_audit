@@ -7,7 +7,7 @@ function rebuildFunctionsDropdown (type) {
         let options = [];
 
         if (type == "edit") {
-            options = ['Functions', 'Submit edit title', 'Add issue', 'Cancel'];
+            options = ['Functions', 'Submit edit title', 'Add issue', 'Delete this title', 'Cancel'];
         }
         else {
             options = ['Functions', 'Submit new title', 'Cancel'];

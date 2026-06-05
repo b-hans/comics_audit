@@ -23,6 +23,10 @@ function titleEditMenu (params) {
             if (menuValue == "No") {
                 clearSelect("TE");
             }
+            else if (menuValue == "Yes, delete this title") {
+                clearSelect("TE");
+                return deleteTitle({display: display, cache: cache});
+            }
             else if (menuValue == "Yes, enter the title") {
                 clearSelect("TE");
                 display.setValue ("Working....");
@@ -167,6 +171,9 @@ function titleEditMenu (params) {
 
             case "Add issue":
                 return addIssue();
+
+            case "Delete this title":
+                return deleteTitleSubmit({display: display, cache: cache});
 
             default:
                 display.setValue ("menu: " + menuValue);

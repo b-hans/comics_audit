@@ -3,6 +3,7 @@ function rebuildTitleSearchForm() {
     try {
 
         const cache = CacheService.getScriptCache();
+        const display = FORMSHEET.getRange(TS_DISPLAY_RANGE);
 
         deleteFormsSheet();
 
@@ -127,7 +128,7 @@ function rebuildTitleSearchForm() {
         return true;
     }
     catch (error) {
-
+        display.setValue("Error rebuilding title search form: " + error);
         return false;
     }
 }
