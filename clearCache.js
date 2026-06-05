@@ -1,0 +1,15 @@
+function clearCache() {
+    var cache = CacheService.getScriptCache();
+
+    const keysToRemove = [
+        'current_search',
+        'delete_issue_id',
+        'current_title_id',
+        'current_edit',
+        'current_title',
+        'current_row',
+        'edit_issue_row'
+    ];
+
+    cache.removeAll(keysToRemove);
+}

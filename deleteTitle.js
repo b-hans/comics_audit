@@ -43,9 +43,9 @@ function deleteTitle(params) {
             row => row[titleHeaders.indexOf('id')] == title_id) + 2;
 
         titleSheet.deleteRow(deleteIndex);
-
-        cache.removeAll();
-
+        
+        clearCache();
+        
         if (rebuildTitleSearchForm()) {
 
             FORMSHEET.getRange(TS_DISPLAY_RANGE).setValue ("Title deleted!");
