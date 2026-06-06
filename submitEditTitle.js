@@ -13,8 +13,8 @@ function submitEditTitle (params) {
             title:      String(sheet.getRange(TE_TITLE_RANGE).getValue()),
             publisher:  null,
             volume:     sheet.getRange(TE_VOL_RANGE).getValue(),
-            first:      sheet.getRange(TE_FIRST_RANGE),
-            last:       sheet.getRange(TE_LAST_RANGE)
+            first:      sheet.getRange(TE_FIRST_RANGE).getValue(),
+            last:       sheet.getRange(TE_LAST_RANGE).getValue()
         }
 
         console.log (myTitle);
