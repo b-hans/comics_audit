@@ -8,18 +8,25 @@ function submitEditTitle (params) {
 
         const sheet = FORMSHEET;
 
-        const myTitle = {
-            id:         sheet.getRange(TE_ID_RANGE).getValue(),
-            title:      String(sheet.getRange(TE_TITLE_RANGE).getValue()),
-            publisher:  null,
-            volume:     sheet.getRange(TE_VOL_RANGE).getValue(),
-            first:      sheet.getRange(TE_FIRST_RANGE).getValue(),
-            last:       sheet.getRange(TE_LAST_RANGE).getValue()
+        const publisher = sheet.getRange(TE_PUBLISHER_DROPDOWN_RANGE).getValue();
+        let publisher_id = null;
+
+        if (publisher && publisher != "Select one") {
+            publisher_id = getPublisherFromDropdown({publisher: publisher, display: display});
         }
 
-        console.log (myTitle);
+        const myTitle = {
+            id:             sheet.getRange(TE_ID_RANGE).getValue(),
+            title:          String(sheet.getRange(TE_TITLE_RANGE).getValue()),
+            publisher_id:   publisher_id,
+            volume:         sheet.getRange(TE_VOL_RANGE).getValue(),
+            first:          sheet.getRange(TE_FIRST_RANGE).getValue(),
+            last:           sheet.getRange(TE_LAST_RANGE).getValue()
+        }
 
-        display.setValue ("zIn submit title edit");
+        if (isValidTitle({display: display, title: myTitle})) {
+            display.setValue("Now confirmation");
+        }
 
         return false;
     } catch (error) {

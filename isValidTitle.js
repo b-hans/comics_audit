@@ -16,9 +16,17 @@ function isValidTitle(params) {
             validType = "edit";
         }
 
-        display.setValue ("type: " + validType);
-        return false;
+        if (validType == "edit") {
+            let compare = new ComicTitle({id: title.id, title: null});
 
+            if (compare.title == title.title &&
+                compare.publisher_id == title.publisher_id) {
+
+                    display.setValue ("Same title and publisher");
+                    return false;
+            }
+            
+        }
 
         if (!title.title) {
             isValid = false;
