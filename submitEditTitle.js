@@ -27,15 +27,20 @@ function submitEditTitle (params) {
         let confirmationText = "Confirmation required\n\nDo the title edits?";
 
         if (isValidTitle({display: display, title: myTitle})) {
+            cache.put('current_title_edit', JSON.stringify(myTitle), 3600);
             insertConfirmation({
                 display:        display,
                 optionsRange:   null,
                 text:           confirmationText,
                 options:        ['Select one', "Yes, submit title edits", "No"]
             });
+            return true;
+        }
+        else {
+            cache.remove('current_title_edit');
+            return false;
         }
 
-        return false;
     } catch (error) {
         display.setValue ("Error submitting title edit: " + error);
         return false;

@@ -25,8 +25,7 @@ function titleEditMenu (params) {
             }
             else if (menuValue == "Yes, submit title edits") {
                 clearSelect("TE");
-                display.setValue ("Now do the crud");
-                return false;
+                return editTitle({cache: cache, display: display});
             }
             else if (menuValue == "Yes, delete this title") {
                 clearSelect("TE");
