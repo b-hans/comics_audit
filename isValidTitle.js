@@ -20,9 +20,13 @@ function isValidTitle(params) {
             let compare = new ComicTitle({id: title.id, title: null});
 
             if (compare.title == title.title &&
-                compare.publisher_id == title.publisher_id) {
+                compare.publisher_id == title.publisher_id &&
+                compare.volume == title.volume &&
+                compare.num_first == title.first &&
+                compare.num_last == title.last
+                ) {
 
-                    display.setValue ("Same title and publisher");
+                    display.setValue ("No changes have been made");
                     return false;
             }
             
