@@ -26,8 +26,10 @@ const PUB_TITLE_SIZE = 18;
 const PUB_FONT_COLOR = "black";
 const PUB_DEFAULT_BACK = "white";
 const PUB_DEFAULT_FONT = "EB Garamond";
+const PUB_DEFAULT_SIZE = 11;
 
 const PUB_DISPLAY_MERGE = "B12:D15";
+const PUB_DISPLAY_RANGE = "B12";
 
 const PUB_ROW_HEIGHTS = [ 20, 20, 20, 20, 44, 20, 34, 20, 33, 20, 20, 20, 20, 20, 20, 20, 20, 20 ];
 const PUB_COL_WIDTHS = 100;
@@ -37,7 +39,7 @@ const PUB_NEW_RANGES = [
         a1notation:     FORM_RANGE,
         background:     LIGHT_ORANGE_3,
         font_family:    PUB_DEFAULT_FONT,
-        font_size:      10,
+        font_size:      PUB_DEFAULT_SIZE,
         font_color:     "black",
         horizontal:     "left",
         vertical:       "middle",
@@ -55,9 +57,39 @@ const PUB_NEW_RANGES = [
         horizontal:     "center",
         vertical:       "middle",
         merge:          true,
-        borders:        false,
+        borders:        [true, true, true, true, false, false],
+        borderstyle:     SpreadsheetApp.BorderStyle.DOUBLE,
+        bordercolor:    "black",
         text:           "Publishers",
-    }
+    },
+    {
+        a1notation:     PUB_DISPLAY_MERGE,
+        background:     LIGHT_GRAY_3,
+        font_family:    PUB_DEFAULT_FONT,
+        font_size:      PUB_DEFAULT_SIZE,
+        font_color:     DARK_RED_2,
+        horizontal:     "left",
+        vertical:       "middle",
+        merge:          true,
+        borders:        [true, true, true, true, false, false],
+        borderstyle:     SpreadsheetApp.BorderStyle.DOUBLE,
+        bordercolor:    "black",
+        text:           "",
+    },
+    {
+        a1notation:     PUB_PUBLISHERS_LABEL_RANGE,
+        background:     PUB_DEFAULT_BACK,
+        font_family:    PUB_DEFAULT_FONT,
+        font_size:      PUB_DEFAULT_SIZE,
+        font_color:     "black",
+        horizontal:     "right",
+        vertical:       "middle",
+        merge:          false,
+        borders:        false,
+        text:           "Publishers: ",
+
+    },
+
 
 
 ];

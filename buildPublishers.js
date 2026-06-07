@@ -22,6 +22,17 @@ function buildPublishers (params) {
                 .setHorizontalAlignment(item.horizontal)
                 .setVerticalAlignment(item.vertical)
                 .setValue(item.text);
+
+            if (item.borders) {
+                tRange.setBorder(
+                    item.borders[0],
+                    item.borders[1],
+                    item.borders[2],
+                    item.borders[3],
+                    item.borders[4],
+                    item.borders[5],                
+                    item.bordercolor, item.borderstyle);
+            }
         }
 
         for (let i=1; i<PUB_ROW_HEIGHTS.length-1; i++) {
@@ -32,7 +43,12 @@ function buildPublishers (params) {
             sheet.setColumnWidth(i, PUB_COL_WIDTHS);
         }
 
-        ui.alert("Next check");
+        FORMSHEET.getRange("A1")
+            .setFontColor(LIGHT_ORANGE_3)
+            .setValue("publishers");
+
+        const display = sheet.getRange(PUB_DISPLAY_RANGE).setValue("Initialized");
+
         return true;
     } catch (error) {
         ui.alert ("Error: " + error);
