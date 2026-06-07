@@ -24,8 +24,15 @@ function submitEditTitle (params) {
             last:           sheet.getRange(TE_LAST_RANGE).getValue()
         }
 
+        let confirmationText = "Confirmation required\n\nDo the title edits?";
+
         if (isValidTitle({display: display, title: myTitle})) {
-            display.setValue("Now confirmation");
+            insertConfirmation({
+                display:        display,
+                optionsRange:   null,
+                text:           confirmationText,
+                options:        ['Select one', "Yes, submit title edits", "No"]
+            });
         }
 
         return false;

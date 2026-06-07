@@ -23,6 +23,11 @@ function titleEditMenu (params) {
             if (menuValue == "No") {
                 clearSelect("TE");
             }
+            else if (menuValue == "Yes, submit title edits") {
+                clearSelect("TE");
+                display.setValue ("Now do the crud");
+                return false;
+            }
             else if (menuValue == "Yes, delete this title") {
                 clearSelect("TE");
                 return deleteTitle({display: display, cache: cache});
