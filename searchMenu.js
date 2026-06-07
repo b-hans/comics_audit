@@ -42,6 +42,9 @@ function searchMenu(params) {
     else if (menuType == "Add title") {
         return addTitleForm();
     }
+    else if (menuType == "Publishers") {
+        return buildPublishers({cache: cache});
+    }
     else {
         display.setValue ("Function error");
         return false;
