@@ -9,6 +9,10 @@ function displayYesNo(params) {
         case "TE":
             yesNo = FORMSHEET.getRange(TE_CONFIRMATION);
             break;
+
+        case "PUB":
+            yesNo = FORMSHEET.getRange(PUB_CONFIRMATION_RANGE);
+            break;
     }
     
     yesNo.clearDataValidations()

@@ -38,7 +38,7 @@ const PUB_COL_WIDTHS = 100;
 
 const PUB_FUNCTIONS_OPTIONS = ['Options', 'Submit edit','New publisher','Cancel'];
 
-const PUB_CONFIRMATION_RANGE = "C16:D17";
+const PUB_CONFIRMATION_RANGE = "D16";
 
 
 const PUB_NEW_RANGES = [

@@ -14,7 +14,15 @@ function publisherMenu (params) {
 
         switch (menuType) {
             case "Cancel":
-                return rebuildTitleSearchForm();
+                const confirmationText = "Confirmation required\n\nCancel?";
+                return insertConfirmation({
+                    display:        display,
+                    optionsRange:   sheet.getRange(PUB_FUNCTIONS_RANGE),
+                    type:           "PUB",
+                    text:           confirmationText,
+                    options:        ['Select one', "Yes, cancel publishers", "No"]
+                });
+                // return rebuildTitleSearchForm();
 
             default:
                 display.setValue ("Default: " + menuType)
