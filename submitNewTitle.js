@@ -44,7 +44,8 @@ function submitNewTitle (params) {
                 display:        display,
                 optionsRange:   null,
                 text:           "Confirmation required\nEnter this title?",
-                options:        ["Select one", "Yes, enter the title", "No"]
+                options:        ["Select one", "Yes, enter the title", "No"],
+                type:           "TE",
             });
         }
         else {

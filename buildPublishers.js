@@ -1,6 +1,7 @@
 function buildPublishers (params) {
 
     const cache = params.cache;
+    const display = FORMSHEET.getRange(PUB_DISPLAY_RANGE);
 
     try {
 
@@ -43,15 +44,31 @@ function buildPublishers (params) {
             sheet.setColumnWidth(i, PUB_COL_WIDTHS);
         }
 
-        FORMSHEET.getRange("A1")
+        sheet.getRange("A1")
             .setFontColor(LIGHT_ORANGE_3)
             .setValue("publishers");
 
-        const display = sheet.getRange(PUB_DISPLAY_RANGE).setValue("Initialized");
+        // now get the dropdowns
+        let functionsRange = sheet.getRange(PUB_FUNCTIONS_RANGE);
+
+        let functionRule = SpreadsheetApp.newDataValidation()
+            .requireValueInList(PUB_FUNCTIONS_OPTIONS, true)
+            .setAllowInvalid(false)
+            .build();
+
+        functionsRange.clearDataValidations()
+            .clearContent();
+
+        SpreadsheetApp.flush();
+
+        functionsRange.setDataValidation(functionRule)
+            .setValue(PUB_FUNCTIONS_OPTIONS[0]);
+
+        display.setValue("Initialized 58");
 
         return true;
     } catch (error) {
-        ui.alert ("Error: " + error);
+        display.setValue ("Error building publishers form: " + error);
         return false;
     }
 }

@@ -13,10 +13,11 @@ function deleteTitleSubmit (params) {
         const confirmationText = "Confirmation required\nAre you sure?\nDelete title and all issues";
 
         return insertConfirmation({
-            display: display,
+            display:        display,
             optionsRange:   null,
             text:           confirmationText,
-            options:        ["Select one", "Yes, delete this title", "No"]
+            options:        ["Select one", "Yes, delete this title", "No"],
+            type:           "TE"
         });
 
         return true;

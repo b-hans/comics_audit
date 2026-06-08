@@ -7,11 +7,13 @@ function insertConfirmation (params) {
      * optionsRange could be null
      * text
      * options
+     * type: "TE" or "PUB"
      * 
      */
 
     const display = params.display;
     const optionsRange = params.optionsRange;
+    const type = params.type;
 
     if (optionsRange) {
         optionsRange.setValue ("Options");
@@ -20,7 +22,7 @@ function insertConfirmation (params) {
     display.setValue(params.text);
 
     displayYesNo({
-        type: "TE",
+        type: type,
         options: params.options
     });
 

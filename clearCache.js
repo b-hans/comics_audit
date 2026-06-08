@@ -7,6 +7,7 @@ function clearCache() {
         'current_title_id',
         'current_edit',
         'current_title',
+        'current_title_edit',
         'current_row',
         'edit_issue_row'
     ];

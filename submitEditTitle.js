@@ -32,7 +32,8 @@ function submitEditTitle (params) {
                 display:        display,
                 optionsRange:   null,
                 text:           confirmationText,
-                options:        ['Select one', "Yes, submit title edits", "No"]
+                options:        ['Select one', "Yes, submit title edits", "No"],
+                type:           "TE"
             });
             return true;
         }

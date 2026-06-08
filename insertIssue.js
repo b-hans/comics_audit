@@ -19,7 +19,7 @@ function insertIssue () {
         const newId = getNextIssueId({display: display});
 
         if (!newId.valid) {
-            ui.alert("Problem getting a new issue id");
+            display.setValue("Problem getting a new issue id");
             return false;
         }
 
@@ -96,7 +96,7 @@ function insertIssue () {
         display.setValue ("Done!");
         
     } catch (error) {
-        ui.alert("Error: " + error);
+        display.setValue("Error: " + error);
         return false;
     }
 

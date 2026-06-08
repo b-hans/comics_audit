@@ -21,6 +21,9 @@ function menuOnEdit(e) {
                 range: range
             });
         }
+        else if (formType == "publishers") {
+            return publisherMenu ({range: range});
+        }
         else if (formType == "titleedit") {
             return titleEditMenu ({ range: range});
         }

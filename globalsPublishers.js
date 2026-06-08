@@ -28,11 +28,18 @@ const PUB_DEFAULT_BACK = "white";
 const PUB_DEFAULT_FONT = "EB Garamond";
 const PUB_DEFAULT_SIZE = 11;
 
+const PUB_LABEL_FONT = "Comic Sans MS";
+
 const PUB_DISPLAY_MERGE = "B12:D15";
 const PUB_DISPLAY_RANGE = "B12";
 
 const PUB_ROW_HEIGHTS = [ 20, 20, 20, 20, 44, 20, 34, 20, 33, 20, 20, 20, 20, 20, 20, 20, 20, 20 ];
 const PUB_COL_WIDTHS = 100;
+
+const PUB_FUNCTIONS_OPTIONS = ['Options', 'Submit edit','New publisher','Cancel'];
+
+const PUB_CONFIRMATION_RANGE = "C16:D17";
+
 
 const PUB_NEW_RANGES = [
     {
@@ -79,7 +86,7 @@ const PUB_NEW_RANGES = [
     {
         a1notation:     PUB_PUBLISHERS_LABEL_RANGE,
         background:     PUB_DEFAULT_BACK,
-        font_family:    PUB_DEFAULT_FONT,
+        font_family:    PUB_LABEL_FONT,
         font_size:      PUB_DEFAULT_SIZE,
         font_color:     "black",
         horizontal:     "right",
@@ -89,7 +96,73 @@ const PUB_NEW_RANGES = [
         text:           "Publishers: ",
 
     },
+    {
+        a1notation:     PUB_SEARCH_LABEL_RANGE,
+        background:     PUB_DEFAULT_BACK,
+        font_family:    PUB_LABEL_FONT,
+        font_size:      PUB_DEFAULT_SIZE,
+        font_color:     "black",
+        horizontal:     "right",
+        vertical:       "middle",
+        merge:          false,
+        borders:        false,
+        text:           "New/Edit: ",
 
+    },
+    {
+        a1notation:     PUB_FUNCTIONS_LABEL,
+        background:     PUB_DEFAULT_BACK,
+        font_family:    PUB_LABEL_FONT,
+        font_size:      PUB_DEFAULT_SIZE,
+        font_color:     "black",
+        horizontal:     "right",
+        vertical:       "middle",
+        merge:          false,
+        borders:        false,
+        text:           "Functions: ",
+
+    },
+    {
+        a1notation:     PUB_PUBLISHERS_DROPDOWN_MERGE,
+        background:     PUB_DEFAULT_BACK,
+        font_family:    PUB_DEFAULT_FONT,
+        font_size:      PUB_DEFAULT_SIZE,
+        font_color:     "black",
+        horizontal:     "center",
+        vertical:       "middle",
+        merge:          true,
+        borders:        [true, true, true, true, false, false],
+        borderstyle:     SpreadsheetApp.BorderStyle.SOLID,
+        bordercolor:    "black",
+        text:           "Select one",
+
+    },
+    {
+        a1notation:     PUB_SEARCH_MERGE,
+        background:     PUB_DEFAULT_BACK,
+        font_family:    PUB_DEFAULT_FONT,
+        font_size:      PUB_DEFAULT_SIZE,
+        font_color:     "black",
+        horizontal:     "left",
+        vertical:       "middle",
+        merge:          true,
+        borders:        false,
+        text:           "",
+    },    
+    {
+        a1notation:     PUB_FUNCTIONS_MERGE,
+        background:     PUB_DEFAULT_BACK,
+        font_family:    PUB_DEFAULT_FONT,
+        font_size:      PUB_DEFAULT_SIZE,
+        font_color:     "black",
+        horizontal:     "center",
+        vertical:       "middle",
+        merge:          true,
+        borders:        [true, true, true, true, false, false],
+        borderstyle:     SpreadsheetApp.BorderStyle.SOLID,
+        bordercolor:    "black",
+        text:           "Options",
+    },    
 
 
 ];

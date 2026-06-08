@@ -13,7 +13,7 @@ function newIssueValid (params) {
 
         // get the values 
         const newIssue = {
-            number:     rowData[1],
+            number:     String(rowData[1]),
             month:      rowData[2],
             year:       rowData[3],
             condition:  rowData[4],
@@ -28,6 +28,11 @@ function newIssueValid (params) {
         if (!newIssue.number) {
             valid = false;
             errors += "Number, ";
+        }
+
+        if (!isNumeric(newIssue.number)) {
+            valid = false;
+            errors += "Issue number not valid, ";
         }
 
         if (!newIssue.condition || newIssue.condition == "Select one") {

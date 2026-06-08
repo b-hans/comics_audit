@@ -110,7 +110,8 @@ function titleEditMenu (params) {
                         display:        display,
                         optionsRange:   FORMSHEET.getRange(rowIndex, 1),
                         text:           confirmationText,
-                        options:        ["Options", "Yes, edit it", "No"]
+                        options:        ["Options", "Yes, edit it", "No"],
+                        type:           "TE",
                     });
                 }
             }
@@ -130,7 +131,8 @@ function titleEditMenu (params) {
                         text:           "Confirmation required\n\nAdd this issue?",
                         display:        display,
                         optionsRange:   FORMSHEET.getRange(TE_issue_start_row, 1, 1, 1),
-                        options:        ['Select', "Yes, insert", "No"]
+                        options:        ['Select', "Yes, insert", "No"],
+                        type:           "TE",
                     });                
                 }
                 else {
@@ -143,7 +145,8 @@ function titleEditMenu (params) {
                     text:           "Confirmation required\n\nDo you wish to cancel?",
                     display:        display,
                     optionsRange:   FORMSHEET.getRange(TE_issue_start_row, 1, 1, 1),
-                    options:        ['Select', "Cancel insert issue", "No"]
+                    options:        ['Select', "Cancel insert issue", "No"],
+                    type:           "TE",
                 });
 
             }

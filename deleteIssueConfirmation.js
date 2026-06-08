@@ -17,7 +17,7 @@ function deleteIssueConfirmation (rangeRow) {
         
         let params = {
             text:       "Confirmation required\nDelete issue No. " + issueRange[1] + "?",
-            type:       "Te",
+            type:       "TE",
             display:    display,
             options:    ["Select", "Yes, delete it", "No"],
             optionsRange:   FORMSHEET.getRange(rangeRow, 1, 1, 1),
