@@ -8,8 +8,10 @@ function publisherMenu (params) {
 
     try {
 
-        if (a1Notation != PUB_FUNCTIONS_RANGE || menuType == PUB_FUNCTIONS_OPTIONS[0]) {
-            return true;
+        if (a1Notation != PUB_FUNCTIONS_RANGE  && a1Notation != PUB_CONFIRMATION_RANGE) {
+            if (menuType == PUB_FUNCTIONS_OPTIONS[0] || menuType == "Select one") {
+                return true;
+            }
         }
 
         switch (menuType) {
@@ -23,6 +25,15 @@ function publisherMenu (params) {
                     options:        ['Select one', "Yes, cancel publishers", "No"]
                 });
                 // return rebuildTitleSearchForm();
+
+            case "Yes, cancel publishers":
+                clearCache();
+                return rebuildTitleSearchForm();
+
+            case "No":
+                clearSelect("PUB");
+                display.activate();
+                break;
 
             default:
                 display.setValue ("Default: " + menuType)
