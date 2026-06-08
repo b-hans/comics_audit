@@ -64,7 +64,26 @@ function buildPublishers (params) {
         functionsRange.setDataValidation(functionRule)
             .setValue(PUB_FUNCTIONS_OPTIONS[0]);
 
-        display.setValue("Initialized 58");
+
+        const pubData = getPublisherData();
+        const headers = pubData.headers;
+
+        const pubNames = pubData.data.map (row => row[headers.indexOf('Publisher')]);
+        pubNames.unshift("Select a publisher");
+
+        let pubRule = SpreadsheetApp.newDataValidation()
+            .requireValueInList(pubNames, true)
+            .setAllowInvalid(false)
+            .build();
+        let pubRange = sheet.getRange(PUB_PUBLISHERS_DROPDOWN_RANGE)
+            .clearDataValidations()
+            .clearContent();
+
+        SpreadsheetApp.flush();
+        pubRange.setDataValidation(pubRule)
+            .setValue(pubNames[0]);
+
+        display.setValue("Initialized 9");
 
         return true;
     } catch (error) {

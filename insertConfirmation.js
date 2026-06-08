@@ -26,7 +26,14 @@ function insertConfirmation (params) {
         options: params.options
     });
 
-    FORMSHEET.getRange(TE_CONFIRMATION).activate();
+    let conRange;
+    if (type == "TE") {
+        conRange = FORMSHEET.getRange(TE_CONFIRMATION);
+    }
+    else if (type == "PUB") {
+        conRange = FORMSHEET.getRange(PUB_CONFIRMATION_RANGE);
+    }
+    conRange.activate();
 
     return true;
 }
