@@ -8,7 +8,7 @@ function rebuildPubFunctions (params) {
         let options = [];
 
         if (type == "edit") {
-            options = ['Options', 'Submit edit publisher', 'Cancel'];
+            options = ['Options', 'Submit edit publisher', 'Delete publisher', 'Cancel'];
         }
         else {
             options = ['Options', 'Submit new publisher', 'Cancel'];

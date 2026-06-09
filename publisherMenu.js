@@ -40,6 +40,17 @@ function publisherMenu (params) {
 
 
         switch (menuType) {
+            case "Delete publisher":
+                functionsRange.setValue(PUB_FUNCTIONS_OPTIONS[0]);
+
+                if (validateDeletePublisher({display: display, cache: cache})) {
+                    display.setValue ("Good to delete");
+                }
+                else {
+                    return false;
+                }
+                return true;
+
             case "Yes, add publisher":
                 clearSelect("PUB");
                 return addPublisher({display: display, cache: cache})
