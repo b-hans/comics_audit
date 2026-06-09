@@ -34,6 +34,9 @@ function buildPublishers (params) {
                     item.borders[5],                
                     item.bordercolor, item.borderstyle);
             }
+            if (item.wrap) {
+                tRange.setWrap(item.wrap);
+            }
         }
 
         for (let i=1; i<PUB_ROW_HEIGHTS.length-1; i++) {

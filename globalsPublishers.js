@@ -82,6 +82,7 @@ const PUB_NEW_RANGES = [
         borderstyle:     SpreadsheetApp.BorderStyle.DOUBLE,
         bordercolor:    "black",
         text:           "",
+        wrap:           true,
     },
     {
         a1notation:     PUB_PUBLISHERS_LABEL_RANGE,

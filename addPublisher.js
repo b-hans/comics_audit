@@ -10,7 +10,7 @@ function addPublisher (params) {
         const headers = pubData.headers;
         let data = pubData.data;
 
-        const sheet = SpreadsheetApp.getActiveSpreadsheet()
+        let sheet = SpreadsheetApp.getActiveSpreadsheet()
             .getSheetByName("Publishers ID");
 
         const ids = sheet.getRange(2, headers.indexOf('id')+1, sheet.getLastRow()-1, 1)
@@ -30,11 +30,35 @@ function addPublisher (params) {
 
         data.unshift(dc);
         data.unshift(marvel);
+
+        let newPubList = data.map(row => row[headers.indexOf('Publisher')]);
+        newPubList.unshift("Select a publisher");
+
         data.unshift(headers);
 
-        console.log (data);
+        sheet.clearContents();
 
-        display.setValue ("Adding publisher 40: " + newPublisher + " : " + nextId);
+        sheet.getRange (1, 1, data.length, data[0].length)
+            .setValues(data);
+
+        FORMSHEET.getRange(PUB_SEARCH_RANGE).setValue("");
+        clearCache();
+
+        let dropdownRange = FORMSHEET.getRange(PUB_PUBLISHERS_DROPDOWN_RANGE)
+            .clearDataValidations()
+            .clearContent();
+
+        const newPublisherRule = SpreadsheetApp.newDataValidation()
+            .requireValueInList(newPubList, true)
+            .setAllowInvalid(false)
+            .build();
+
+        SpreadsheetApp.flush();
+
+        dropdownRange.setDataValidation(newPublisherRule)
+            .setValue(newPubList[0]);
+
+        display.setValue ("Publisher added!");
         return true;
 
     } catch (error) {
