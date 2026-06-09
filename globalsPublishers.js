@@ -36,7 +36,7 @@ const PUB_DISPLAY_RANGE = "B12";
 const PUB_ROW_HEIGHTS = [ 20, 20, 20, 20, 44, 20, 34, 20, 33, 20, 20, 20, 20, 20, 20, 20, 20, 20 ];
 const PUB_COL_WIDTHS = 100;
 
-const PUB_FUNCTIONS_OPTIONS = ['Options', 'Submit edit','New publisher','Cancel'];
+const PUB_FUNCTIONS_OPTIONS = ['Options', 'Submit new publisher','Cancel'];
 
 const PUB_CONFIRMATION_RANGE = "D16";
 

@@ -83,8 +83,6 @@ function buildPublishers (params) {
         pubRange.setDataValidation(pubRule)
             .setValue(pubNames[0]);
 
-        display.setValue("Initialized 9");
-
         return true;
     } catch (error) {
         display.setValue ("Error building publishers form: " + error);
