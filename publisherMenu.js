@@ -8,6 +8,7 @@ function publisherMenu (params) {
     const functionsRange = sheet.getRange(PUB_FUNCTIONS_RANGE);
     const dropdownRange = sheet.getRange(PUB_PUBLISHERS_DROPDOWN_RANGE);
     const pubRange = sheet.getRange(PUB_SEARCH_RANGE);
+    const cache = params.cache;
 
     try {
         
@@ -41,7 +42,7 @@ function publisherMenu (params) {
         switch (menuType) {
             case "Yes, add publisher":
                 clearSelect("PUB");
-                return addPublisher({display: display})
+                return addPublisher({display: display, cache: cache})
 
             case "Cancel":
                 const confirmationText = "Confirmation required\n\nCancel?";
@@ -66,6 +67,7 @@ function publisherMenu (params) {
             case "Submit new publisher":
                 functionsRange.setValue(PUB_FUNCTIONS_OPTIONS[0]);
                 const newPublisher = sheet.getRange(PUB_SEARCH_RANGE).getValue();
+                cache.put("new_publisher", newPublisher, 3600);
                 if (validatePublisher({
                     publisher:  newPublisher, 
                     display:    display, 

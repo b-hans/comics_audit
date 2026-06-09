@@ -9,6 +9,8 @@ function menuOnEdit(e) {
 
     const formType = FORMSHEET.getRange("A1").getValue();
 
+    const cache = CacheService.getScriptCache();
+
     try {
 
         if (sheet.getName() != FORMSHEET.getName()) {
@@ -22,7 +24,7 @@ function menuOnEdit(e) {
             });
         }
         else if (formType == "publishers") {
-            return publisherMenu ({range: range});
+            return publisherMenu ({range: range, cache: cache});
         }
         else if (formType == "titleedit") {
             return titleEditMenu ({ range: range});
