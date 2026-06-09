@@ -37,7 +37,12 @@ function publisherMenu (params) {
             return true;
         }
 
+
         switch (menuType) {
+            case "Yes, add publisher":
+                clearSelect("PUB");
+                return addPublisher({display: display})
+
             case "Cancel":
                 const confirmationText = "Confirmation required\n\nCancel?";
                 return insertConfirmation({
@@ -66,8 +71,13 @@ function publisherMenu (params) {
                     display:    display, 
                     dropdown:   dropdownRange.getValue()
                 })) {
-                    display.setValue ("Send confirmation");
-                    return true;
+                    return insertConfirmation({
+                        display:        display,
+                        optionsRange:   null,
+                        text:           "Confirmation required\n\nAdd new publisher?",
+                        options:        ['Select one', 'Yes, add publisher', 'No'],
+                        type:           "PUB"
+                    });
                 }
                 else {
                     return false;
