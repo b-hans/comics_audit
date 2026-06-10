@@ -21,9 +21,17 @@ function deletePublisher (params) {
 
         sheet.deleteRow(rowNumber);
         clearCache();
+
+        if (!rebuildPublishersDropdown ({
+            type:       'PUB',
+            display:    display,
+            range:      FORMSHEET.getRange(PUB_PUBLISHERS_DROPDOWN_RANGE)
+        })) {
+            return false;
+        }
         
         FORMSHEET.getRange(PUB_PUBLISHERS_DROPDOWN_RANGE)
-            .setValue ("Select a publisher").activate();
+            .activate();
 
         FORMSHEET.getRange(PUB_SEARCH_RANGE).setValue ("");
 
