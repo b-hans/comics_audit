@@ -37,6 +37,40 @@ function publisherMenu (params) {
 
 
         switch (menuType) {
+            case "Yes, edit publisher":
+                clearSelect('PUB');
+                display.setValue ("Working....");
+                return editPublisher ({
+                    display:    display,
+                    cache:      cache,
+                });
+
+            case "Submit edit publisher":
+                functionsRange.setValue(PUB_FUNCTIONS_OPTIONS[0]);
+                if (validatePublisher({
+                    display:    display,
+                    publisher:  pubRange.getValue(),
+                    dropdown:   dropdownRange.getValue()
+                })) {
+                    let publisherEdit = {
+                        publisher: pubRange.getValue(),
+                        dropdown: dropdownRange.getValue()
+                    };
+
+                    cache.put("publisher_edit", JSON.stringify(publisherEdit), 3600);
+
+                    return insertConfirmation ({
+                        display:        display,
+                        optionsRange:   null,
+                        text:           "Confirmation required\nMake changes to this publisher?",
+                        options:        ["Select one", "Yes, edit publisher", "No"],
+                        type:           'PUB'
+                    });
+                }
+                else {
+                    return false;
+                }
+
             case "Yes, delete this publisher":
                 clearSelect('PUB');
                 return deletePublisher({display: display, cache: cache});

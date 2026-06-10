@@ -20,7 +20,7 @@ function validatePublisher (params) {
         }
 
         if (!publisher) {
-            display.setValue ("Nothing to enter: " + type);
+            display.setValue ("Publisher field cannot be empty");
             return false;
         }
 
@@ -39,7 +39,32 @@ function validatePublisher (params) {
                 break;
 
             case "edit":
-                break;
+                if (publisher == dropdown) {
+                    display.setValue("No changes to make");
+                    return false;
+                }
+
+                // check to see if new edited doesn't match something else
+                let currentPublisher = new ComicPublisher({
+                    id:         null,
+                    publisher:  dropdown
+                });
+
+                let allPublishers = getPublisherData();
+
+                let data = allPublishers.data;
+                let headers = allPublishers.headers;
+
+                for (let i=0; i<data.length; i++) {
+                    item = data[i];
+
+                    if (item[headers.indexOf('Publisher')] == publisher &&
+                        item[headers.indexOf('id')] != currentPublisher.id) {
+                            display.setValue ("That publisher name exists already");
+                            return false;
+                    }
+                }
+
         }
 
         return true;
