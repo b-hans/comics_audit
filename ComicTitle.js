@@ -74,7 +74,7 @@ class ComicTitle {
             this.num_first = myTitle[HEADERS.indexOf('Title first#')];
             this.num_last = myTitle[HEADERS.indexOf('Title last#')];
 
-            this.publisher = new ComicPublisher({id: this.publisher_id});
+            this.publisher = new ComicPublisher({id: this.publisher_id, publisher: null});
             let edit_dropdown = this.title;
             if (this.volume) {
                 edit_dropdown += ", vol." + this.volume;

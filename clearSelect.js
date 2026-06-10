@@ -7,7 +7,7 @@ function clearSelect (type) {
     switch (type) {
         case ("TE"):
             yesNoRange = FORMSHEET.getRange(TE_CONFIRMATION);
-            backgroundColor = "#fefefe";
+            backgroundColor = "#f3f3f3";
             break;
 
         case ("PUB"):
@@ -18,15 +18,17 @@ function clearSelect (type) {
 
     // clear the select
     yesNoRange.clearDataValidations()
-        .clearContent()
+        .clearContent();
+
+    SpreadsheetApp.flush();
+
+    yesNoRange
         .setBackground(backgroundColor)
         .setFontColor(backgroundColor);
-
 
     display.setValue("");
 
     return true;
-
 
 
 }

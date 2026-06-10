@@ -1,18 +1,21 @@
 class ComicPublisher {
     constructor (params) {
-        let id = -1;
+
         this.valid = true;
-        const display = FORMSHEET.getRange(DISPLAYCELL);
+        const id = params.id;
+        const publisher = params.publisher;
 
         try {
 
-            if (params.id) {
-                id = params.id;
+            if (publisher) {
+                this.name = publisher;
             }
-
-            if (id < 0) {
+            else if (id < 1) {
                 this.valid = false;
                 return;
+            }
+            else {
+                this.id = id;
             }
 
             const publisherData = SpreadsheetApp.getActiveSpreadsheet()
@@ -22,31 +25,27 @@ class ComicPublisher {
 
             const HEADERS = publisherData.shift();
 
-            let filteredResults = [];
+            let foundRow;
 
-            filteredResults = publisherData.filter (
-                item => item[HEADERS.indexOf("id")] === id
-            );
+            if (this.id) {
+                foundRow = publisherData.find(row => row[HEADERS.indexOf('id')] == this.id);
+                this.name = foundRow[HEADERS.indexOf('Publisher')];
+            }
+            else if (this.name) {
+                foundRow = publisherData.find(row => row[HEADERS.indexOf('Publisher')] == this.name);
+                this.id = foundRow[HEADERS.indexOf('id')];
+            }
 
-            if (filteredResults.length != 1){
+            if (!this.id || this.id < 1 || !this.name) {
                 this.valid = false;
                 return;
             }
 
-            this.name = filteredResults[0][HEADERS.indexOf("Publisher")];
-            this.id = id;
-
             return;
         } catch (error) {
-
-            display.setValue ("Error getting publisher: " + error);
             this.valid = false;
             return;
-
         }
-
-
-
 
     }
 }

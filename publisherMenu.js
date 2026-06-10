@@ -17,9 +17,6 @@ function publisherMenu (params) {
             a1Notation != PUB_CONFIRMATION_RANGE &&
             a1Notation != PUB_PUBLISHERS_DROPDOWN_RANGE) {
                 return true;
-            // if (menuType == PUB_FUNCTIONS_OPTIONS[0] || menuType == "Select one") {
-            //     return true;
-            // }
         }
         else if (a1Notation == PUB_PUBLISHERS_DROPDOWN_RANGE){
             if (menuType != "Select a publisher") {
@@ -40,16 +37,26 @@ function publisherMenu (params) {
 
 
         switch (menuType) {
+            case "Yes, delete this publisher":
+                clearSelect('PUB');
+                return deletePublisher({display: display, cache: cache});
+
             case "Delete publisher":
                 functionsRange.setValue(PUB_FUNCTIONS_OPTIONS[0]);
 
                 if (validateDeletePublisher({display: display, cache: cache})) {
-                    display.setValue ("Good to delete");
+                    return insertConfirmation({
+                        display: display,
+                        optionsRange:   null,
+                        text:           "Confirmation required\nDelete the publisher?",
+                        options:        ["Select one", 'Yes, delete this publisher', 'No'],
+                        type:           'PUB'
+                    })
                 }
                 else {
                     return false;
                 }
-                return true;
+                
 
             case "Yes, add publisher":
                 clearSelect("PUB");
