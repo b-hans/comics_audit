@@ -13,7 +13,8 @@ function clearCache() {
         'new_publisher',
         'delete_publisher',
         'publisher_edit',
-        'edit_issue_data'
+        'edit_issue_data',
+        'validate_status'
     ];
 
     cache.removeAll(keysToRemove);

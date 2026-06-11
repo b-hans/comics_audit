@@ -5,6 +5,10 @@ function getConditionId (params) {
 
     try {
 
+        if (!grade || grade == 'Select one') {
+            return null;
+        }
+
         const conditionData = SpreadsheetApp.getActiveSpreadsheet()
             .getSheetByName("Grading ID")
             .getDataRange()

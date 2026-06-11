@@ -23,6 +23,10 @@ function titleEditMenu (params) {
             if (menuValue == "No") {
                 clearSelect("TE");
             }
+            else if (menuValue == "Yes, update all issues") {
+                clearSelect('TE');
+                return updateAllIssues({display: display, cache: cache});         
+            }
             else if (menuValue == "Yes, submit title edits") {
                 clearSelect("TE");
                 return editTitle({cache: cache, display: display});
@@ -167,8 +171,19 @@ function titleEditMenu (params) {
         switch (menuValue) {
 
             case "Submit issue edits":
-                if (validateAllIssueEdits({display: display, cache: cache})) {
-                    display.setValue ("Valid 16");
+
+                let validateStatus = validateAllIssueEdits({display: display, cache: cache});
+
+                cache.put('validate_status', JSON.stringify(validateStatus), 3600);
+
+                if (validateStatus.valid) {
+                    return insertConfirmation({
+                        display:        display,
+                        optionsRange:   null,
+                        text:           'Confirmation required\nUpdate all the issues?',
+                        options:        ['Selecte one', 'Yes, update all issues', 'No'],
+                        type:           'TE'
+                    });
                 }
                 else {
                     return false;
