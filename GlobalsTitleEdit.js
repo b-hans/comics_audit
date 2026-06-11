@@ -232,6 +232,17 @@ const TE_innerRanges = [
         a1notation: "H14",
         value: "Overstreet",
     },
+    {
+        background: "#f3f3f3",
+        fontColor:  "#f3f3f3",
+        merge:      false,
+        a1notation: "I14",
+        value:      "id",
+        fontFamily: TE_fontStyles.fontFamily,
+        vertical: TE_fontStyles.vertical,
+        horizontal: "center",
+        fontSize: 12,
+    },
      {
         background: TE_fontStyles.background,
         fontFamily: "EB Garamond",

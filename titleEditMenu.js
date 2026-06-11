@@ -166,6 +166,15 @@ function titleEditMenu (params) {
         // function menu range
         switch (menuValue) {
 
+            case "Submit issue edits":
+                if (validateAllIssueEdits({display: display, cache: cache})) {
+                    display.setValue ("Valid 16");
+                }
+                else {
+                    return false;
+                }
+                break;
+
             case "Cancel":
                 cache.remove('current_issue');
                 return rebuildTitleSearchForm();

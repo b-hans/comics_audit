@@ -4,7 +4,11 @@ class ComicIssue {
         let id = params.id;
         let row = params.row;
         let headers = params.headers;
-        const display = FORMSHEET.getRange(DISPLAYCELL);
+        let display = params.display;
+
+        if (!display) {
+            display = FORMSHEET.getRange(DISPLAYCELL);
+        }
 
         try {
 
