@@ -181,7 +181,7 @@ function titleEditMenu (params) {
                         display:        display,
                         optionsRange:   null,
                         text:           'Confirmation required\nUpdate all the issues?',
-                        options:        ['Selecte one', 'Yes, update all issues', 'No'],
+                        options:        ['Select one', 'Yes, update all issues', 'No'],
                         type:           'TE'
                     });
                 }
