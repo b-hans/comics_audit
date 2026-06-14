@@ -16,7 +16,6 @@ function updateAllIssues(params) {
         const newIssueHeaders = FORMSHEET.getRange(TE_issue_start_row-1, 1, 1, FORMSHEET.getLastColumn())
             .getValues()[0];
 
-        display.setValue ("ids to change: " + changes.length + "\n");
         for (let i=0; i<changes.length; i++) {
             let findIndex = issuesData.findIndex(
                 row => row[issuesHeaders.indexOf('id')] == changes[i][newIssueHeaders.indexOf('id')]);
@@ -52,9 +51,14 @@ function updateAllIssues(params) {
 
         }
 
-        display.setValue ("Next 812");
+        issuesData.unshift(issuesHeaders);
 
-        console.log ("test1", changes, issuesHeaders, newIssueHeaders);
+        issuesSheet.clearContents()
+
+        issuesSheet.getRange(1, 1, issuesData.length, issuesData[0].length)
+            .setValues(issuesData);
+
+        display.setValue ("Issues updated!");
 
         FORMSHEET.getRange(TE_FUNCTIONS_RANGE).activate();
 
