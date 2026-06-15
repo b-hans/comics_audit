@@ -93,13 +93,17 @@ function insertIssue () {
             display:    display
         });
 
+        rebuildFunctionsDropdown('edit');
+
         display.setValue ("Done!");
+
+        return true;
         
     } catch (error) {
         display.setValue("Error: " + error);
         return false;
     }
 
-    return true;
+    
 
 }

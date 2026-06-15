@@ -58,6 +58,7 @@ function titleEditMenu (params) {
                 };
             }
             else if (menuValue == "Cancel insert issue") {
+                rebuildFunctionsDropdown('edit');
                 cancelNewIssue();
             }
             else if (menuValue == "Yes, insert") {

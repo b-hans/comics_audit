@@ -9,6 +9,9 @@ function rebuildFunctionsDropdown (type) {
         if (type == "edit") {
             options = ['Functions', 'Submit edit title', 'Add issue', 'Submit issue edits', 'Delete this title', 'Cancel'];
         }
+        else if (type == "issue") {
+            options = ['Functions', 'Cancel'];
+        }
         else {
             options = ['Functions', 'Submit new title', 'Cancel'];
         }

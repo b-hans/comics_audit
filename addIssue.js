@@ -66,6 +66,8 @@ function addIssue () {
 
         }
 
+        rebuildFunctionsDropdown('issue');
+
         display.setValue("");
 
         return true;
