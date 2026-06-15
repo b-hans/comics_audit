@@ -22,23 +22,6 @@ function searchMenu(params) {
         });
 
     } 
-    else if (menuType == "Edit selected") {
-        const editTitle = FORMSHEET.getRange(TS_CURRENT_TITLES).getValue();
-
-        if (!editTitle || editTitle == "Select a title") {
-            display.setValue ("No title has been selected");
-            return false;
-        }
-
-        cache.put("current_edit", editTitle, 3600);
-
-        display.setValue ("Working...");
-
-        return editComicTitle({
-            display: display,
-            title: editTitle,
-        });
-    }
     else if (menuType == "Add title") {
         return addTitleForm();
     }

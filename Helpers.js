@@ -23,6 +23,25 @@ function menuOnEdit(e) {
                 range: range
             });
         }
+        else if (formType == "titlesearch" && 
+                 range.getA1Notation() == TS_TITLE_DROPDOWN &&
+                 range.getValue() != "Select a title") {
+            const editTitle = FORMSHEET.getRange(TS_CURRENT_TITLES).getValue();
+
+            if (!editTitle || editTitle == "Select a title") {
+                return false;
+            }
+
+            cache.put("current_edit", editTitle, 3600);
+
+            let display = FORMSHEET.getRange(TS_DISPLAY_RANGE);
+            display.setValue ("Working...");
+
+            return editComicTitle({
+                display: display,
+                title: editTitle,
+            });
+        }
         else if (formType == "publishers") {
             return publisherMenu ({range: range, cache: cache});
         }
