@@ -7,6 +7,7 @@ const TE_VOL_RANGE = "C6";
 const TE_FIRST_RANGE = "C8";
 const TE_LAST_RANGE = "C10";
 const TE_issue_start_row = 15;
+const TE_issue_id_column = 9;
 const TE_ID_RANGE = "F12";
 const TE_DISPLAY = "G2";
 const TE_CONFIRMATION = "H4";

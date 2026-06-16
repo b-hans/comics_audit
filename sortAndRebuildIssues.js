@@ -8,13 +8,14 @@ function sortAndRebuildIssues (params) {
         const last = sheet.getLastRow();
         const numRows = last - start + 1;
         const numCols = 9;
-        const range = sheet.getRange(TE_issue_start_row, 1, numRows, numCols)
-            .getValues();
+        const range = sheet.getRange(TE_issue_start_row, 1, numRows, numCols);
+        const data = range.getValues();
 
-        console.log (range);
+        data.sort((a, b) => a[1] - b[1]);
 
-        display.setValue ("In rebuild");
-        return false;
+        range.setValues(data);
+
+        return true;
     } catch (error) {
         display.setValue ("Error sorting issues: " + error);
         return false;

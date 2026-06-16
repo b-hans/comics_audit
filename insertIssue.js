@@ -86,7 +86,8 @@ function insertIssue () {
 
         // edit Comic title params display and like row edit
 
-        comicsIssuesSheet.appendRow(issueRow);        
+        comicsIssuesSheet.appendRow(issueRow);  
+        FORMSHEET.getRange(TE_issue_start_row, TE_issue_id_column).setValue(newId.id);      
 
         // editComicTitle({
         //     title:      myTitle.edit_dropdown,
@@ -94,6 +95,18 @@ function insertIssue () {
         // });
 
         rebuildFunctionsDropdown('edit');
+        
+        let newRule = SpreadsheetApp.newDataValidation()
+            .requireValueInList(['Options', 'Edit', 'Delete'], true)
+            .setAllowInvalid(false)
+            .build();
+
+        let issueOptionRange = FORMSHEET.getRange(TE_issue_start_row, 1);
+        issueOptionRange.clearDataValidations().clearContent();
+
+        SpreadsheetApp.flush();
+
+        issueOptionRange.setDataValidation(newRule).setValue('Options');
 
         if (!sortAndRebuildIssues({display: display})) {
             display.setValue ("Problem sorting issues\n" + display.getValue());
