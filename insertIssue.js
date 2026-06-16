@@ -86,16 +86,22 @@ function insertIssue () {
 
         // edit Comic title params display and like row edit
 
-        comicsIssuesSheet.appendRow(issueRow);
+        comicsIssuesSheet.appendRow(issueRow);        
 
-        editComicTitle({
-            title:      myTitle.edit_dropdown,
-            display:    display
-        });
+        // editComicTitle({
+        //     title:      myTitle.edit_dropdown,
+        //     display:    display
+        // });
 
         rebuildFunctionsDropdown('edit');
 
-        display.setValue ("Done!");
+        if (!sortAndRebuildIssues({display: display})) {
+            display.setValue ("Problem sorting issues\n" + display.getValue());
+        }
+        else {
+            display.setValue ("Done!");
+        }
+
 
         return true;
         
