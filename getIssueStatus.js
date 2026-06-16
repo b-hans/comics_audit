@@ -79,17 +79,13 @@ function getIssueStatus (params) {
                     }
                     
                     break;
-                case "Overstreet":
-                    if (currentIssue[issuesHeaders.indexOf('Value Overstreet')] != issue[i]) {
+
+                case "Notes":
+                    if (currentIssue[issuesHeaders.indexOf('Notes')] != issue[i]) {
                         returnInfo.change = true;
                     }
-
-                    if (!isNumeric(issue[i])) {
-                        returnInfo.valid = false;
-                        returnInfo.errors.push(issue[headers.indexOf('Number')] + " overstreet invalid");
-                    }
-
                     break;
+
             }
         }
 

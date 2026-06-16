@@ -19,7 +19,7 @@ function newIssueValid (params) {
             condition:  rowData[4],
             location:   rowData[5],
             online:     rowData[6],
-            overstreet: rowData[7]
+            notes:      rowData[7]
         }
 
         let errors = "Required:\n";

@@ -40,7 +40,7 @@ class ComicIssue {
             this.month = row[headers.indexOf("month")];
             this.year = row[headers.indexOf("year")];
             this.online = row[headers.indexOf("Value Online")];
-            this.overstreet = row[headers.indexOf("Value Overstreet")];
+            this.notes = row[headers.indexOf("Notes")];
             this.location = row[headers.indexOf("Box Number")];
 
             // this.grade = "F";

@@ -43,8 +43,8 @@ function updateAllIssues(params) {
                     case "Online":
                         issueRow[issuesHeaders.indexOf('Value Online')] = changeRow[i];
                         break;
-                    case "Overstreet":
-                        issueRow[issuesHeaders.indexOf('Value Overstreet')] = changeRow[i];
+                    case "Notes":
+                        issueRow[issuesHeaders.indexOf('Notes')] = changeRow[i];
                         break;
                 }
             }

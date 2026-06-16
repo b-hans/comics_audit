@@ -58,7 +58,7 @@ function editComicTitle (params) {
                 row.grade,
                 row.location,
                 usdFormatter.format(row.online),
-                usdFormatter.format(row.overstreet),
+                row.notes,
                 row.id
             ]);
 
@@ -119,11 +119,17 @@ function editComicTitle (params) {
 
                 for (let i=0; i<colAlignments.length; i++) {
                     FORMSHEET.getRange(startRow, i+1, numRows, 1)
-                        .setHorizontalAlignment(colAlignments[i]);
+                        .setHorizontalAlignment(colAlignments[i])
+                        .setVerticalAlignment('top');
                 }
 
                 FORMSHEET.getRange(startRow, 9, numRows, 1)
                     .setFontColor('#f3f3f3');
+
+                // set notes as a wrap
+                FORMSHEET.getRange (startRow, 8, numRows, 1)
+                    .setWrap(true)
+                    .setHorizontalAlignment('left');
 
                 return true;
 

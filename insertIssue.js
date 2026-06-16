@@ -55,9 +55,8 @@ function insertIssue () {
             condition:      newIssueData[3],
             location:       newIssueData[4],
             online:         newIssueData[5],
-            overstreet:     newIssueData[6],
+            notes:          newIssueData[6],
             condition_id:   condition_id,
-            Notes:          ""
         }
 
         for (let i=0; i<comicsHeaders.length; i++) {
@@ -73,8 +72,8 @@ function insertIssue () {
                     issueRow.push(issue.online);
                     break;
 
-                case "Value Overstreet":
-                    issueRow.push(issue.overstreet);
+                case "Notes":
+                    issueRow.push(issue.notes);
                     break;
 
                 default:

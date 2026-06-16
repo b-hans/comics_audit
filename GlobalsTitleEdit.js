@@ -231,7 +231,7 @@ const TE_innerRanges = [
         fontSize: 12,
         merge: false,
         a1notation: "H14",
-        value: "Overstreet",
+        value: "Notes",
     },
     {
         background: "#f3f3f3",

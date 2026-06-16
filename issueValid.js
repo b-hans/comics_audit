@@ -44,7 +44,7 @@ function issueValid (params) {
             "condition",
             "location",
             "online",
-            "overstreet",
+            "notes",
         ];
         
         let testVal = "";
@@ -106,15 +106,9 @@ function issueValid (params) {
                         valid = false;
                     }
                     break;
-
-                case "overstreet":
-                    if (item != issue.overstreet) {
-                        change = true;                        
-                    }
-                    testVal = parseFloat(item);
-                    if (item && Number.isNaN(testVal)) {
-                        errorDisplay += "Overstreet: not a valid number\n"
-                        valid = false;
+                case "notes":
+                    if (item != issue.notes) {
+                        change = true;
                     }
                     break;
 

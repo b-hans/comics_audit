@@ -14,7 +14,7 @@ function editIssue(params) {
             "condition",
             "location",
             "online",
-            "overstreet",
+            "notes",
             "issue_id"
         ];
 
@@ -44,7 +44,7 @@ function editIssue(params) {
             '',
             issueRange[headers.indexOf('location')],
             issueRange[headers.indexOf('online')],
-            issueRange[headers.indexOf('overstreet')]
+            issueRange[headers.indexOf('notes')]
         ];
           
         issueSheet.getRange(sheetRow+1, 1, 1, newRowData.length)
