@@ -72,7 +72,8 @@ function titleEditMenu (params) {
                     id: cache.get("delete_issue_id")
                 })) {
                     cache.remove("delete_issue_id");
-                    if (redrawCurrentEdit({ display: display })) {
+                    
+                    if (sortAndRebuildIssues({display: display})) {
                         display.setValue ("Issue deleted!");
                     }
                     else {
@@ -81,7 +82,7 @@ function titleEditMenu (params) {
                 }
                 else {
                     cache.remove("delete_issue_id");
-                    display.setValue ("Problem deleting issue");
+                    display.setValue (display.getValue() + "\nProblem deleting issue");
                 }
             }
             else {
