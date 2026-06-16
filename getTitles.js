@@ -21,11 +21,6 @@ function getTitles(params) {
             .getValues();
         const publisherHeaders = PublisherData.shift();
 
-        // display.setValue ("test3\n\n" + String(ComicData[0][1]));
-        // display.setValue (display.getValue() + "\n" +
-        //     String())
-        // return { valid: true }
-
         // first filter
         const filteredResults = ComicData.filter (row => {
             if (String(row[headers.indexOf('Title')]).toLowerCase().includes(
@@ -68,7 +63,7 @@ function getTitles(params) {
             return { valid: false}
         }
 
-        if (titleMap.length > 1) {
+        if (titleMap.length > 0) {
             titleMap.unshift("Select a title");
         }
 

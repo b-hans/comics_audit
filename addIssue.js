@@ -38,7 +38,7 @@ function addIssue () {
             "left",
             "left",
             "right",
-            "right",
+            "left",
         ];
 
         for (let i=0; i<colAlignments.length; i++) {
@@ -65,6 +65,10 @@ function addIssue () {
                 .setValue(dropdown[0]);
 
         }
+
+        // set wrap for notes column
+        FORMSHEET.getRange(TE_issue_start_row, TE_NOTES_COLUMN)
+            .setWrap(true);
 
         rebuildFunctionsDropdown('issue');
 
