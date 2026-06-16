@@ -45,12 +45,18 @@ function insertIssue () {
 
         let issueRow = [];
 
+        let insertMonth = "";
+
+        if (newIssueData[1] != "Select one") {
+            insertMonth = newIssueData[1];
+        }
+
         const issue = {
             id:             newId.id,
             title_id:       title_id,
             publisher_id:   publisher_id,
             Number:         newIssueData[0],
-            month:          newIssueData[1],
+            month:          insertMonth,
             year:           newIssueData[2],
             condition:      newIssueData[3],
             location:       newIssueData[4],

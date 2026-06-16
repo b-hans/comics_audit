@@ -86,3 +86,25 @@ const MENUOPTIONS = {
     vertical: 'middle',
     options: ['Options', 'Search title'],
 }
+
+
+const MONTHS_ARRAY = [
+    'Select one',
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+];
+
+const MONTHS_RULE = SpreadsheetApp.newDataValidation()
+    .requireValueInList(MONTHS_ARRAY, true)
+    .setAllowInvalid(false)
+    .build();

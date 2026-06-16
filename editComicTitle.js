@@ -98,6 +98,9 @@ function editComicTitle (params) {
             FORMSHEET.getRange(startRow, 1, numRows, 1)
                 .setDataValidation(optionsRule);
 
+            FORMSHEET.getRange(startRow, 3, numRows, 1)
+                .setDataValidation(MONTHS_RULE);
+
             try {
                 FORMSHEET.getRange(startRow, 1, numRows, numCols)
                     .setValues(mappedArray)

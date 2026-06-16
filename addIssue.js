@@ -66,6 +66,16 @@ function addIssue () {
 
         }
 
+        // set months as a dropdown
+        let monthRange = FORMSHEET.getRange(TE_issue_start_row, 3)
+            .clearDataValidations()
+            .clearContent();
+
+        SpreadsheetApp.flush();
+
+        monthRange.setDataValidation(MONTHS_RULE)
+            .setValue(MONTHS_ARRAY[0]);
+
         // set wrap for notes column
         FORMSHEET.getRange(TE_issue_start_row, TE_NOTES_COLUMN)
             .setWrap(true);
