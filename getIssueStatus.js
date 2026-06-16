@@ -73,7 +73,7 @@ function getIssueStatus (params) {
                         returnInfo.change = true;
                     }
 
-                    if (!isNumeric(issue[i])) {
+                    if (issue[i] && !isNumeric(issue[i])) {
                         returnInfo.valid = false;
                         returnInfo.errors.push(issue[headers.indexOf('Number')] + " online invalid");
                     }
