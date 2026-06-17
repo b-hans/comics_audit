@@ -52,14 +52,14 @@ function validatePublisher (params) {
 
                 let allPublishers = getPublisherData();
 
-                let data = allPublishers.data;
-                let headers = allPublishers.headers;
+                let apdata = allPublishers.data;
+                let apheaders = allPublishers.headers;
 
-                for (let i=0; i<data.length; i++) {
-                    item = data[i];
+                for (let i=0; i<apdata.length; i++) {
+                    item = apdata[i];
 
-                    if (item[headers.indexOf('Publisher')] == publisher &&
-                        item[headers.indexOf('id')] != currentPublisher.id) {
+                    if (item[apheaders.indexOf('Publisher')] == publisher &&
+                        item[apheaders.indexOf('id')] != currentPublisher.id) {
                             display.setValue ("That publisher name exists already");
                             return false;
                     }

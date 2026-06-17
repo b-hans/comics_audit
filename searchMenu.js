@@ -25,6 +25,9 @@ function searchMenu(params) {
     else if (menuType == "Add title") {
         return addTitleForm();
     }
+    else if (menuType == "Update repo") {
+        return updateRepo({display: display});
+    }
     else if (menuType == "Publishers") {
         return buildPublishers({cache: cache});
     }
