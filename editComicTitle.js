@@ -1,7 +1,6 @@
 function editComicTitle (params) {
     const inputTitle = params.title;
-    const display = params.display;
-
+    const display = FORMSHEET.getRange(TE_DISPLAY);
     try {
 
         const myTitle = getComicTitle({
@@ -102,6 +101,7 @@ function editComicTitle (params) {
                 .setDataValidation(MONTHS_RULE);
 
             try {
+
                 FORMSHEET.getRange(startRow, 1, numRows, numCols)
                     .setValues(mappedArray)
                     .setFontColor("black")
