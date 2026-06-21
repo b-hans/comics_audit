@@ -62,6 +62,8 @@ function editComicTitle (params) {
                     row.id
                 ];
 
+                console.log ("test 0", row, row.month);
+
                 let testMonth = validMonth({display: display, month: row.month});
                 if (!testMonth.valid) {
                     display.setValue (display.getValue() + "check: " + testMonth.month);
