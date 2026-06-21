@@ -49,17 +49,27 @@ function editComicTitle (params) {
         else {
 
             // map the array
-            let mappedArray = issues.map (row => [
-                "Options",
-                row.number,
-                row.month,
-                row.year,
-                row.grade,
-                row.location,
-                usdFormatter.format(row.online),
-                row.notes,
-                row.id
-            ]);
+            let mappedArray = issues.map (row => {
+                let returnArray = [
+                    "Options",
+                    row.number,
+                    row.month,
+                    row.year,
+                    row.grade,
+                    row.location,
+                    usdFormatter.format(row.online),
+                    row.notes,
+                    row.id
+                ];
+
+                let testMonth = validMonth({display: display, month: row.month});
+                if (!testMonth.valid) {
+                    display.setValue (display.getValue() + "check: " + testMonth.month);
+                    returnArray[2] = "";
+                }
+
+                return returnArray;
+            });
 
             let startRow = TE_issue_start_row;
             let numRows = mappedArray.length;
