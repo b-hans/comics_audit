@@ -209,6 +209,9 @@ function titleEditMenu (params) {
             case "Delete this title":
                 return deleteTitleSubmit({display: display, cache: cache});
 
+            case "Show needed issues":
+                return needed({display: display, cache: cache, type: "show"});
+
             default:
                 display.setValue ("menu: " + menuValue);
         }
