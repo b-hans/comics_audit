@@ -40,6 +40,7 @@ function menuOnEdit(e) {
             return editComicTitle({
                 display: display,
                 title: editTitle,
+                cache: cache,
             });
         }
         else if (formType == "publishers") {

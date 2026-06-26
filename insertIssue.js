@@ -94,11 +94,6 @@ function insertIssue () {
         comicsIssuesSheet.appendRow(issueRow);  
         FORMSHEET.getRange(TE_issue_start_row, TE_issue_id_column).setValue(newId.id);      
 
-        // editComicTitle({
-        //     title:      myTitle.edit_dropdown,
-        //     display:    display
-        // });
-
         rebuildFunctionsDropdown('edit');
         
         let newRule = SpreadsheetApp.newDataValidation()
