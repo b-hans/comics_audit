@@ -8,6 +8,7 @@ function clearCache() {
         'current_edit',
         'current_title',
         'current_title_edit',
+        'current_issues',
         'current_row',
         'edit_issue_row',
         'new_publisher',

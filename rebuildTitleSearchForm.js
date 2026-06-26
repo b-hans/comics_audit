@@ -125,7 +125,20 @@ function rebuildTitleSearchForm() {
                 .setDataValidation(functionsRule)
                 .setValue("Select one");
 
+        // Define the last row number you want to KEEP
+        const rowToKeep = 18; 
+        
+        const maxRows = FORMSHEET.getMaxRows();
+        const startRowToDelete = rowToKeep + 1;
+        const totalRowsToDelete = maxRows - rowToKeep;
+        
+        // Only execute if there are rows available to delete
+        if (totalRowsToDelete > 0) {
+            FORMSHEET.deleteRows(startRowToDelete, totalRowsToDelete);
+        }
+  
         return true;
+  
     }
     catch (error) {
         display.setValue("Error rebuilding title search form: " + error);

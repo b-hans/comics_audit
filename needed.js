@@ -9,16 +9,48 @@ function needed (params) {
         // get and cache current issues
         display.setValue ("Working....");
 
-        let start = TE_issue_start_row;
-        let end = FORMSHEET.getLastRow();
-        let numRows = end - start + 1;
+        const title_id = FORMSHEET.getRange(TE_ID_RANGE).getValue();
+        const first = FORMSHEET.getRange(TE_FIRST_RANGE).getValue();
+        const last = FORMSHEET.getRange(TE_LAST_RANGE).getValue();
 
-        let currentIssues = FORMSHEET.getRange(start, 1, numRows, FORMSHEET.getLastColumn())
-            .getValues()[0];
+        if (type == "show") {
+            let start = TE_issue_start_row;
+            let end = FORMSHEET.getLastRow();
+            let numRows = end - start + 1;
 
-        console.log (currentIssues);
+            let issuesRange = FORMSHEET.getRange(start, 1, numRows, FORMSHEET.getLastColumn());
+            let issuesData = issuesRange.getValues();
+            cache.put('issuesData', JSON.stringify(issuesData), 3600);
 
-        display.setValue ("Test: " + start + " : " + numRows);
+            issuesRange.clearContent();
+            issuesRange.clearDataValidations(); 
+
+            let neededIssues = [];
+            let neededRow = ["", "", "", "", "", "", "", "", ""];
+
+            for (let i=first; i<last+1; i++) {
+                if (issuesData.some(row => row[1] == i)) {
+                    console.log ("issue: " + i);
+                    continue;
+                }
+
+                neededIssues.push (["", i, "", "", "", "", "", "", ""]);
+            }
+
+            console.log (neededIssues);
+
+            if (neededIssues.length > 0) {
+                const neededRange = FORMSHEET.getRange(TE_issue_start_row, 1, neededIssues.length, 9)
+                    .setValues(neededIssues);
+            }
+                    
+
+            display.setValue ("Done!");
+        }
+        else if (type == "hide") {
+            // do something
+        }
+
         return true;
     } catch (error) {
         display.setValue ("Error getting needed: " + error);
