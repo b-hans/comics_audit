@@ -212,6 +212,9 @@ function titleEditMenu (params) {
             case "Show needed issues":
                 return needed({display: display, cache: cache, type: "show"});
 
+            case "Show my issues":
+                return needed({display: display, cache: cache, type: "hide"});
+
             default:
                 display.setValue ("menu: " + menuValue);
         }
