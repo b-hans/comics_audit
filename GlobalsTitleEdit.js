@@ -255,7 +255,7 @@ const TE_innerRanges = [
         fontSize: 12,
         value: null,
         merge: true,
-        options: ["Functions", "Edit title", "Add issue", "Cancel"]
+        options: ["Functions", "Edit title", "Add issue", "Show needs", "Cancel"]
     },
     {
         background: TE_fontStyles.background,

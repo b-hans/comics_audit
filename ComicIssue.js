@@ -31,11 +31,14 @@ class ComicIssue {
             }
 
             if (id < 0) {
-                this.valid = false;
-                return;
+                // this.valid = false;
+                // return;
+                this.id = null;
+            }
+            else {
+                this.id = id;
             }
 
-            this.id = id;
             this.number = row[headers.indexOf("Number")];
             this.month = row[headers.indexOf("month")];
             this.year = row[headers.indexOf("year")];
@@ -43,13 +46,15 @@ class ComicIssue {
             this.notes = row[headers.indexOf("Notes")];
             this.location = row[headers.indexOf("Box Number")];
 
-            // this.grade = "F";
-
-
-            this.grade = GRADINGDATA.filter (
-                item => item[GRADINGHEADERS.indexOf('id')] === 
-                row[headers.indexOf("condition_id")]
-            )[0][GRADINGHEADERS.indexOf('Condition')];
+            if (this.id) {
+                this.grade = GRADINGDATA.filter (
+                    item => item[GRADINGHEADERS.indexOf('id')] === 
+                    row[headers.indexOf("condition_id")]
+                )[0][GRADINGHEADERS.indexOf('Condition')];
+            }
+            else {
+                this.grade = null;
+            }
 
             return;
         } catch (error) {

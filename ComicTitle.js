@@ -96,6 +96,31 @@ class ComicTitle {
                 item => item[issueHeaders.indexOf('title_id')] === this.id
             );
 
+            let issueList = "";
+            this.issues = [];
+
+            for (let i=this.num_first; i<this.num_last+1; i++) {
+                if (filteredIssues.some(row => row[numIndex] == i)) {
+                    continue;
+                }
+                else {
+                    filteredIssues.push ([
+                        -1,
+                        this.id,
+                        this.publisher_id,
+                        i,
+                        "",
+                        "",
+                        "",
+                        "Needed",
+                        "",
+                        "",
+                        "",
+                    ]);
+                }
+            }
+
+            // sort by issue number
             filteredIssues.sort ((a, b) => {
                 if (a[numIndex] == b[numIndex]) {
                     return 0;
@@ -108,8 +133,7 @@ class ComicTitle {
                 }
             });
 
-            let issueList = "";
-            this.issues = []
+
             for (let i=0; i<filteredIssues.length; i++) {
                 this.issues.push(new ComicIssue(
                     {
