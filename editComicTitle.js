@@ -1,6 +1,8 @@
 function editComicTitle (params) {
     const inputTitle = params.title;
     const display = FORMSHEET.getRange(TE_DISPLAY);
+    const cache = params.cache;
+
     try {
 
         const myTitle = getComicTitle({
@@ -11,6 +13,9 @@ function editComicTitle (params) {
             display.setValue ("Not valid");
             return false;
         }
+
+        cache.put("current_title_data", JSON.stringify(myTitle), 3600);
+
 
         const title = myTitle.title;
         const publisher = title.publisher.name;
@@ -72,9 +77,14 @@ function editComicTitle (params) {
                 return returnArray;
             });
 
+            // by default we hide the needed
+            cache.put("needed_status", "hide", 3600);
+
+            let hiddenFilteredArray = mappedArray.filter(row => row[TE_ISSUE_ID_COLUMN] != null)
+
             let startRow = TE_issue_start_row;
-            let numRows = mappedArray.length;
-            let numCols = mappedArray[0].length;
+            let numRows = hiddenFilteredArray.length;
+            let numCols = hiddenFilteredArray[0].length;
 
             FORMSHEET.insertRowsAfter(startRow, numRows);
 
@@ -114,7 +124,7 @@ function editComicTitle (params) {
             try {
 
                 FORMSHEET.getRange(startRow, 1, numRows, numCols)
-                    .setValues(mappedArray)
+                    .setValues(hiddenFilteredArray)
                     .setFontColor("black")
                     .setFontSize(10)
                     .setHorizontalAlignment("left");
