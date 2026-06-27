@@ -22,11 +22,8 @@ function rebuildFunctionsDropdown (type) {
         else if (type == "showNeeded") {
             options = [
                 'Functions', 
-                'Submit edit title', 
-                'Add issue', 
-                'Submit issue edits', 
+                'Submit new issues', 
                 'Show my issues',
-                'Delete this title', 
                 'Cancel'];
 
         }

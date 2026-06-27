@@ -25,6 +25,12 @@ function needed (params) {
             "center"
         ];
 
+        const conditions = getConditions();
+
+        const conditionsRule = SpreadsheetApp.newDataValidation()
+            .requireValueInList(conditions.dropdown, true)
+            .setAllowInvalid(false)
+            .build();
 
         if (type == "show") {
             let start = TE_issue_start_row;
@@ -72,6 +78,11 @@ function needed (params) {
                 numRange.setHorizontalAlignment("center");
 
             }      
+
+            SpreadsheetApp.flush();
+
+            FORMSHEET.getRange(TE_issue_start_row, 5, neededIssues.length, 1)
+                .setDataValidation(conditionsRule);
             
             rebuildFunctionsDropdown("showNeeded");
 
@@ -136,12 +147,6 @@ function needed (params) {
                 FORMSHEET.getRange(TE_issue_start_row, 7, currentIssues.length, 1)
                     .setNumberFormat("$#,##0.00");
 
-                const conditions = getConditions();
-
-                const conditionsRule = SpreadsheetApp.newDataValidation()
-                    .requireValueInList(conditions.dropdown, true)
-                    .setAllowInvalid(false)
-                    .build();
 
                 SpreadsheetApp.flush();
 

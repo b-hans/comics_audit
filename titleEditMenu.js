@@ -215,6 +215,9 @@ function titleEditMenu (params) {
             case "Show my issues":
                 return needed({display: display, cache: cache, type: "hide"});
 
+            case "Submit new issues":
+                return newIssues({display: display, cache: cache});
+
             default:
                 display.setValue ("menu: " + menuValue);
         }
