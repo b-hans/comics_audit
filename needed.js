@@ -35,7 +35,7 @@ function needed (params) {
 
             if (numRows > 0) {
                 let issuesRange = FORMSHEET.getRange(start, 1, numRows, FORMSHEET.getLastColumn());
-                let issuesData = issuesRange.getValues();
+                issuesData = issuesRange.getValues();
 
                 issuesRange.clearContent();
                 issuesRange.clearDataValidations(); 
