@@ -15,6 +15,16 @@ const TE_ISSUE_ID_COLUMN = 8;
 const TE_FUNCTIONS_RANGE = "E6";
 const TE_NOTES_COLUMN = 8;
 
+const issueEditValidation = SpreadsheetApp.newDataValidation()
+    .requireValueInList(['Options', 'edit', 'delete'], true)
+    .setAllowInvalid(false)
+    .build();
+
+const monthValidation = SpreadsheetApp.newDataValidation()
+    .requireValueInList(MONTHS_ARRAY, true)
+    .setAllowInvalid(false)
+    .build();
+
 const TE_OUTERRANGE = {
     a1notation: "A1:I17",
     color: "#f3f3f3",

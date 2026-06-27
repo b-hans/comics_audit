@@ -92,7 +92,7 @@ function needed (params) {
             insertRange.setValues(currentIssues)
                     .setFontColor("black")
                     .setFontSize(10)
-                    .setFontFamily("EB Garamond")
+                    .setFontFamily("Arial")
                     .setVerticalAlignment("top")
                     .setBackground("#f3f3f3")
                     .setHorizontalAlignment("left");
@@ -111,6 +111,36 @@ function needed (params) {
             FORMSHEET.getRange (TE_issue_start_row, 8, currentIssues.length, 1)
                 .setWrap(true)
                 .setHorizontalAlignment('left');
+
+            SpreadsheetApp.flush();
+
+            // options
+            FORMSHEET.getRange(TE_issue_start_row, 1, currentIssues.length, 1)
+                .setDataValidation(issueEditValidation);
+
+            SpreadsheetApp.flush();
+
+            // months
+            FORMSHEET.getRange(TE_issue_start_row, 3, currentIssues.length, 1)
+                .setDataValidation(monthValidation);
+
+            // value
+            FORMSHEET.getRange(TE_issue_start_row, 7, currentIssues.length, 1)
+                .setNumberFormat("$#,##0.00");
+
+            const conditions = getConditions();
+
+            const conditionsRule = SpreadsheetApp.newDataValidation()
+                .requireValueInList(conditions.dropdown, true)
+                .setAllowInvalid(false)
+                .build();
+
+            SpreadsheetApp.flush();
+
+            FORMSHEET.getRange(TE_issue_start_row, 5, currentIssues.length, 1)
+                .setDataValidation(conditionsRule);
+
+            rebuildFunctionsDropdown("edit");
 
             display.setValue ("Done!");
         }
