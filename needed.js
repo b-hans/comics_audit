@@ -31,13 +31,19 @@ function needed (params) {
             let end = FORMSHEET.getLastRow();
             let numRows = end - start + 1;
 
-            let issuesRange = FORMSHEET.getRange(start, 1, numRows, FORMSHEET.getLastColumn());
-            let issuesData = issuesRange.getValues();
+            let issuesData = [];
+
+            if (numRows > 0) {
+                let issuesRange = FORMSHEET.getRange(start, 1, numRows, FORMSHEET.getLastColumn());
+                let issuesData = issuesRange.getValues();
+
+                issuesRange.clearContent();
+                issuesRange.clearDataValidations(); 
+
+            }
+
             cache.put('issuesData', JSON.stringify(issuesData), 3600);
             cache.put('needType', "show", 3600);
-
-            issuesRange.clearContent();
-            issuesRange.clearDataValidations(); 
 
             let neededIssues = [];
 
@@ -81,64 +87,74 @@ function needed (params) {
 
             let currentIssues = JSON.parse(cache.get("issuesData"));
 
-            let insertStart = TE_issue_start_row;
-            
-            let insertRange = FORMSHEET.getRange(
-                TE_issue_start_row, 
-                1, 
-                currentIssues.length, 
-                currentIssues[0].length);
+            if (currentIssues.length > 0) {
 
-            insertRange.setValues(currentIssues)
-                    .setFontColor("black")
-                    .setFontSize(10)
-                    .setFontFamily("Arial")
-                    .setVerticalAlignment("top")
-                    .setBackground("#f3f3f3")
-                    .setHorizontalAlignment("left");
+                let insertStart = TE_issue_start_row;
+                
+                let insertRange = FORMSHEET.getRange(
+                    TE_issue_start_row, 
+                    1, 
+                    currentIssues.length, 
+                    currentIssues[0].length);
 
-            
-            for (let i=0; i<colAlignments.length; i++) {
-                FORMSHEET.getRange(TE_issue_start_row, i+1, currentIssues.length, 1)
-                    .setHorizontalAlignment(colAlignments[i])
-                    .setVerticalAlignment('top');
+                insertRange.setValues(currentIssues)
+                        .setFontColor("black")
+                        .setFontSize(10)
+                        .setFontFamily("Arial")
+                        .setVerticalAlignment("top")
+                        .setBackground("#f3f3f3")
+                        .setHorizontalAlignment("left");
+
+                
+                for (let i=0; i<colAlignments.length; i++) {
+                    FORMSHEET.getRange(TE_issue_start_row, i+1, currentIssues.length, 1)
+                        .setHorizontalAlignment(colAlignments[i])
+                        .setVerticalAlignment('top');
+                }
+
+                FORMSHEET.getRange(TE_issue_start_row, 9, currentIssues.length, 1)
+                    .setFontColor('#f3f3f3');
+
+                // set notes as a wrap
+                FORMSHEET.getRange (TE_issue_start_row, 8, currentIssues.length, 1)
+                    .setWrap(true)
+                    .setHorizontalAlignment('left');
+
+                SpreadsheetApp.flush();
+
+                // options
+                FORMSHEET.getRange(TE_issue_start_row, 1, currentIssues.length, 1)
+                    .setDataValidation(issueEditValidation);
+
+                SpreadsheetApp.flush();
+
+                // months
+                FORMSHEET.getRange(TE_issue_start_row, 3, currentIssues.length, 1)
+                    .setDataValidation(monthValidation);
+
+                // value
+                FORMSHEET.getRange(TE_issue_start_row, 7, currentIssues.length, 1)
+                    .setNumberFormat("$#,##0.00");
+
+                const conditions = getConditions();
+
+                const conditionsRule = SpreadsheetApp.newDataValidation()
+                    .requireValueInList(conditions.dropdown, true)
+                    .setAllowInvalid(false)
+                    .build();
+
+                SpreadsheetApp.flush();
+
+                FORMSHEET.getRange(TE_issue_start_row, 5, currentIssues.length, 1)
+                    .setDataValidation(conditionsRule);
+
             }
-
-            FORMSHEET.getRange(TE_issue_start_row, 9, currentIssues.length, 1)
-                .setFontColor('#f3f3f3');
-
-            // set notes as a wrap
-            FORMSHEET.getRange (TE_issue_start_row, 8, currentIssues.length, 1)
-                .setWrap(true)
-                .setHorizontalAlignment('left');
-
-            SpreadsheetApp.flush();
-
-            // options
-            FORMSHEET.getRange(TE_issue_start_row, 1, currentIssues.length, 1)
-                .setDataValidation(issueEditValidation);
-
-            SpreadsheetApp.flush();
-
-            // months
-            FORMSHEET.getRange(TE_issue_start_row, 3, currentIssues.length, 1)
-                .setDataValidation(monthValidation);
-
-            // value
-            FORMSHEET.getRange(TE_issue_start_row, 7, currentIssues.length, 1)
-                .setNumberFormat("$#,##0.00");
-
-            const conditions = getConditions();
-
-            const conditionsRule = SpreadsheetApp.newDataValidation()
-                .requireValueInList(conditions.dropdown, true)
-                .setAllowInvalid(false)
-                .build();
-
-            SpreadsheetApp.flush();
-
-            FORMSHEET.getRange(TE_issue_start_row, 5, currentIssues.length, 1)
-                .setDataValidation(conditionsRule);
+            else {
+                FORMSHEET.getRange(TE_issue_start_row, 1, 2, 9)
+                    .setBackground('#f3f3f3')
+                    .setFontFamily('Arial')
+                    .setFontSize(10);
+            }
 
             rebuildFunctionsDropdown("edit");
 

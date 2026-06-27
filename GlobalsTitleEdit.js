@@ -16,7 +16,7 @@ const TE_FUNCTIONS_RANGE = "E6";
 const TE_NOTES_COLUMN = 8;
 
 const issueEditValidation = SpreadsheetApp.newDataValidation()
-    .requireValueInList(['Options', 'edit', 'delete'], true)
+    .requireValueInList(['Options', 'Edit', 'Delete'], true)
     .setAllowInvalid(false)
     .build();
 
