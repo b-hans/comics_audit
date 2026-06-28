@@ -85,6 +85,12 @@ function needed (params) {
 
                 FORMSHEET.getRange(TE_issue_start_row, 5, neededIssues.length, 1)
                     .setDataValidation(conditionsRule);
+
+                SpreadsheetApp.flush();
+
+                FORMSHEET.getRange(TE_issue_start_row, 3, neededIssues.length, 1)
+                    .setDataValidation(monthValidation);
+
                 
                 rebuildFunctionsDropdown("showNeeded");
                 
