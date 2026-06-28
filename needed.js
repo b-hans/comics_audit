@@ -38,13 +38,14 @@ function needed (params) {
             let numRows = end - start + 1;
 
             let issuesData = [];
+            let issuesRange;
 
             if (numRows > 0) {
-                let issuesRange = FORMSHEET.getRange(start, 1, numRows, FORMSHEET.getLastColumn());
+                issuesRange = FORMSHEET.getRange(start, 1, numRows, FORMSHEET.getLastColumn());
                 issuesData = issuesRange.getValues();
 
-                issuesRange.clearContent();
-                issuesRange.clearDataValidations(); 
+                // issuesRange.clearContent();
+                // issuesRange.clearDataValidations(); 
 
             }
 
@@ -62,9 +63,12 @@ function needed (params) {
                 neededIssues.push (["", i, "", "", "", "", "", "", ""]);
             }
 
-            console.log (neededIssues);
 
             if (neededIssues.length > 0) {
+
+                issuesRange.clearContent();
+                issuesRange.clearDataValidations(); 
+
                 const neededRange = FORMSHEET.getRange(TE_issue_start_row, 1, neededIssues.length, 9);
                 const numRange = FORMSHEET.getRange(TE_issue_start_row, 2, neededIssues.length);
 
@@ -77,16 +81,20 @@ function needed (params) {
 
                 numRange.setHorizontalAlignment("center");
 
-            }      
+                SpreadsheetApp.flush();
 
-            SpreadsheetApp.flush();
+                FORMSHEET.getRange(TE_issue_start_row, 5, neededIssues.length, 1)
+                    .setDataValidation(conditionsRule);
+                
+                rebuildFunctionsDropdown("showNeeded");
+                
+                display.setValue ("Done!");
+            }
+            else {
+                display.setValue ("No issues needed for this title!");
+            }
 
-            FORMSHEET.getRange(TE_issue_start_row, 5, neededIssues.length, 1)
-                .setDataValidation(conditionsRule);
-            
-            rebuildFunctionsDropdown("showNeeded");
 
-            display.setValue ("Done!");
         }
         else if (type == "hide") {
             // get range
