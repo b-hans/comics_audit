@@ -108,6 +108,26 @@ function newIssues (params) {
         cache.put("issuesData", JSON.stringify(currentIssues), 3600);
 
         // now redo the needed
+        let currentNeededRange = FORMSHEET.getRange(start, 1, numRows, numCols);
+        let currentNeededData = currentNeededRange.getValues();
+
+        let newNeeded = currentNeededData.filter ( item => {
+
+                if (data.some(row => row[headers.Number] == item[headers.Number])) {
+                    return false;
+                }
+
+                return true;
+
+            }            
+        );
+
+        FORMSHEET.deleteRows(start, numRows);
+
+        if (newNeeded.length > 0) {
+            FORMSHEET.getRange(start, 1, newNeeded.length, numCols)
+                .setValues(newNeeded);
+        }
 
         display.setValue ("Done!");
 

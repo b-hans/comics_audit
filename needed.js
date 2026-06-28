@@ -66,8 +66,10 @@ function needed (params) {
 
             if (neededIssues.length > 0) {
 
-                issuesRange.clearContent();
-                issuesRange.clearDataValidations(); 
+                if (numRows > 0) {
+                    issuesRange.clearContent();
+                    issuesRange.clearDataValidations(); 
+                }
 
                 const neededRange = FORMSHEET.getRange(TE_issue_start_row, 1, neededIssues.length, 9);
                 const numRange = FORMSHEET.getRange(TE_issue_start_row, 2, neededIssues.length);
