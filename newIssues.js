@@ -125,8 +125,11 @@ function newIssues (params) {
         FORMSHEET.deleteRows(start, numRows);
 
         if (newNeeded.length > 0) {
-            FORMSHEET.getRange(start, 1, newNeeded.length, numCols)
-                .setValues(newNeeded);
+            let newRange = FORMSHEET.getRange(start, 1, newNeeded.length, numCols);
+
+            newRange.setValues(newNeeded);
+
+            return styleIssuesRange({display: display, range: newRange});
         }
 
         display.setValue ("Done!");
