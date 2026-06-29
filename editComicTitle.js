@@ -1,6 +1,8 @@
 function editComicTitle (params) {
+
     const inputTitle = params.title;
     const display = FORMSHEET.getRange(TE_DISPLAY);
+
     try {
 
         const myTitle = getComicTitle({
@@ -24,6 +26,8 @@ function editComicTitle (params) {
             return false;
         }
 
+        display.setValue ("Working....");
+
         // rebuild functions menu
         rebuildFunctionsDropdown('edit');
 
@@ -43,7 +47,7 @@ function editComicTitle (params) {
         let issues = title.issues;
 
         if (issues.length <= 0) {
-            // display.setValue ("No issues");
+            display.setValue ("Title loaded!");
             return true;
         }
         else {
@@ -145,6 +149,7 @@ function editComicTitle (params) {
                     .setWrap(true)
                     .setHorizontalAlignment('left');
 
+                display.setValue ("Title loaded!");
                 return true;
 
             } catch (error) {

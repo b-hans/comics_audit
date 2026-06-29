@@ -64,6 +64,10 @@ function titleEditMenu (params) {
             else if (menuValue == "Yes, insert") {
                 insertIssue();
             }
+            else if (menuValue == "Yes, submit issues") {
+                clearSelect("TE");
+                return newIssues({display: display, cache: cache});
+            }
             else if (menuValue == "Yes, delete it") {
                 clearSelect("TE");
                 display.setValue("Working....");
@@ -216,7 +220,12 @@ function titleEditMenu (params) {
                 return needed({display: display, cache: cache, type: "hide"});
 
             case "Submit new issues":
-                return newIssues({display: display, cache: cache});
+                return insertConfirmation({
+                    text:       "Confirmation required\n\nSubmit these issues?",
+                    display:    display,
+                    type:       "TE",
+                    options:    ['Select', 'Yes, submit issues', 'No']
+                });
 
             default:
                 display.setValue ("menu: " + menuValue);

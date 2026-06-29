@@ -1,9 +1,9 @@
 function rebuildTitleSearchForm() {
 
-    try {
+    const cache = CacheService.getScriptCache();
+    const display = FORMSHEET.getRange(TS_DISPLAY_RANGE);
 
-        const cache = CacheService.getScriptCache();
-        const display = FORMSHEET.getRange(TS_DISPLAY_RANGE);
+    try {
 
         deleteFormsSheet();
 
@@ -30,15 +30,6 @@ function rebuildTitleSearchForm() {
                 .setFontSize(18)
                 .setValue("Title Search");
 
-        range = sheet.getRange(TS_CURRENT_TITLES_LABEL)
-                    .setBackground("#cfe2f3")
-                    .setFontColor("#7A367A")
-                    .setHorizontalAlignment("right")
-                    .setVerticalAlignment("middle")
-                    .setFontFamily("Comic Sans MS")
-                    .setFontSize(10)
-                    .setValue("Titles: ");
-
         range = sheet.getRange(TS_SEARCH_TITLES_LABEL)
                     .setBackground("#cfe2f3")
                     .setFontColor("#7A367A")
@@ -48,25 +39,19 @@ function rebuildTitleSearchForm() {
                     .setFontSize(10)
                     .setValue("Search Title: ");
 
-        let titlesRange = sheet.getRange(TS_CURRENT_TITLES)
-                    .setBackground("#ffffff")
-                    .merge()
-                    .setFontColor("black")
-                    .setHorizontalAlignment("center")
-                    .setVerticalAlignment("middle")
-                    .setBorder(true, true, true, true, false, false,
-                        "black", SpreadsheetApp.BorderStyle.SOLID
-                    );
-
         let cacheSearch = cache.get("current_search");
         if (cacheSearch) {
+
+            showTitlesMenu({display: display});
+
             let newRule = SpreadsheetApp.newDataValidation()
                 .requireValueInList(JSON.parse(cacheSearch), true)
                 .setAllowInvalid(false)
                 .build();
 
             SpreadsheetApp.flush();
-            titlesRange.setDataValidation(newRule);
+            let titlesRange = FORMSHEET.getRange(TS_CURRENT_TITLES)
+                .setDataValidation(newRule);
 
             let cacheSelected = cache.get("current_edit");
             if (cacheSelected) {
@@ -115,7 +100,14 @@ function rebuildTitleSearchForm() {
                 .setVerticalAlignment("top");
 
         let functionsRule = SpreadsheetApp.newDataValidation()
-            .requireValueInList(["Select one", "Search", "Add title", "Publishers", "Update repo"])
+            .requireValueInList([
+                "Select one", 
+                "Search", 
+                "Add title", 
+                "Publishers", 
+                "Update repo",
+                "Clear cache"
+            ])
             .setAllowInvalid(false)
             .build();
 

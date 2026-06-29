@@ -16,6 +16,13 @@ function applySearch (params) {
             return false;
         }
 
+        if (FORMSHEET.getRange(TS_CURRENT_TITLES_LABEL).getValue() != "Titles: ") {
+            if (!showTitlesMenu({display: display})) {
+                display.setValue ("Problem");
+                return false;
+            }
+        }
+
         // put results in cache for current search results
         cache.put('current_search', JSON.stringify(results.titles), 3600);
 

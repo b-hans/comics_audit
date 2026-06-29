@@ -28,6 +28,10 @@ function searchMenu(params) {
     else if (menuType == "Update repo") {
         return updateRepo({display: display});
     }
+    else if (menuType == "Clear cache") {
+        clearCache();
+        rebuildTitleSearchForm();
+    }
     else if (menuType == "Publishers") {
         return buildPublishers({cache: cache});
     }

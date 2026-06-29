@@ -33,6 +33,12 @@ function needed (params) {
             .build();
 
         if (type == "show") {
+
+            if ((first === null || first == "" && first != 0)|| !last) {
+                display.setValue ("Can't show needed. First and last needed to be indicated");
+                return true;
+            }
+            
             let start = TE_issue_start_row;
             let end = FORMSHEET.getLastRow();
             let numRows = end - start + 1;
@@ -56,7 +62,6 @@ function needed (params) {
 
             for (let i=first; i<last+1; i++) {
                 if (issuesData.some(row => row[1] == i)) {
-                    console.log ("issue: " + i);
                     continue;
                 }
 

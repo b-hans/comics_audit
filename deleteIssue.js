@@ -24,8 +24,6 @@ function deleteIssue (params) {
             return false;
         }
 
-        display.setValue ("here");
-
         let start = TE_issue_start_row;
         let end = FORMSHEET.getLastRow();
         let numRows = end - start + 1;
@@ -39,12 +37,18 @@ function deleteIssue (params) {
 
         range.clearContent();
 
-        range = FORMSHEET.getRange(start, 1, rangeData.length, TE_issue_id_column)
-            .setValues(rangeData);
+        if (rangeData.length < 1) {
+            range.clearDataValidations();
+        }
+        else {
+            range = FORMSHEET.getRange(start, 1, rangeData.length, TE_issue_id_column)
+                .setValues(rangeData);
 
-        let deleteRowIndex = start + rangeData.length;
+            let deleteRowIndex = start + rangeData.length;
 
-        FORMSHEET.deleteRow(deleteRowIndex);
+            FORMSHEET.deleteRow(deleteRowIndex);
+
+        }
 
         return true;
 

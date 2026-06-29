@@ -24,6 +24,7 @@ function menuOnEdit(e) {
             });
         }
         else if (formType == "titlesearch" && 
+                 FORMSHEET.getRange(TS_CURRENT_TITLES_LABEL).getValue() == "Titles: " &&
                  range.getA1Notation() == TS_TITLE_DROPDOWN &&
                  range.getValue() != "Select a title") {
             const editTitle = FORMSHEET.getRange(TS_CURRENT_TITLES).getValue();
