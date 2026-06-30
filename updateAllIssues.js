@@ -4,6 +4,8 @@ function updateAllIssues(params) {
 
     try {
 
+        display.setValue ("Working....");
+
         const changes = JSON.parse(cache.get('validate_status')).changes;
 
         const issuesSheet = SpreadsheetApp.getActiveSpreadsheet()

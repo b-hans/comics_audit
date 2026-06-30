@@ -131,7 +131,7 @@ function newIssues (params) {
 
             display.setValue ("Done!");
 
-            return styleIssuesRange({display: display, range: newRange});
+            return styleIssuesRange({display: display, range: newRange, type: "neededIssues"});
         }
 
         display.setValue ("Done!");

@@ -76,86 +76,97 @@ function editComicTitle (params) {
                 return returnArray;
             });
 
-            let startRow = TE_issue_start_row;
-            let numRows = mappedArray.length;
-            let numCols = mappedArray[0].length;
+            const startRow = TE_issue_start_row;
+            const numRows = mappedArray.length;
+            const numCols = mappedArray[0].length;
 
-            FORMSHEET.insertRowsAfter(startRow, numRows);
+            const range = FORMSHEET.getRange (startRow, 1, numRows, numCols);
 
-            // set the condition dropdowns
-            const conditionColNum = 5;
-            const conditions = getConditions();
-
-            if (conditions.valid) {
-                let dropdown = conditions.dropdown;
-                dropdown.unshift("Select one");
-                const conditionRule = SpreadsheetApp.newDataValidation()
-                    .requireValueInList(dropdown, true)
-                    .setAllowInvalid(false)
-                    .build();
-
-                SpreadsheetApp.flush();
-
-                FORMSHEET.getRange (startRow, conditionColNum, numRows, 1)
-                    .setDataValidation(conditionRule);
-
-            }
-
-            // set the options here
-            let optionsRule = SpreadsheetApp.newDataValidation()
-                .requireValueInList(["Options", "Edit", "Delete"], true)
-                .setAllowInvalid(false)
-                .build();
-
-            SpreadsheetApp.flush();
-
-            FORMSHEET.getRange(startRow, 1, numRows, 1)
-                .setDataValidation(optionsRule);
-
-            FORMSHEET.getRange(startRow, 3, numRows, 1)
-                .setDataValidation(MONTHS_RULE);
-
-            try {
-
-                FORMSHEET.getRange(startRow, 1, numRows, numCols)
-                    .setValues(mappedArray)
-                    .setFontColor("black")
-                    .setFontSize(10)
-                    .setHorizontalAlignment("left");
-
-                let colAlignments = [
-                    "center",
-                    "center",
-                    "left",
-                    "left",
-                    "left",
-                    "left",
-                    "right",
-                    "right", 
-                    "center"
-                ];
-
-                for (let i=0; i<colAlignments.length; i++) {
-                    FORMSHEET.getRange(startRow, i+1, numRows, 1)
-                        .setHorizontalAlignment(colAlignments[i])
-                        .setVerticalAlignment('top');
-                }
-
-                FORMSHEET.getRange(startRow, 9, numRows, 1)
-                    .setFontColor('#f3f3f3');
-
-                // set notes as a wrap
-                FORMSHEET.getRange (startRow, 8, numRows, 1)
-                    .setWrap(true)
-                    .setHorizontalAlignment('left');
-
+            if (styleIssuesRange({
+                display:    display,
+                range:      range,
+                data:       mappedArray,
+                type:       "myIssues",
+            })) {
                 display.setValue ("Title loaded!");
-                return true;
+            };
 
-            } catch (error) {
-                display.setValue ("Error: " + error);
-                return false;
-            }
+            // FORMSHEET.insertRowsAfter(startRow, numRows);
+
+            // // set the condition dropdowns
+            // const conditionColNum = 5;
+            // const conditions = getConditions();
+
+            // if (conditions.valid) {
+            //     let dropdown = conditions.dropdown;
+            //     dropdown.unshift("Select one");
+            //     const conditionRule = SpreadsheetApp.newDataValidation()
+            //         .requireValueInList(dropdown, true)
+            //         .setAllowInvalid(false)
+            //         .build();
+
+            //     SpreadsheetApp.flush();
+
+            //     FORMSHEET.getRange (startRow, conditionColNum, numRows, 1)
+            //         .setDataValidation(conditionRule);
+
+            // }
+
+            // // set the options here
+            // let optionsRule = SpreadsheetApp.newDataValidation()
+            //     .requireValueInList(["Options", "Edit", "Delete"], true)
+            //     .setAllowInvalid(false)
+            //     .build();
+
+            // SpreadsheetApp.flush();
+
+            // FORMSHEET.getRange(startRow, 1, numRows, 1)
+            //     .setDataValidation(optionsRule);
+
+            // FORMSHEET.getRange(startRow, 3, numRows, 1)
+            //     .setDataValidation(MONTHS_RULE);
+
+            // try {
+
+            //     FORMSHEET.getRange(startRow, 1, numRows, numCols)
+            //         .setValues(mappedArray)
+            //         .setFontColor("black")
+            //         .setFontSize(10)
+            //         .setHorizontalAlignment("left");
+
+            //     let colAlignments = [
+            //         "center",
+            //         "center",
+            //         "left",
+            //         "left",
+            //         "left",
+            //         "left",
+            //         "right",
+            //         "right", 
+            //         "center"
+            //     ];
+
+            //     for (let i=0; i<colAlignments.length; i++) {
+            //         FORMSHEET.getRange(startRow, i+1, numRows, 1)
+            //             .setHorizontalAlignment(colAlignments[i])
+            //             .setVerticalAlignment('top');
+            //     }
+
+            //     FORMSHEET.getRange(startRow, 9, numRows, 1)
+            //         .setFontColor('#f3f3f3');
+
+            //     // set notes as a wrap
+            //     FORMSHEET.getRange (startRow, 8, numRows, 1)
+            //         .setWrap(true)
+            //         .setHorizontalAlignment('left');
+
+            //     display.setValue ("Title loaded!");
+            //     return true;
+
+            // } catch (error) {
+            //     display.setValue ("Error: " + error);
+            //     return false;
+            // }
 
         }
 
