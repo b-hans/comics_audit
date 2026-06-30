@@ -75,14 +75,7 @@ function titleEditMenu (params) {
                     display: display,
                     id: cache.get("delete_issue_id")
                 })) {
-                    cache.remove("delete_issue_id");
-                    
-                    // if (sortAndRebuildIssues({display: display})) {
-                    //     display.setValue ("Issue deleted!");
-                    // }
-                    // else {
-                    //     display.setValue ("Problem deleting\n" + display.getValue());
-                    // }
+                    cache.remove("delete_issue_id");                    
                 }
                 else {
                     cache.remove("delete_issue_id");
@@ -180,7 +173,9 @@ function titleEditMenu (params) {
 
                 let validateStatus = validateAllIssueEdits({display: display, cache: cache});
 
-                if (!validateStatus.issuesToChange) {
+                console.log (validateStatus);
+
+                if (!validateStatus.changes) {
                     display.setValue ("No issues to edit");
                     return true;
                 }

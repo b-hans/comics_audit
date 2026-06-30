@@ -59,14 +59,18 @@ function validateAllIssueEdits (params) {
 
             if (validStatus.change) {
 
+                display.setValue ("at mapping");
+
                 let mapped = data[i].map ((el, i) => {
                     if (i == 4) {
                         el = validStatus.condition_id;
                     }
                     return el;
                 });
+
                 issuesToChange.push(mapped);
                 change = true;
+
             }
 
         }
@@ -84,7 +88,8 @@ function validateAllIssueEdits (params) {
             display.setValue ("Nothing to change");
             return { valid: false}
         }
-
+        
+        
         return {
             valid:     true,
             changes:   issuesToChange

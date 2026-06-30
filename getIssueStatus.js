@@ -9,6 +9,7 @@ function getIssueStatus (params) {
     const conditionHeaders = allConditionData.headers;
 
     try {
+
         let returnInfo = {
             valid:          true,
             change:         false,
@@ -65,6 +66,7 @@ function getIssueStatus (params) {
 
                     break;
                 case "Location":
+                    
                     if (currentIssue[issuesHeaders.indexOf("Box Number")] != issue[i]) {
                         returnInfo.change = true;
                     }
@@ -89,7 +91,6 @@ function getIssueStatus (params) {
 
             }
         }
-
 
         return returnInfo;
     } catch (error) {
