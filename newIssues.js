@@ -18,11 +18,12 @@ function newIssues (params) {
 
         display.setValue("Working....")
 
+        // get the title information
         const title_id = FORMSHEET.getRange(TE_ID_RANGE).getValue();
         const publisher = FORMSHEET.getRange(TE_PUBLISHER_DROPDOWN_RANGE).getValue();
-
         const publisher_id = getPublisherFromDropdown({display: display, publisher: publisher});
 
+        // get the current range
         const start = TE_issue_start_row;
         const end = FORMSHEET.getLastRow();
         const numRows = end - start + 1;
@@ -30,6 +31,7 @@ function newIssues (params) {
 
         const newIssuesRange = FORMSHEET.getRange(start, 1, numRows, numCols);
 
+        // filter out the new issues to enter
         let data = newIssuesRange.getValues().filter (
             row => {
                 if (
@@ -48,6 +50,7 @@ function newIssues (params) {
             }
         );
 
+        // no changes return a message
         if (data.length < 1) {
             display.setValue ("No changes to add");
             return true;
@@ -55,6 +58,7 @@ function newIssues (params) {
 
         let errorList = "";
 
+        // validate the new entries
         for (let i=0; i<data.length; i++) {
             if (!data[i][headers.Condition]) {
                 errorList += "Condition required: #" + data[i][1] + "\n";
@@ -64,14 +68,16 @@ function newIssues (params) {
             }
         }
 
+        // validation errors, return the message
         if (errorList) {
             display.setValue(errorList);
             return false;
         }
 
-        // get the currentIssues
+        // get the currentIssues from the cache
         const currentIssues = JSON.parse(cache.get("issuesData"));
 
+        // the issues sheet - where we enter new data
         const sheet = SpreadsheetApp.getActiveSpreadsheet()
             .getSheetByName('MyComics');
 
@@ -79,6 +85,7 @@ function newIssues (params) {
         const sheetIds = sheet.getRange(2, 1, sheet.getLastRow(), 1).getValues().flat().filter(Boolean);
         let startId = Math.max(...sheetIds)+1;
 
+        // enter the new data here
         for (let i=0; i<data.length; i++) {
             // construct the row to insert
             let item = data[i];
@@ -95,19 +102,25 @@ function newIssues (params) {
                 ""
             ];
 
-            // item.push(new_id);
+            // adding the needed array items for the myIssues array
             item[0] = "Options";
             item[8] = new_id;
 
+            // add the new data to the sheet
             sheet.appendRow(newRow);
+
+            // push the new item into the current issues array
             currentIssues.push(item);
 
         }
 
+        // sort the current issues after inserting new data
         currentIssues.sort ((a, b) => a[headers.Number] - b[headers.Number]);
+
+        // put the edited data into cache
         cache.put("issuesData", JSON.stringify(currentIssues), 3600);
 
-        // now redo the needed
+        // now rewrite the needed array
         let currentNeededRange = FORMSHEET.getRange(start, 1, numRows, numCols);
         let currentNeededData = currentNeededRange.getValues();
 
@@ -127,11 +140,19 @@ function newIssues (params) {
         if (newNeeded.length > 0) {
             let newRange = FORMSHEET.getRange(start, 1, newNeeded.length, numCols);
 
-            newRange.setValues(newNeeded);
+            // newRange.setValues(newNeeded);
 
-            display.setValue ("Done!");
+            // display.setValue ("Done!");
 
-            return styleIssuesRange({display: display, range: newRange, type: "neededIssues"});
+            if (!styleIssuesRange({
+                display:    display, 
+                range:      newRange, 
+                type:       "neededIssues",
+                data:       newNeeded,
+            })){
+                display.setValue ("Problem setting revised needed");
+                return false;
+            };
         }
 
         display.setValue ("Done!");
