@@ -19,6 +19,10 @@ function validateAllIssueEdits (params) {
             row[issuesHeaders.indexOf('title_id')] == title_id
         );
 
+        if (titleIssues.length < 1) {
+            return { valid: true, issuesToChange: null }
+        }
+
         const allConditionData = getConditions();
 
         const start = TE_issue_start_row;

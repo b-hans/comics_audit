@@ -77,12 +77,12 @@ function titleEditMenu (params) {
                 })) {
                     cache.remove("delete_issue_id");
                     
-                    if (sortAndRebuildIssues({display: display})) {
-                        display.setValue ("Issue deleted!");
-                    }
-                    else {
-                        display.setValue ("Problem deleting\n" + display.getValue());
-                    }
+                    // if (sortAndRebuildIssues({display: display})) {
+                    //     display.setValue ("Issue deleted!");
+                    // }
+                    // else {
+                    //     display.setValue ("Problem deleting\n" + display.getValue());
+                    // }
                 }
                 else {
                     cache.remove("delete_issue_id");
@@ -179,6 +179,11 @@ function titleEditMenu (params) {
             case "Submit issue edits":
 
                 let validateStatus = validateAllIssueEdits({display: display, cache: cache});
+
+                if (!validateStatus.issuesToChange) {
+                    display.setValue ("No issues to edit");
+                    return true;
+                }
 
                 cache.put('validate_status', JSON.stringify(validateStatus), 3600);
 

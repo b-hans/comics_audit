@@ -16,6 +16,7 @@ function deleteIssue (params) {
             row => row[headers.indexOf('id')] == id
         );
 
+        // delete the issue row here
         if (rowIndex >= 0) {
             titleSheet.deleteRow(rowIndex + 2);
         }
@@ -32,21 +33,42 @@ function deleteIssue (params) {
         let range = FORMSHEET.getRange(start, 1, numRows, TE_issue_id_column);
         let rangeData = range.getValues();
 
+        // rangeData is the new data after splice
         let deleteIndex = rangeData.findIndex(row => row[TE_issue_id_column-1] == id);
         rangeData.splice(deleteIndex, 1);
 
+        // clear contents from previous data
         range.clearContent();
+        range.clearDataValidations();
 
         if (rangeData.length < 1) {
-            range.clearDataValidations();
+            // no issues left in the section
+            // range.clearDataValidations();
+            display.setValue ("Issue deleted!");
+            return true;
         }
         else {
-            range = FORMSHEET.getRange(start, 1, rangeData.length, TE_issue_id_column)
-                .setValues(rangeData);
+            range = FORMSHEET.getRange(start, 1, rangeData.length, TE_issue_id_column);
 
-            let deleteRowIndex = start + rangeData.length;
+            if (styleIssuesRange({
+                display:    display,
+                range:      range,
+                data:       rangeData,
+                type:       "myIssues"
 
-            FORMSHEET.deleteRow(deleteRowIndex);
+            })){
+                display.setValue ("Issue deleted!");
+                return true;
+            }
+            else {
+                display.setValue ("Problem deleting");
+                return false;
+            }
+                // .setValues(rangeData);
+
+            // let deleteRowIndex = start + rangeData.length;
+
+            // FORMSHEET.deleteRow(deleteRowIndex);
 
         }
 
