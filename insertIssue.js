@@ -94,32 +94,50 @@ function insertIssue () {
         comicsIssuesSheet.appendRow(issueRow);  
         FORMSHEET.getRange(TE_issue_start_row, TE_issue_id_column).setValue(newId.id);      
 
-        // editComicTitle({
-        //     title:      myTitle.edit_dropdown,
-        //     display:    display
-        // });
-
         rebuildFunctionsDropdown('edit');
-        
-        let newRule = SpreadsheetApp.newDataValidation()
-            .requireValueInList(['Options', 'Edit', 'Delete'], true)
-            .setAllowInvalid(false)
-            .build();
 
-        let issueOptionRange = FORMSHEET.getRange(TE_issue_start_row, 1);
-        issueOptionRange.clearDataValidations().clearContent();
+        let start = TE_issue_start_row;
+        let end = FORMSHEET.getLastRow();
+        let numRows = end - start + 1;
 
-        SpreadsheetApp.flush();
+        let newRange = FORMSHEET.getRange(TE_issue_start_row, 1, numRows, TE_issue_id_column);
 
-        issueOptionRange.setDataValidation(newRule).setValue('Options');
+        let newRangeData = newRange.getValues();
 
-        if (!sortAndRebuildIssues({display: display})) {
-            display.setValue ("Problem sorting issues\n" + display.getValue());
+        newRangeData.sort ((a, b) => a[1] - b[1]);
+
+        if (styleIssuesRange({
+            display:    display,
+            range:      newRange,
+            data:       newRangeData,
+            type:       "myIssues",
+        })) {
+            display.setValue ("Issue added!");
+            return true;
         }
         else {
-            display.setValue ("Done!");
+            display.setValue ("Problem restyling range");
+            return false;
         }
+        
+        // let newRule = SpreadsheetApp.newDataValidation()
+        //     .requireValueInList(['Options', 'Edit', 'Delete'], true)
+        //     .setAllowInvalid(false)
+        //     .build();
 
+        // let issueOptionRange = FORMSHEET.getRange(TE_issue_start_row, 1);
+        // issueOptionRange.clearDataValidations().clearContent();
+
+        // SpreadsheetApp.flush();
+
+        // issueOptionRange.setDataValidation(newRule).setValue('Options');
+
+        // if (!sortAndRebuildIssues({display: display})) {
+        //     display.setValue ("Problem sorting issues\n" + display.getValue());
+        // }
+        // else {
+        //     display.setValue ("Done!");
+        // }
 
         return true;
         
