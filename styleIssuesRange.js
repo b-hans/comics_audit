@@ -74,14 +74,15 @@ function styleIssuesRange (params) {
         range.offset(0, headers.Condition, numRows, 1)
             .setDataValidation(conditionsRule);
 
+        range.offset(0, headers.id, numRows, 1)
+            .setFontColor('#f3f3f3');
+
         if (type == "myIssues") {
             SpreadsheetApp.flush();
 
             range.offset(0, headers.Options, numRows, 1)
                 .setDataValidation(issueEditValidation);
 
-            range.offset(0, headers.id, numRows, 1)
-                .setFontColor('#f3f3f3');
         }
 
         return true;

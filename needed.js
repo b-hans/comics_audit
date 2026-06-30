@@ -13,25 +13,6 @@ function needed (params) {
         const first = FORMSHEET.getRange(TE_FIRST_RANGE).getValue();
         const last = FORMSHEET.getRange(TE_LAST_RANGE).getValue();
 
-        const colAlignments = [
-            "center",
-            "center",
-            "left",
-            "left",
-            "left",
-            "left",
-            "right",
-            "right", 
-            "center"
-        ];
-
-        const conditions = getConditions();
-
-        const conditionsRule = SpreadsheetApp.newDataValidation()
-            .requireValueInList(conditions.dropdown, true)
-            .setAllowInvalid(false)
-            .build();
-
         if (type == "show") {
 
             if ((first === null || first == "" && first != 0)|| !last) {
@@ -49,10 +30,6 @@ function needed (params) {
             if (numRows > 0) {
                 issuesRange = FORMSHEET.getRange(start, 1, numRows, FORMSHEET.getLastColumn());
                 issuesData = issuesRange.getValues();
-
-                // issuesRange.clearContent();
-                // issuesRange.clearDataValidations(); 
-
             }
 
             cache.put('issuesData', JSON.stringify(issuesData), 3600);
@@ -77,34 +54,25 @@ function needed (params) {
                 }
 
                 const neededRange = FORMSHEET.getRange(TE_issue_start_row, 1, neededIssues.length, 9);
-                const numRange = FORMSHEET.getRange(TE_issue_start_row, 2, neededIssues.length);
 
-                neededRange.setValues(neededIssues)
-                    .setFontColor("black")
-                    .setFontSize(10)
-                    .setVerticalAlignment("top")
-                    .setBackground("#f3f3f3")
-                    .setHorizontalAlignment("left");
+                if (styleIssuesRange({
+                    display:    display,
+                    range:      neededRange,
+                    data:       neededIssues,
+                    type:       "neededIssues"
+                })) {
+                    rebuildFunctionsDropdown("showNeeded");
+                    
+                    display.setValue ("Done!");
 
-                numRange.setHorizontalAlignment("center");
+                    return true;
 
-                SpreadsheetApp.flush();
+                }
 
-                FORMSHEET.getRange(TE_issue_start_row, 5, neededIssues.length, 1)
-                    .setDataValidation(conditionsRule);
-
-                SpreadsheetApp.flush();
-
-                FORMSHEET.getRange(TE_issue_start_row, 3, neededIssues.length, 1)
-                    .setDataValidation(monthValidation);
-
-                
-                rebuildFunctionsDropdown("showNeeded");
-                
-                display.setValue ("Done!");
             }
             else {
                 display.setValue ("No issues needed for this title!");
+                return true;
             }
 
 
@@ -113,7 +81,6 @@ function needed (params) {
             return showMyIssues({display: display, cache: cache});
         }
 
-        return true;
     } catch (error) {
         display.setValue ("Error getting needed: " + error);
         return false;
