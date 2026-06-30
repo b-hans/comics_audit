@@ -140,10 +140,6 @@ function newIssues (params) {
         if (newNeeded.length > 0) {
             let newRange = FORMSHEET.getRange(start, 1, newNeeded.length, numCols);
 
-            // newRange.setValues(newNeeded);
-
-            // display.setValue ("Done!");
-
             if (!styleIssuesRange({
                 display:    display, 
                 range:      newRange, 

@@ -55,13 +55,20 @@ function issueValid (params) {
 
             switch (head) {
                 case "number":
-                    if (!item) {
+                    if (item === "" || item == null) {
                         change = true;
                         valid = false;
                         errorDisplay += "Number is required\n";
                     }
                     else if (item != issue.number){
                         change = true;
+                        valid = false;
+                        errorDisplay += "Can't change the number\n";
+                    }
+                    else if (!isNumeric(item)) {
+                        change = true;
+                        valid = false;
+                        errorDisplay += "Number is not valid\n";
                     }
 
                     break;

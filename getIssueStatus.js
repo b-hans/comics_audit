@@ -26,7 +26,8 @@ function getIssueStatus (params) {
             switch (headers[i]) {
                 case "Number":
                     if (currentIssue[issuesHeaders.indexOf('Number')] != issue[i]) {
-                        returnInfo.change = true;
+                        returnInfo.valid = false;
+                        returnInfo.errors.push (issue[i] + " can't change number");
                     }
 
                     if (!isNumeric(issue[i])) {
