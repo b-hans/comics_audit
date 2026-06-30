@@ -85,6 +85,29 @@ function styleIssuesRange (params) {
 
         }
 
+        // now apply zebra
+        const color1 = "#ffffff";
+        const color2 = "#f3f3f3";
+        var colors = [];
+
+        const zNumRows = range.getNumRows();
+        const zNumCols = range.getNumColumns() - 1;
+
+        const zRange = FORMSHEET.getRange(TE_issue_start_row, 1, zNumRows, zNumCols);
+
+        for (var i=1; i<=zNumRows; i++) {
+            var rowColors = [];
+            var rowColor = (i %2 === 0) ? color1 : color2;
+
+            for (var j=1; j<=zNumCols; j++) {
+                rowColors.push (rowColor);
+            }
+            colors.push(rowColors);
+        }
+
+        zRange.setBackgrounds(colors);
+
+
         return true;
 
     }

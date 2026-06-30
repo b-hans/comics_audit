@@ -173,8 +173,6 @@ function titleEditMenu (params) {
 
                 let validateStatus = validateAllIssueEdits({display: display, cache: cache});
 
-                console.log (validateStatus);
-
                 if (!validateStatus.changes) {
                     display.setValue ("No issues to edit");
                     return true;
