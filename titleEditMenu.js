@@ -218,12 +218,17 @@ function titleEditMenu (params) {
                 return needed({display: display, cache: cache, type: "hide"});
 
             case "Submit new issues":
-                return insertConfirmation({
-                    text:       "Confirmation required\n\nSubmit these issues?",
-                    display:    display,
-                    type:       "TE",
-                    options:    ['Select', 'Yes, submit issues', 'No']
-                });
+                if (newIssuesValid({display: display, cache: cache})) {
+                    return insertConfirmation({
+                        text:       "Confirmation required\n\nSubmit these issues?",
+                        display:    display,
+                        type:       "TE",
+                        options:    ['Select', 'Yes, submit issues', 'No']
+                    });
+                }
+                else {
+                    return false;
+                }
 
             default:
                 display.setValue ("menu: " + menuValue);

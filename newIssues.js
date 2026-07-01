@@ -18,11 +18,6 @@ function newIssues (params) {
 
         display.setValue("Working....")
 
-        // get the title information
-        const title_id = FORMSHEET.getRange(TE_ID_RANGE).getValue();
-        const publisher = FORMSHEET.getRange(TE_PUBLISHER_DROPDOWN_RANGE).getValue();
-        const publisher_id = getPublisherFromDropdown({display: display, publisher: publisher});
-
         // get the current range
         const start = TE_issue_start_row;
         const end = FORMSHEET.getLastRow();
@@ -31,48 +26,11 @@ function newIssues (params) {
 
         const newIssuesRange = FORMSHEET.getRange(start, 1, numRows, numCols);
 
-        // filter out the new issues to enter
-        let data = newIssuesRange.getValues().filter (
-            row => {
-                if (
-                    row[headers.Year] ||
-                    row[headers.Condition] ||
-                    row[headers.Location] ||
-                    row[headers.Online] ||
-                    row[headers.Notes] ||
-                    (row[headers.Month] && row[headers.Month] != "Select one")
-                ){
-                    return true;
-                }
-                else {
-                    return false;
-                }
-            }
-        );
-
-        // no changes return a message
-        if (data.length < 1) {
-            display.setValue ("No changes to add");
-            return true;
-        }
-
-        let errorList = "";
-
-        // validate the new entries
-        for (let i=0; i<data.length; i++) {
-            if (!data[i][headers.Condition]) {
-                errorList += "Condition required: #" + data[i][1] + "\n";
-            }
-            if (isNotValidCurrency(usdFormatter.format(data[i][headers.Online]))) {
-                errorList += "Not valid currency: " + data[i][headers.Number];
-            }
-        }
-
-        // validation errors, return the message
-        if (errorList) {
-            display.setValue(errorList);
-            return false;
-        }
+        // get new issue data from cache
+        const newIssues = JSON.parse(cache.get('newIssues'));
+        const title_id = newIssues.title_id;
+        const publisher_id = newIssues.publisher_id;
+        const data = newIssues.issues;
 
         // get the currentIssues from the cache
         const currentIssues = JSON.parse(cache.get("issuesData"));

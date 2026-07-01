@@ -15,7 +15,8 @@ function clearCache() {
         'delete_publisher',
         'publisher_edit',
         'edit_issue_data',
-        'validate_status'
+        'validate_status',
+        'newIssues'
     ];
 
     cache.removeAll(keysToRemove);
