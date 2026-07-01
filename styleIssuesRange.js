@@ -107,8 +107,7 @@ function styleIssuesRange (params) {
 
         zRange.setBackgrounds(colors);
 
-
-        return true;
+        return buildEndForm({display: display});
 
     }
     catch (error) {
